@@ -14,21 +14,6 @@ const PRIORITIES = [
 ];
 
 
-const COLORS = [
-  '#888',
-  '#feffa5',
-  '#b4dc7f',
-  '#596859',
-  '#7b886f',
-  '#9cfffa',
-  '#565676',
-  '#aeadf0',
-  '#613f75',
-  '#ffa0ac',
-  '#dab6c4',
-];
-
-
 class Node {
   constructor() {
     this.parent = null;
@@ -46,13 +31,19 @@ class Node {
   hasChild() {
     return this.children.length > 0;
   }
+
+  flatten() {
+    let ret = [this];
+    this.children.forEach((child) => {
+      ret = ret.concat(child.flatten());
+    });
+    return ret;
+  }
 }
 
 class BaseRequirementNode extends Node {
-  constructor(layer, priority, body) {
+  constructor(body) {
     super();
-    this.layer = layer;
-    this.priority = priority;
     this.body = body;
   }
 }
@@ -66,15 +57,14 @@ class Requirement extends BaseRequirementNode {
 // ValueDesign
 
 class Vision extends BaseRequirementNode {
-  constructor(layer, priority, body) {
-    super(layer, priority, body);
+  constructor(body) {
+    super(body);
   }
 }
 
 class Concept extends BaseRequirementNode {
-  constructor(layer, priority, number, body) {
-    super(layer, priority, body);
-    this.number = number;  // 1, 2, 3のコンセプト
+  constructor(body) {
+    super(body);
   }
 }
 
@@ -105,10 +95,12 @@ class Design {
 // StakeholderModel
 
 const DEMAND_TYPE = {
-  negative: 0,
-  positive: 1,
-  0: '否定',
-  1: '肯定',
+  unselected: 0,
+  negative: 1,
+  positive: 2,
+  0: '---',
+  1: '否定',
+  2: '肯定',
 };
 
 class Demand {
@@ -123,7 +115,8 @@ class Stakeholder extends Node {
   constructor(name) {
     super();
     this.name = name;
-    this.demands = []
+    this.demands = [];
+    this.values = [];
   }
 
   addDemand(body, type) {
@@ -132,18 +125,34 @@ class Stakeholder extends Node {
     );
     return this;
   }
+
+  addValue(body, purpose) {
+    purpose = purpose || null;
+    this.values.push(new Value(this, purpose, body));
+    return this;
+  }
 }
 
 // ValueAnalysisModel
 
-class Purpose extends BaseRequirementNode {
-  constructor(layer, priority, body, color) {
-    super(layer, priority, body);
-    this.color = color;
-  }
+const COLORS = [
+  '#888',
+  '#feffa5',
+  '#b4dc7f',
+  '#596859',
+  '#7b886f',
+  '#9cfffa',
+  '#565676',
+  '#aeadf0',
+  '#613f75',
+  '#ffa0ac',
+  '#dab6c4',
+];
 
-  get colorCode() {
-    return COLORS[this.color];
+class Purpose extends BaseRequirementNode {
+  constructor(body, color) {
+    super(body);
+    this.color = color || COLORS[0];
   }
 }
 

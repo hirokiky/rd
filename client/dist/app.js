@@ -6905,21 +6905,6 @@
 	];
 
 
-	const COLORS = [
-	  '#888',
-	  '#feffa5',
-	  '#b4dc7f',
-	  '#596859',
-	  '#7b886f',
-	  '#9cfffa',
-	  '#565676',
-	  '#aeadf0',
-	  '#613f75',
-	  '#ffa0ac',
-	  '#dab6c4',
-	];
-
-
 	class Node {
 	  constructor() {
 	    this.parent = null;
@@ -6937,13 +6922,19 @@
 	  hasChild() {
 	    return this.children.length > 0;
 	  }
+
+	  flatten() {
+	    let ret = [this];
+	    this.children.forEach((child) => {
+	      ret = ret.concat(child.flatten());
+	    });
+	    return ret;
+	  }
 	}
 
 	class BaseRequirementNode extends Node {
-	  constructor(layer, priority, body) {
+	  constructor(body) {
 	    super();
-	    this.layer = layer;
-	    this.priority = priority;
 	    this.body = body;
 	  }
 	}
@@ -6957,15 +6948,14 @@
 	// ValueDesign
 
 	class Vision extends BaseRequirementNode {
-	  constructor(layer, priority, body) {
-	    super(layer, priority, body);
+	  constructor(body) {
+	    super(body);
 	  }
 	}
 
 	class Concept extends BaseRequirementNode {
-	  constructor(layer, priority, number, body) {
-	    super(layer, priority, body);
-	    this.number = number;  // 1, 2, 3のコンセプト
+	  constructor(body) {
+	    super(body);
 	  }
 	}
 
@@ -6996,10 +6986,12 @@
 	// StakeholderModel
 
 	const DEMAND_TYPE = {
-	  negative: 0,
-	  positive: 1,
-	  0: '否定',
-	  1: '肯定',
+	  unselected: 0,
+	  negative: 1,
+	  positive: 2,
+	  0: '---',
+	  1: '否定',
+	  2: '肯定',
 	};
 
 	class Demand {
@@ -7014,7 +7006,8 @@
 	  constructor(name) {
 	    super();
 	    this.name = name;
-	    this.demands = []
+	    this.demands = [];
+	    this.values = [];
 	  }
 
 	  addDemand(body, type) {
@@ -7023,18 +7016,34 @@
 	    );
 	    return this;
 	  }
+
+	  addValue(body, purpose) {
+	    purpose = purpose || null;
+	    this.values.push(new Value(this, purpose, body));
+	    return this;
+	  }
 	}
 
 	// ValueAnalysisModel
 
-	class Purpose extends BaseRequirementNode {
-	  constructor(layer, priority, body, color) {
-	    super(layer, priority, body);
-	    this.color = color;
-	  }
+	const COLORS = [
+	  '#888',
+	  '#feffa5',
+	  '#b4dc7f',
+	  '#596859',
+	  '#7b886f',
+	  '#9cfffa',
+	  '#565676',
+	  '#aeadf0',
+	  '#613f75',
+	  '#ffa0ac',
+	  '#dab6c4',
+	];
 
-	  get colorCode() {
-	    return COLORS[this.color];
+	class Purpose extends BaseRequirementNode {
+	  constructor(body, color) {
+	    super(body);
+	    this.color = color || COLORS[0];
 	  }
 	}
 
@@ -7141,14 +7150,38 @@
 	  state: {
 	    stakeholders: [
 	      new models.Stakeholder("BeProud")
-	        .addDemand('売上が立たない', models.DEMAND_TYPE.negative)
-	        .addChild(new models.Stakeholder("BPメンバー"))
+	        .addChild(new models.Stakeholder("BPメンバー")
+			    .addDemand('オフィスに活気が溢れてほしい', models.DEMAND_TYPE.positive))
 	        .addChild(new models.Stakeholder("経営者")),
 	      new models.Stakeholder("お客さん")
-	    ]
+	        .addValue("楽しいので嬉しい")
+	    ],
+	      
+	    purposes: [
+	      new models.Purpose('地域の活性化'),
+	      new models.Purpose('個人学習の促進')
+	    ],
+
+	    vision: new models.Vision("ビジョン"),
+	    concept1: new models.Concept("コンセプト1"),
+	    concept2: new models.Concept("コンセプト2"),
+	    concept3: new models.Concept("コンセプト3"),
+
+	    requirements: []
 	  },
 	  mutations: {}
 	});
+
+	store.state.requirements.push(
+	  store.state.vision
+	    .addChild(
+	      store.state.concept1
+	        .addChild(store.state.purposes[0])
+	        .addChild(store.state.purposes[1])
+	    )
+	    .addChild(store.state.concept2)
+	    .addChild(store.state.concept3)
+	);
 
 	module.exports = store;
 
@@ -7968,7 +8001,10 @@
 
 	const router = new VueRouter({
 	  routes: [
-	    {path: '/stakeholders', component: __webpack_require__(17)}
+	    {path: '/stakeholders', component: __webpack_require__(17)},
+	    {path: '/valueanalyse', component: __webpack_require__(24)},
+	    {path: '/valuedesign', component: __webpack_require__(27)},
+	    {path: '/requirements', component: __webpack_require__(30)},
 	  ]
 	});
 
@@ -10425,13 +10461,345 @@
 	    attrs: {
 	      "to": "/stakeholders"
 	    }
-	  }, [_vm._v("Stakeholders")]), _vm._v(" "), _c('router-view')], 1)
+	  }, [_vm._v("Stakeholders")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valueanalyse"
+	    }
+	  }, [_vm._v("ValueAnalyse")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valuedesign"
+	    }
+	  }, [_vm._v("ValueDesign")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/requirements"
+	    }
+	  }, [_vm._v("Requirements")]), _vm._v(" "), _c('router-view')], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-8120094a", module.exports)
+	  }
+	}
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(25),
+	  /* template */
+	  __webpack_require__(26),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\valueanalyse.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] valueanalyse.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-1efe8a98", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-1efe8a98", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const store = __webpack_require__(12);
+
+	module.exports = {
+	  computed: {
+	    purposes() {return store.state.purposes},
+	    stakeholders() {
+	      let ret = [];
+	      store.state.stakeholders.forEach((s) => {
+	        ret = ret.concat(s.flatten());
+	      });
+	      return ret
+	    },
+	  }
+	}
+
+
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('ul', _vm._l((_vm.purposes), function(purpose) {
+	    return _c('li', {
+	      domProps: {
+	        "textContent": _vm._s(purpose.body)
+	      }
+	    })
+	  })), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
+	    return _c('li', [_c('div', [_c('i', {
+	      staticClass: "material-icons"
+	    }, [_vm._v("person")]), _c('span', {
+	      domProps: {
+	        "textContent": _vm._s(stakeholder.name)
+	      }
+	    })]), _vm._v(" "), _c('ul', _vm._l((stakeholder.values), function(value) {
+	      return _c('li', {
+	        domProps: {
+	          "textContent": _vm._s(value.body)
+	        }
+	      })
+	    }))])
+	  }))])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-1efe8a98", module.exports)
+	  }
+	}
+
+/***/ },
+/* 27 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(28),
+	  /* template */
+	  __webpack_require__(29),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\valuedesign.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] valuedesign.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-2f3f22a9", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-2f3f22a9", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const store = __webpack_require__(12);
+
+	module.exports = {
+	  computed: {
+	    vision() {return store.state.vision},
+	    concept1() {return store.state.concept1},
+	    concept2() {return store.state.concept2},
+	    concept3() {return store.state.concept3},
+	  }
+	}
+
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('h2', [_vm._v("ビジョン")]), _vm._v(" "), _c('p', {
+	    domProps: {
+	      "textContent": _vm._s(_vm.vision.body)
+	    }
+	  }), _vm._v(" "), _c('h3', [_vm._v("コンセプト1")]), _vm._v(" "), _c('p', {
+	    domProps: {
+	      "textContent": _vm._s(_vm.concept1.body)
+	    }
+	  }), _vm._v(" "), _c('h3', [_vm._v("コンセプト2")]), _vm._v(" "), _c('p', {
+	    domProps: {
+	      "textContent": _vm._s(_vm.concept2.body)
+	    }
+	  }), _vm._v(" "), _c('h3', [_vm._v("コンセプト3")]), _vm._v(" "), _c('p', {
+	    domProps: {
+	      "textContent": _vm._s(_vm.concept3.body)
+	    }
+	  })])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-2f3f22a9", module.exports)
+	  }
+	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(31),
+	  /* template */
+	  __webpack_require__(35),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\requirements.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] requirements.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-a5049374", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-a5049374", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const Vue = __webpack_require__(1);
+
+	const store = __webpack_require__(12);
+
+	Vue.component('requirement', __webpack_require__(32));
+
+	module.exports = {
+	  computed: {
+	    requirements() {
+	      return store.state.requirements
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(33),
+	  /* template */
+	  __webpack_require__(34),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\requirement.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] requirement.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-70d53a7d", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-70d53a7d", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const models = __webpack_require__(10);
+
+	module.exports = {
+	  props: {
+	    requirement: models.BaseRequirementModel
+	  }
+	}
+
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('li', [_c('span', {
+	    domProps: {
+	      "textContent": _vm._s(_vm.requirement.body)
+	    }
+	  }), _vm._v(" "), _c('ul', _vm._l((_vm.requirement.children), function(child) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": child
+	      }
+	    })
+	  }))])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-70d53a7d", module.exports)
+	  }
+	}
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('ul', _vm._l((_vm.requirements), function(req) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": req
+	      }
+	    })
+	  }))])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-a5049374", module.exports)
 	  }
 	}
 
