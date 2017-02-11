@@ -1,15 +1,24 @@
 <script>
   const Vue = require('vue');
+  const VueRouter = require('vue-router');
+
   const models = require('./models');
 
-  Vue.component('stakeholders', require('./stakeholders.vue'));
 
-  module.exports = {
-    el: 'body',
-    data: {}
-  }
+  Vue.use(VueRouter);
+
+  const router = new VueRouter({
+    routes: [
+      {path: '/stakeholders', component: require('./stakeholders.vue')}
+    ]
+  });
+
+  module.exports = {router};
 </script>
 
 <template>
-  <stakeholders></stakeholders>
+  <div>
+    <router-link to="/stakeholders">Stakeholders</router-link>
+    <router-view></router-view>
+  </div>
 </template>

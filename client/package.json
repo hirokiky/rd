@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "vue": "^2.1.10",
+    "vue-router": "^2.2.0",
     "vuex": "^2.1.1"
   },
   "repository": "https://github.com/hirokiky/rd"
