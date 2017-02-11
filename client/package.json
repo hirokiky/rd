@@ -1,0 +1,22 @@
+{
+  "name": "rd",
+  "version": "1.0.0",
+  "description": "rd client",
+  "main": "src/js/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hiroki Kiyohara",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "vue-loader": "^10.1.2",
+    "vue-template-compiler": "^2.1.10",
+    "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "vue": "^2.1.10",
+    "vuex": "^2.1.1"
+  },
+  "repository": "https://github.com/hirokiky/rd"
+}
