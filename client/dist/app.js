@@ -6995,8 +6995,8 @@
 	};
 
 	class Demand {
-	  constructor(stakeholder, body, type) {
-	    this.stakeholder = stakeholder;
+	  constructor(body, type) {
+	    this.stakeholder = null;
 	    this.body = body;
 	    this.type = type;
 	  }
@@ -7010,10 +7010,9 @@
 	    this.values = [];
 	  }
 
-	  addDemand(body, type) {
-	    this.demands.push(
-	      new Demand(this, body, type)
-	    );
+	  addDemand(demand) {
+	    this.demands.push(demand);
+	    demand.stakeholder = this;
 	    return this;
 	  }
 
@@ -7150,12 +7149,17 @@
 	  state: {
 	    stakeholders: [
 	      new models.Stakeholder("BeProud")
-	        .addChild(new models.Stakeholder("BPメンバー")
-			    .addDemand('オフィスに活気が溢れてほしい', models.DEMAND_TYPE.positive))
+	        .addChild(
+	          new models.Stakeholder("BPメンバー")
+	            .addDemand(new models.Demand(
+	              'オフィスに活気が溢れてほしい',
+	              models.DEMAND_TYPE.positive))
+	        )
 	        .addChild(new models.Stakeholder("経営者")),
 	      new models.Stakeholder("お客さん")
 	        .addValue("楽しいので嬉しい")
 	    ],
+	    bodyEditing: null,
 	      
 	    purposes: [
 	      new models.Purpose('地域の活性化'),
@@ -7167,9 +7171,23 @@
 	    concept2: new models.Concept("コンセプト2"),
 	    concept3: new models.Concept("コンセプト3"),
 
-	    requirements: []
+	    requirements: [],
+
+	    showModal: false,
+	    modalEditing: null
 	  },
-	  mutations: {}
+	  mutations: {
+	    addStakeholder(state, stakeholder) {
+	      state.stakeholders.push(stakeholder);
+	      state.bodyEditing = stakeholder;
+	    },
+	    editBody(state, obj) {
+	      state.bodyEditing = obj;
+	    },
+	    endBodyEditing(state) {
+	      state.bodyEditing = null;
+	    }
+	  }
 	});
 
 	store.state.requirements.push(
@@ -7998,6 +8016,17 @@
 
 
 	Vue.use(VueRouter);
+	Vue.component('modal', __webpack_require__(36));
+
+	Vue.directive('focus', function(el, value) {
+	  Vue.nextTick(() => {
+	    if (value) {
+	      el.focus();
+	    } else {
+	      el.blur();
+	    }
+	  });
+	});
 
 	const router = new VueRouter({
 	  routes: [
@@ -10346,6 +10375,12 @@
 	module.exports = {
 	  computed: {
 	    stakeholders() {return store.state.stakeholders}
+	  },
+	  methods: {
+	    addStakeholder() {
+	      let s = new models.Stakeholder('');
+	      store.commit('addStakeholder', s);
+	    }
 	  }
 	}
 
@@ -10390,10 +10425,33 @@
 
 	
 	const models = __webpack_require__(10);
+	const store = __webpack_require__(12);
 
 	module.exports = {
 	  props: {
-	    stakeholder: models.Stakeholder
+	    stakeholder: models.Stakeholder,
+	  },
+
+	  methods: {
+	    isEditing(obj) {
+	      return obj == store.state.bodyEditing;
+	    },
+	    addChild() {
+	      let s = new models.Stakeholder('');
+	      this.stakeholder.addChild(s);
+	      store.commit('editBody', s);
+	    },
+	    addDemand() {
+	      let d = new models.Demand('');
+	      this.stakeholder.addDemand(d);
+	      store.commit('editBody', d);
+	    },
+	    edit(obj) {
+	      store.commit('editBody', obj);
+	    },
+	    end() {
+	      store.commit('endBodyEditing');
+	    }
 	  }
 	}
 
@@ -10405,16 +10463,90 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('li', [_c('div', [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("person")]), _c('span', {
+	  }, [_vm._v("person")]), _vm._v(" "), (_vm.isEditing(_vm.stakeholder)) ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.stakeholder.name),
+	      expression: "stakeholder.name"
+	    }, {
+	      name: "focus",
+	      rawName: "v-focus",
+	      value: (_vm.isEditing(_vm.stakeholder)),
+	      expression: "isEditing(stakeholder)"
+	    }],
+	    domProps: {
+	      "value": _vm._s(_vm.stakeholder.name)
+	    },
+	    on: {
+	      "blur": _vm.end,
+	      "keydown": function($event) {
+	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+	        if (!$event.ctrlKey) { return; }
+	        _vm.end($event)
+	      },
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.stakeholder.name = $event.target.value
+	      }
+	    }
+	  }) : _c('span', {
 	    domProps: {
 	      "textContent": _vm._s(_vm.stakeholder.name)
+	    },
+	    on: {
+	      "dblclick": function($event) {
+	        $event.stopPropagation();
+	        _vm.edit(_vm.stakeholder)
+	      }
 	    }
-	  })]), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
-	    return _c('li', {
+	  })]), _vm._v(" "), _c('button', {
+	    on: {
+	      "click": _vm.addChild
+	    }
+	  }, [_vm._v("Add Child")]), _vm._v(" "), _c('button', {
+	    on: {
+	      "click": _vm.addDemand
+	    }
+	  }, [_vm._v("Add Demand")]), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
+	    return _c('li', [(_vm.isEditing(demand)) ? _c('textarea', {
+	      directives: [{
+	        name: "model",
+	        rawName: "v-model",
+	        value: (demand.body),
+	        expression: "demand.body"
+	      }, {
+	        name: "focus",
+	        rawName: "v-focus",
+	        value: (_vm.isEditing(demand)),
+	        expression: "isEditing(demand)"
+	      }],
+	      domProps: {
+	        "value": _vm._s(demand.body)
+	      },
+	      on: {
+	        "blur": _vm.end,
+	        "keydown": function($event) {
+	          if (_vm._k($event.keyCode, "enter", 13)) { return; }
+	          if (!$event.ctrlKey) { return; }
+	          _vm.end($event)
+	        },
+	        "input": function($event) {
+	          if ($event.target.composing) { return; }
+	          demand.body = $event.target.value
+	        }
+	      }
+	    }) : _c('div', {
 	      domProps: {
 	        "textContent": _vm._s(demand.body)
+	      },
+	      on: {
+	        "dblclick": function($event) {
+	          $event.stopPropagation();
+	          _vm.edit(demand)
+	        }
 	      }
-	    })
+	    })])
 	  })), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.children), function(child) {
 	    return _c('stakeholder', {
 	      attrs: {
@@ -10436,13 +10568,17 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
+	  return _c('ul', [_vm._l((_vm.stakeholders), function(stakeholder) {
 	    return _c('stakeholder', {
 	      attrs: {
 	        "stakeholder": stakeholder
 	      }
 	    })
-	  }))
+	  }), _vm._v(" "), _c('button', {
+	    on: {
+	      "click": _vm.addStakeholder
+	    }
+	  }, [_vm._v("Add Stakeholder")])], 2)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -10473,7 +10609,7 @@
 	    attrs: {
 	      "to": "/requirements"
 	    }
-	  }, [_vm._v("Requirements")]), _vm._v(" "), _c('router-view')], 1)
+	  }, [_vm._v("Requirements")]), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('modal')], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -10543,28 +10679,32 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('ul', _vm._l((_vm.purposes), function(purpose) {
+	  return _c('div', [_c('ul', [_vm._l((_vm.purposes), function(purpose) {
 	    return _c('li', {
 	      domProps: {
 	        "textContent": _vm._s(purpose.body)
 	      }
 	    })
-	  })), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
+	  }), _vm._v(" "), _vm._m(0)], 2), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
 	    return _c('li', [_c('div', [_c('i', {
 	      staticClass: "material-icons"
 	    }, [_vm._v("person")]), _c('span', {
 	      domProps: {
 	        "textContent": _vm._s(stakeholder.name)
 	      }
-	    })]), _vm._v(" "), _c('ul', _vm._l((stakeholder.values), function(value) {
+	    })]), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
 	      return _c('li', {
 	        domProps: {
 	          "textContent": _vm._s(value.body)
 	        }
 	      })
-	    }))])
+	    }), _vm._v(" "), _vm._m(1, true)], 2)])
 	  }))])
-	},staticRenderFns: []}
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('li', [_c('button', [_vm._v("Add Purpose")])])
+	},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('li', [_c('button', [_vm._v("Add Value")])])
+	}]}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
@@ -10766,14 +10906,16 @@
 	    domProps: {
 	      "textContent": _vm._s(_vm.requirement.body)
 	    }
-	  }), _vm._v(" "), _c('ul', _vm._l((_vm.requirement.children), function(child) {
+	  }), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
 	    return _c('requirement', {
 	      attrs: {
 	        "requirement": child
 	      }
 	    })
-	  }))])
-	},staticRenderFns: []}
+	  }), _vm._v(" "), _vm._m(0)], 2)])
+	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('li', [_c('button', [_vm._v("Add Requirement")])])
+	}]}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
@@ -10800,6 +10942,77 @@
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-a5049374", module.exports)
+	  }
+	}
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(37),
+	  /* template */
+	  __webpack_require__(38),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\modal.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] modal.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-0a421567", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-0a421567", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const store = __webpack_require__(12);
+
+	module.exports = {
+	  computed: {
+	    showModal() {return store.state.showModal},
+	    modalEditing() {return store.state.modalEditing},
+	  }
+	}
+
+
+/***/ },
+/* 38 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.showModal),
+	      expression: "showModal"
+	    }]
+	  })
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-0a421567", module.exports)
 	  }
 	}
 

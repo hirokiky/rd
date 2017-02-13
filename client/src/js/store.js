@@ -10,12 +10,17 @@ const store = new Vuex.Store({
   state: {
     stakeholders: [
       new models.Stakeholder("BeProud")
-        .addChild(new models.Stakeholder("BPメンバー")
-		    .addDemand('オフィスに活気が溢れてほしい', models.DEMAND_TYPE.positive))
+        .addChild(
+          new models.Stakeholder("BPメンバー")
+            .addDemand(new models.Demand(
+              'オフィスに活気が溢れてほしい',
+              models.DEMAND_TYPE.positive))
+        )
         .addChild(new models.Stakeholder("経営者")),
       new models.Stakeholder("お客さん")
         .addValue("楽しいので嬉しい")
     ],
+    bodyEditing: null,
       
     purposes: [
       new models.Purpose('地域の活性化'),
@@ -27,9 +32,23 @@ const store = new Vuex.Store({
     concept2: new models.Concept("コンセプト2"),
     concept3: new models.Concept("コンセプト3"),
 
-    requirements: []
+    requirements: [],
+
+    showModal: false,
+    modalEditing: null
   },
-  mutations: {}
+  mutations: {
+    addStakeholder(state, stakeholder) {
+      state.stakeholders.push(stakeholder);
+      state.bodyEditing = stakeholder;
+    },
+    editBody(state, obj) {
+      state.bodyEditing = obj;
+    },
+    endBodyEditing(state) {
+      state.bodyEditing = null;
+    }
+  }
 });
 
 store.state.requirements.push(

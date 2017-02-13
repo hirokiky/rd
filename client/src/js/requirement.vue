@@ -14,6 +14,7 @@
     <ul>
       <requirement v-for="child in requirement.children"
                    :requirement="child"></requirement>
+      <li><button>Add Requirement</button></li>
     </ul>
   </li>
 </template>

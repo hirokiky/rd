@@ -6,6 +6,17 @@
 
 
   Vue.use(VueRouter);
+  Vue.component('modal', require('./modal.vue'));
+
+  Vue.directive('focus', function(el, value) {
+    Vue.nextTick(() => {
+      if (value) {
+        el.focus();
+      } else {
+        el.blur();
+      }
+    });
+  });
 
   const router = new VueRouter({
     routes: [
@@ -26,5 +37,7 @@
     <router-link to="/valuedesign">ValueDesign</router-link>
     <router-link to="/requirements">Requirements</router-link>
     <router-view></router-view>
+
+    <modal></modal>
   </div>
 </template>

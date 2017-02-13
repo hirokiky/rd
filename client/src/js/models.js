@@ -104,8 +104,8 @@ const DEMAND_TYPE = {
 };
 
 class Demand {
-  constructor(stakeholder, body, type) {
-    this.stakeholder = stakeholder;
+  constructor(body, type) {
+    this.stakeholder = null;
     this.body = body;
     this.type = type;
   }
@@ -119,10 +119,9 @@ class Stakeholder extends Node {
     this.values = [];
   }
 
-  addDemand(body, type) {
-    this.demands.push(
-      new Demand(this, body, type)
-    );
+  addDemand(demand) {
+    this.demands.push(demand);
+    demand.stakeholder = this;
     return this;
   }
 

@@ -19,12 +19,14 @@
   <div>
     <ul>
       <li v-for="purpose in purposes" v-text="purpose.body"></li>
+      <li><button>Add Purpose</button></li>
     </ul>
     <ul>
       <li v-for="stakeholder in stakeholders">
         <div><i class="material-icons">person</i><span v-text="stakeholder.name"></span></div>
         <ul>
           <li v-for="value in stakeholder.values" v-text="value.body"></li>
+          <li><button>Add Value</button></li>
         </ul>
       </li>
     </ul>
