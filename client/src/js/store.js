@@ -18,7 +18,7 @@ const store = new Vuex.Store({
         )
         .addChild(new models.Stakeholder("経営者")),
       new models.Stakeholder("お客さん")
-        .addValue("楽しいので嬉しい")
+        .addValue(new models.Value(null, null, "楽しいので嬉しい"))
     ],
     bodyEditing: null,
       

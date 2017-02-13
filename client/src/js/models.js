@@ -3,14 +3,14 @@
 const LAYERS = [
   '戦略要求',
   '業務要求',
-  'IT要求',
+  'IT要求'
 ];
 
 const PRIORITIES = [
   '重要度（低）',
   '重要度（中）',
   '重要度（高）優先度（中）',
-  '重要度（高）優先度（高）',
+  '重要度（高）優先度（高）'
 ];
 
 
@@ -125,9 +125,9 @@ class Stakeholder extends Node {
     return this;
   }
 
-  addValue(body, purpose) {
-    purpose = purpose || null;
-    this.values.push(new Value(this, purpose, body));
+  addValue(value) {
+    value.stakeholder = this;
+    this.values.push(value);
     return this;
   }
 }
@@ -158,8 +158,8 @@ class Purpose extends BaseRequirementNode {
 class Value {
   constructor(stakeholder, purpose, body) {
     this.stakeholder = stakeholder;
-    this.purpose = purpose;
-    this.body = body;
+    this.purpose = purpose || null;
+    this.body = body || '';
   }
 }
 

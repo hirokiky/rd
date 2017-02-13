@@ -4,7 +4,7 @@
 
   module.exports = {
     props: {
-      stakeholder: models.Stakeholder,
+      stakeholder: models.Stakeholder
     },
 
     methods: {

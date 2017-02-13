@@ -1,4 +1,5 @@
 <script>
+  const models = require('./models');
   const store = require('./store');
 
   module.exports = {
@@ -11,6 +12,11 @@
         });
         return ret
       },
+      addValue(stakeholder) {
+        let value = models.Value(null, null, '');
+        stakeholder.addValue(value);
+        store.commit('editBody', value);
+      }
     }
   }
 </script>
