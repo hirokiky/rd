@@ -32,6 +32,7 @@
       <li>
         <button @click="addChildRequirement(requirement)">New Child</button>
         <select>
+          <option>Add Non Parent Node</option>
           <option v-for="req in noParents"
                   v-text="req.body"
                   @click="requirement.addChild(req)"></option>

@@ -11121,7 +11121,7 @@
 	        _vm.addChildRequirement(_vm.requirement)
 	      }
 	    }
-	  }, [_vm._v("New Child")]), _vm._v(" "), _c('select', _vm._l((_vm.noParents), function(req) {
+	  }, [_vm._v("New Child")]), _vm._v(" "), _c('select', [_c('option', [_vm._v("Add Non Parent Node")]), _vm._v(" "), _vm._l((_vm.noParents), function(req) {
 	    return _c('option', {
 	      domProps: {
 	        "textContent": _vm._s(req.body)
@@ -11132,7 +11132,7 @@
 	        }
 	      }
 	    })
-	  }))])], 2)], 1)
+	  })], 2)])], 2)], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
