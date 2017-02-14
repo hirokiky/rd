@@ -14,12 +14,28 @@
 <template>
   <div>
     <h2>ビジョン</h2>
-    <p v-text="vision.body"></p>
+    <p>
+      <bodyedit :obj="vision"
+                bodyAttr="body"
+                widget="textarea"></bodyedit>
+    </p>
     <h3>コンセプト1</h3>
-    <p v-text="concept1.body"></p>
+    <p>
+      <bodyedit :obj="concept1"
+                bodyAttr="body"
+                widget="textarea"></bodyedit>
+    </p>
     <h3>コンセプト2</h3>
-    <p v-text="concept2.body"></p>
+    <p>
+      <bodyedit :obj="concept2"
+                bodyAttr="body"
+                widget="textarea"></bodyedit>
+    </p>
     <h3>コンセプト3</h3>
-    <p v-text="concept3.body"></p>
+    <p>
+      <bodyedit :obj="concept3"
+                bodyAttr="body"
+                widget="textarea"></bodyedit>
+    </p>
   </div>
 </template>

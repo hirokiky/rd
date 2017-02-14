@@ -10920,23 +10920,31 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('h2', [_vm._v("ビジョン")]), _vm._v(" "), _c('p', {
-	    domProps: {
-	      "textContent": _vm._s(_vm.vision.body)
+	  return _c('div', [_c('h2', [_vm._v("ビジョン")]), _vm._v(" "), _c('p', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.vision,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
 	    }
-	  }), _vm._v(" "), _c('h3', [_vm._v("コンセプト1")]), _vm._v(" "), _c('p', {
-	    domProps: {
-	      "textContent": _vm._s(_vm.concept1.body)
+	  })], 1), _vm._v(" "), _c('h3', [_vm._v("コンセプト1")]), _vm._v(" "), _c('p', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.concept1,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
 	    }
-	  }), _vm._v(" "), _c('h3', [_vm._v("コンセプト2")]), _vm._v(" "), _c('p', {
-	    domProps: {
-	      "textContent": _vm._s(_vm.concept2.body)
+	  })], 1), _vm._v(" "), _c('h3', [_vm._v("コンセプト2")]), _vm._v(" "), _c('p', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.concept2,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
 	    }
-	  }), _vm._v(" "), _c('h3', [_vm._v("コンセプト3")]), _vm._v(" "), _c('p', {
-	    domProps: {
-	      "textContent": _vm._s(_vm.concept3.body)
+	  })], 1), _vm._v(" "), _c('h3', [_vm._v("コンセプト3")]), _vm._v(" "), _c('p', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.concept3,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
 	    }
-	  })])
+	  })], 1)])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
