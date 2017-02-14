@@ -6473,7 +6473,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/node.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\node.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] node.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -6484,9 +6484,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-902cd6aa", Component.options)
+	    hotAPI.createRecord("data-v-2e84acb8", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-902cd6aa", Component.options)
+	    hotAPI.reload("data-v-2e84acb8", Component.options)
 	  }
 	})()}
 
@@ -6509,8 +6509,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-902cd6aa!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./node.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-902cd6aa!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./node.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-2e84acb8!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./node.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-2e84acb8!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./node.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -6894,14 +6894,14 @@
 	const LAYERS = [
 	  '戦略要求',
 	  '業務要求',
-	  'IT要求',
+	  'IT要求'
 	];
 
 	const PRIORITIES = [
 	  '重要度（低）',
 	  '重要度（中）',
 	  '重要度（高）優先度（中）',
-	  '重要度（高）優先度（高）',
+	  '重要度（高）優先度（高）'
 	];
 
 
@@ -7016,9 +7016,9 @@
 	    return this;
 	  }
 
-	  addValue(body, purpose) {
-	    purpose = purpose || null;
-	    this.values.push(new Value(this, purpose, body));
+	  addValue(value) {
+	    value.stakeholder = this;
+	    this.values.push(value);
 	    return this;
 	  }
 	}
@@ -7049,8 +7049,8 @@
 	class Value {
 	  constructor(stakeholder, purpose, body) {
 	    this.stakeholder = stakeholder;
-	    this.purpose = purpose;
-	    this.body = body;
+	    this.purpose = purpose || null;
+	    this.body = body || '';
 	  }
 	}
 
@@ -7129,7 +7129,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-902cd6aa", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-2e84acb8", module.exports)
 	  }
 	}
 
@@ -7157,7 +7157,7 @@
 	        )
 	        .addChild(new models.Stakeholder("経営者")),
 	      new models.Stakeholder("お客さん")
-	        .addValue("楽しいので嬉しい")
+	        .addValue(new models.Value(null, null, "楽しいので嬉しい"))
 	    ],
 	    bodyEditing: null,
 	      
@@ -7180,6 +7180,10 @@
 	    addStakeholder(state, stakeholder) {
 	      state.stakeholders.push(stakeholder);
 	      state.bodyEditing = stakeholder;
+	    },
+	    addPurpose(state, purpose) {
+	      state.purposes.push(purpose);
+	      state.bodyEditing = purpose;
 	    },
 	    editBody(state, obj) {
 	      state.bodyEditing = obj;
@@ -7978,13 +7982,13 @@
 	  /* script */
 	  __webpack_require__(15),
 	  /* template */
-	  __webpack_require__(38),
+	  __webpack_require__(41),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/app.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\app.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -7995,9 +7999,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-46b66df0", Component.options)
+	    hotAPI.createRecord("data-v-8120094a", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-46b66df0", Component.options)
+	    hotAPI.reload("data-v-8120094a", Component.options)
 	  }
 	})()}
 
@@ -8017,23 +8021,15 @@
 
 	Vue.use(VueRouter);
 	Vue.component('modal', __webpack_require__(17));
+	Vue.component('bodyedit', __webpack_require__(20));
 
-	Vue.directive('focus', function(el, value) {
-	  Vue.nextTick(() => {
-	    if (value) {
-	      el.focus();
-	    } else {
-	      el.blur();
-	    }
-	  });
-	});
 
 	const router = new VueRouter({
 	  routes: [
-	    {path: '/stakeholders', component: __webpack_require__(20)},
-	    {path: '/valueanalyse', component: __webpack_require__(26)},
-	    {path: '/valuedesign', component: __webpack_require__(29)},
-	    {path: '/requirements', component: __webpack_require__(32)},
+	    {path: '/stakeholders', component: __webpack_require__(23)},
+	    {path: '/valueanalyse', component: __webpack_require__(29)},
+	    {path: '/valuedesign', component: __webpack_require__(32)},
+	    {path: '/requirements', component: __webpack_require__(35)},
 	  ]
 	});
 
@@ -10340,7 +10336,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/modal.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\modal.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10351,9 +10347,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-a50ba858", Component.options)
+	    hotAPI.createRecord("data-v-0a421567", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-a50ba858", Component.options)
+	    hotAPI.reload("data-v-0a421567", Component.options)
 	  }
 	})()}
 
@@ -10393,7 +10389,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-a50ba858", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-0a421567", module.exports)
 	  }
 	}
 
@@ -10405,15 +10401,15 @@
 	  /* script */
 	  __webpack_require__(21),
 	  /* template */
-	  __webpack_require__(25),
+	  __webpack_require__(22),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/stakeholders.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\bodyedit.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-	if (Component.options.functional) {console.error("[vue-loader] stakeholders.vue: functional components are not supported with templates, they should use render functions.")}
+	if (Component.options.functional) {console.error("[vue-loader] bodyedit.vue: functional components are not supported with templates, they should use render functions.")}
 
 	/* hot reload */
 	if (false) {(function () {
@@ -10422,9 +10418,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-f416a094", Component.options)
+	    hotAPI.createRecord("data-v-e5d63d3c", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-f416a094", Component.options)
+	    hotAPI.reload("data-v-e5d63d3c", Component.options)
 	  }
 	})()}
 
@@ -10438,10 +10434,174 @@
 	
 	const Vue = __webpack_require__(1);
 
+	const store = __webpack_require__(12);
+
+	module.exports = {
+	  directives: {
+	    focus: function (el, value) {
+	      Vue.nextTick(() => {
+	        if (value) {
+	          el.focus();
+	        } else {
+	          el.blur();
+	        }
+	      });
+	    }
+	  },
+	  props: {
+	    obj: Object,
+	    bodyAttr: String,
+	    widget: String  // 'input' or 'textarea'
+	  },
+	  computed: {
+	    isEditing() {
+	      return this.obj == store.state.bodyEditing;
+	    }
+	  },
+	  methods: {
+	    edit() {
+	      store.commit('editBody', this.obj);
+	    },
+	    end() {
+	      store.commit('endBodyEditing');
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('span', [(_vm.isEditing && _vm.widget == 'input') ? _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.obj[_vm.bodyAttr]),
+	      expression: "obj[bodyAttr]"
+	    }, {
+	      name: "focus",
+	      rawName: "v-focus",
+	      value: (_vm.isEditing),
+	      expression: "isEditing"
+	    }],
+	    domProps: {
+	      "value": _vm._s(_vm.obj[_vm.bodyAttr])
+	    },
+	    on: {
+	      "blur": _vm.end,
+	      "keydown": function($event) {
+	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+	        if (!$event.ctrlKey) { return; }
+	        _vm.end($event)
+	      },
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        var $$exp = _vm.obj,
+	          $$idx = _vm.bodyAttr;
+	        if (!Array.isArray($$exp)) {
+	          _vm.obj[_vm.bodyAttr] = $event.target.value
+	        } else {
+	          $$exp.splice($$idx, 1, $event.target.value)
+	        }
+	      }
+	    }
+	  }) : _vm._e(), _vm._v(" "), (_vm.isEditing && _vm.widget == 'textarea') ? _c('textarea', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.obj[_vm.bodyAttr]),
+	      expression: "obj[bodyAttr]"
+	    }, {
+	      name: "focus",
+	      rawName: "v-focus",
+	      value: (_vm.isEditing),
+	      expression: "isEditing"
+	    }],
+	    domProps: {
+	      "value": _vm._s(_vm.obj[_vm.bodyAttr])
+	    },
+	    on: {
+	      "blur": _vm.end,
+	      "keydown": function($event) {
+	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+	        if (!$event.ctrlKey) { return; }
+	        _vm.end($event)
+	      },
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        var $$exp = _vm.obj,
+	          $$idx = _vm.bodyAttr;
+	        if (!Array.isArray($$exp)) {
+	          _vm.obj[_vm.bodyAttr] = $event.target.value
+	        } else {
+	          $$exp.splice($$idx, 1, $event.target.value)
+	        }
+	      }
+	    }
+	  }) : _vm._e(), _vm._v(" "), (!_vm.isEditing) ? _c('span', {
+	    domProps: {
+	      "textContent": _vm._s(_vm.obj[_vm.bodyAttr])
+	    },
+	    on: {
+	      "dblclick": _vm.edit
+	    }
+	  }) : _vm._e()])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-e5d63d3c", module.exports)
+	  }
+	}
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(24),
+	  /* template */
+	  __webpack_require__(28),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\stakeholders.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] stakeholders.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-23716ac3", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-23716ac3", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 24 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const Vue = __webpack_require__(1);
+
 	const models = __webpack_require__(10);
 	const store = __webpack_require__(12);
 
-	Vue.component('stakeholder', __webpack_require__(22));
+	Vue.component('stakeholder', __webpack_require__(25));
 
 	module.exports = {
 	  computed: {
@@ -10457,20 +10617,20 @@
 
 
 /***/ },
-/* 22 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(8)(
 	  /* script */
-	  __webpack_require__(23),
+	  __webpack_require__(26),
 	  /* template */
-	  __webpack_require__(24),
+	  __webpack_require__(27),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/stakeholder.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\stakeholder.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] stakeholder.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10481,9 +10641,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-8c3d59e6", Component.options)
+	    hotAPI.createRecord("data-v-118a8260", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-8c3d59e6", Component.options)
+	    hotAPI.reload("data-v-118a8260", Component.options)
 	  }
 	})()}
 
@@ -10491,7 +10651,7 @@
 
 
 /***/ },
-/* 23 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10500,13 +10660,10 @@
 
 	module.exports = {
 	  props: {
-	    stakeholder: models.Stakeholder,
+	    stakeholder: models.Stakeholder
 	  },
 
 	  methods: {
-	    isEditing(obj) {
-	      return obj == store.state.bodyEditing;
-	    },
 	    addChild() {
 	      let s = new models.Stakeholder('');
 	      this.stakeholder.addChild(s);
@@ -10517,61 +10674,24 @@
 	      this.stakeholder.addDemand(d);
 	      store.commit('editBody', d);
 	    },
-	    edit(obj) {
-	      store.commit('editBody', obj);
-	    },
-	    end() {
-	      store.commit('endBodyEditing');
-	    }
 	  }
 	}
 
 
 /***/ },
-/* 24 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('li', [_c('div', [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("person")]), _vm._v(" "), (_vm.isEditing(_vm.stakeholder)) ? _c('input', {
-	    directives: [{
-	      name: "model",
-	      rawName: "v-model",
-	      value: (_vm.stakeholder.name),
-	      expression: "stakeholder.name"
-	    }, {
-	      name: "focus",
-	      rawName: "v-focus",
-	      value: (_vm.isEditing(_vm.stakeholder)),
-	      expression: "isEditing(stakeholder)"
-	    }],
-	    domProps: {
-	      "value": _vm._s(_vm.stakeholder.name)
-	    },
-	    on: {
-	      "blur": _vm.end,
-	      "keydown": function($event) {
-	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
-	        if (!$event.ctrlKey) { return; }
-	        _vm.end($event)
-	      },
-	      "input": function($event) {
-	        if ($event.target.composing) { return; }
-	        _vm.stakeholder.name = $event.target.value
-	      }
+	  }, [_vm._v("person")]), _vm._v(" "), _c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.stakeholder,
+	      "bodyAttr": "name",
+	      "widget": "input"
 	    }
-	  }) : _c('span', {
-	    domProps: {
-	      "textContent": _vm._s(_vm.stakeholder.name)
-	    },
-	    on: {
-	      "dblclick": function($event) {
-	        $event.stopPropagation();
-	        _vm.edit(_vm.stakeholder)
-	      }
-	    }
-	  })]), _vm._v(" "), _c('button', {
+	  })], 1), _vm._v(" "), _c('button', {
 	    on: {
 	      "click": _vm.addChild
 	    }
@@ -10580,44 +10700,13 @@
 	      "click": _vm.addDemand
 	    }
 	  }, [_vm._v("Add Demand")]), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
-	    return _c('li', [(_vm.isEditing(demand)) ? _c('textarea', {
-	      directives: [{
-	        name: "model",
-	        rawName: "v-model",
-	        value: (demand.body),
-	        expression: "demand.body"
-	      }, {
-	        name: "focus",
-	        rawName: "v-focus",
-	        value: (_vm.isEditing(demand)),
-	        expression: "isEditing(demand)"
-	      }],
-	      domProps: {
-	        "value": _vm._s(demand.body)
-	      },
-	      on: {
-	        "blur": _vm.end,
-	        "keydown": function($event) {
-	          if (_vm._k($event.keyCode, "enter", 13)) { return; }
-	          if (!$event.ctrlKey) { return; }
-	          _vm.end($event)
-	        },
-	        "input": function($event) {
-	          if ($event.target.composing) { return; }
-	          demand.body = $event.target.value
-	        }
+	    return _c('li', [_c('bodyedit', {
+	      attrs: {
+	        "obj": demand,
+	        "bodyAttr": "body",
+	        "widget": "textarea"
 	      }
-	    }) : _c('div', {
-	      domProps: {
-	        "textContent": _vm._s(demand.body)
-	      },
-	      on: {
-	        "dblclick": function($event) {
-	          $event.stopPropagation();
-	          _vm.edit(demand)
-	        }
-	      }
-	    })])
+	    })], 1)
 	  })), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.children), function(child) {
 	    return _c('stakeholder', {
 	      attrs: {
@@ -10630,12 +10719,12 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-8c3d59e6", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-118a8260", module.exports)
 	  }
 	}
 
 /***/ },
-/* 25 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10655,101 +10744,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-f416a094", module.exports)
-	  }
-	}
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Component = __webpack_require__(8)(
-	  /* script */
-	  __webpack_require__(27),
-	  /* template */
-	  __webpack_require__(28),
-	  /* scopeId */
-	  null,
-	  /* cssModules */
-	  null
-	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/valueanalyse.vue"
-	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-	if (Component.options.functional) {console.error("[vue-loader] valueanalyse.vue: functional components are not supported with templates, they should use render functions.")}
-
-	/* hot reload */
-	if (false) {(function () {
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  module.hot.accept()
-	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-fcfc60ea", Component.options)
-	  } else {
-	    hotAPI.reload("data-v-fcfc60ea", Component.options)
-	  }
-	})()}
-
-	module.exports = Component.exports
-
-
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	const store = __webpack_require__(12);
-
-	module.exports = {
-	  computed: {
-	    purposes() {return store.state.purposes},
-	    stakeholders() {
-	      let ret = [];
-	      store.state.stakeholders.forEach((s) => {
-	        ret = ret.concat(s.flatten());
-	      });
-	      return ret
-	    },
-	  }
-	}
-
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('ul', [_vm._l((_vm.purposes), function(purpose) {
-	    return _c('li', {
-	      domProps: {
-	        "textContent": _vm._s(purpose.body)
-	      }
-	    })
-	  }), _vm._v(" "), _vm._m(0)], 2), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
-	    return _c('li', [_c('div', [_c('i', {
-	      staticClass: "material-icons"
-	    }, [_vm._v("person")]), _c('span', {
-	      domProps: {
-	        "textContent": _vm._s(stakeholder.name)
-	      }
-	    })]), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
-	      return _c('li', {
-	        domProps: {
-	          "textContent": _vm._s(value.body)
-	        }
-	      })
-	    }), _vm._v(" "), _vm._m(1, true)], 2)])
-	  }))])
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [_c('button', [_vm._v("Add Purpose")])])
-	},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [_c('button', [_vm._v("Add Value")])])
-	}]}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-fcfc60ea", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-23716ac3", module.exports)
 	  }
 	}
 
@@ -10767,7 +10762,123 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/valuedesign.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\valueanalyse.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] valueanalyse.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-1efe8a98", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-1efe8a98", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const models = __webpack_require__(10);
+	const store = __webpack_require__(12);
+
+	module.exports = {
+	  computed: {
+	    purposes() {return store.state.purposes},
+	    stakeholders() {
+	      let ret = [];
+	      store.state.stakeholders.forEach((s) => {
+	        ret = ret.concat(s.flatten());
+	      });
+	      return ret
+	    }
+	  },
+	  methods: {
+	    addPurpose() {
+	      let purpose = new models.Purpose();
+	      store.commit('addPurpose', purpose);
+	    },
+	    addValue(stakeholder) {
+	      let value = new models.Value();
+	      stakeholder.addValue(value);
+	      store.commit('editBody', value);
+	    },
+	  }
+	}
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('ul', [_vm._l((_vm.purposes), function(purpose) {
+	    return _c('li', [_c('bodyedit', {
+	      attrs: {
+	        "obj": purpose,
+	        "bodyAttr": "body",
+	        "widget": "textarea"
+	      }
+	    })], 1)
+	  }), _vm._v(" "), _c('li', [_c('button', {
+	    on: {
+	      "click": _vm.addPurpose
+	    }
+	  }, [_vm._v("Add Purpose")])])], 2), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
+	    return _c('li', [_c('div', [_c('i', {
+	      staticClass: "material-icons"
+	    }, [_vm._v("person")]), _c('span', {
+	      domProps: {
+	        "textContent": _vm._s(stakeholder.name)
+	      }
+	    })]), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
+	      return _c('li', [_c('bodyedit', {
+	        attrs: {
+	          "obj": value,
+	          "bodyAttr": "body",
+	          "widget": "textarea"
+	        }
+	      })], 1)
+	    }), _vm._v(" "), _c('li', [_c('button', {
+	      on: {
+	        "click": function($event) {
+	          _vm.addValue(stakeholder)
+	        }
+	      }
+	    }, [_vm._v("Add Value")])])], 2)])
+	  }))])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-1efe8a98", module.exports)
+	  }
+	}
+
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(33),
+	  /* template */
+	  __webpack_require__(34),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\valuedesign.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] valuedesign.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10778,9 +10889,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-50d41954", Component.options)
+	    hotAPI.createRecord("data-v-2f3f22a9", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-50d41954", Component.options)
+	    hotAPI.reload("data-v-2f3f22a9", Component.options)
 	  }
 	})()}
 
@@ -10788,7 +10899,7 @@
 
 
 /***/ },
-/* 30 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10805,7 +10916,7 @@
 
 
 /***/ },
-/* 31 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10831,25 +10942,25 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-50d41954", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-2f3f22a9", module.exports)
 	  }
 	}
 
 /***/ },
-/* 32 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(8)(
 	  /* script */
-	  __webpack_require__(33),
+	  __webpack_require__(36),
 	  /* template */
-	  __webpack_require__(37),
+	  __webpack_require__(40),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/requirements.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\requirements.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] requirements.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10860,9 +10971,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-1000fb39", Component.options)
+	    hotAPI.createRecord("data-v-a5049374", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-1000fb39", Component.options)
+	    hotAPI.reload("data-v-a5049374", Component.options)
 	  }
 	})()}
 
@@ -10870,7 +10981,7 @@
 
 
 /***/ },
-/* 33 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10878,7 +10989,7 @@
 
 	const store = __webpack_require__(12);
 
-	Vue.component('requirement', __webpack_require__(34));
+	Vue.component('requirement', __webpack_require__(37));
 
 	module.exports = {
 	  computed: {
@@ -10890,20 +11001,20 @@
 
 
 /***/ },
-/* 34 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(8)(
 	  /* script */
-	  __webpack_require__(35),
+	  __webpack_require__(38),
 	  /* template */
-	  __webpack_require__(36),
+	  __webpack_require__(39),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/user1/dev/rd/client/src/js/requirement.vue"
+	Component.options.__file = "C:\\Users\\hirokiky\\dev\\rd\\client\\src\\js\\requirement.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] requirement.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10914,9 +11025,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-192c0b2a", Component.options)
+	    hotAPI.createRecord("data-v-70d53a7d", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-192c0b2a", Component.options)
+	    hotAPI.reload("data-v-70d53a7d", Component.options)
 	  }
 	})()}
 
@@ -10924,7 +11035,7 @@
 
 
 /***/ },
-/* 35 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10938,7 +11049,7 @@
 
 
 /***/ },
-/* 36 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10960,12 +11071,12 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-192c0b2a", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-70d53a7d", module.exports)
 	  }
 	}
 
 /***/ },
-/* 37 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10981,12 +11092,12 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-1000fb39", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-a5049374", module.exports)
 	  }
 	}
 
 /***/ },
-/* 38 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11012,7 +11123,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-46b66df0", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-8120094a", module.exports)
 	  }
 	}
 

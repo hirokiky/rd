@@ -8,9 +8,6 @@
     },
 
     methods: {
-      isEditing(obj) {
-        return obj == store.state.bodyEditing;
-      },
       addChild() {
         let s = new models.Stakeholder('');
         this.stakeholder.addChild(s);
@@ -21,12 +18,6 @@
         this.stakeholder.addDemand(d);
         store.commit('editBody', d);
       },
-      edit(obj) {
-        store.commit('editBody', obj);
-      },
-      end() {
-        store.commit('endBodyEditing');
-      }
     }
   }
 </script>
@@ -35,14 +26,9 @@
   <li>
     <div>
       <i class="material-icons">person</i>
-      <input v-if="isEditing(stakeholder)"
-             v-model="stakeholder.name"
-             v-focus="isEditing(stakeholder)"
-             @blur="end"
-             @keydown.ctrl.enter="end"/>
-      <span v-else
-            v-text="stakeholder.name"
-            @dblclick.stop="edit(stakeholder)"></span>
+      <bodyedit :obj="stakeholder"
+                bodyAttr="name"
+                widget="input"></bodyedit>
     </div>
 
     <button @click="addChild">Add Child</button>
@@ -50,14 +36,9 @@
 
     <ul>
       <li v-for="demand in stakeholder.demands">
-        <textarea v-if="isEditing(demand)"
-                  v-model="demand.body"
-                  v-focus="isEditing(demand)"
-                  @blur="end"
-                  @keydown.ctrl.enter="end"></textarea>
-        <div v-else
-             v-text="demand.body"
-             @dblclick.stop="edit(demand)"></div>
+        <bodyedit :obj="demand"
+                  bodyAttr="body"
+                  widget="textarea"></bodyedit>
       </li>
     </ul>
     <ul>

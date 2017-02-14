@@ -7,16 +7,8 @@
 
   Vue.use(VueRouter);
   Vue.component('modal', require('./modal.vue'));
+  Vue.component('bodyedit', require('./bodyedit.vue'));
 
-  Vue.directive('focus', function(el, value) {
-    Vue.nextTick(() => {
-      if (value) {
-        el.focus();
-      } else {
-        el.blur();
-      }
-    });
-  });
 
   const router = new VueRouter({
     routes: [

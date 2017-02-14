@@ -42,6 +42,10 @@ const store = new Vuex.Store({
       state.stakeholders.push(stakeholder);
       state.bodyEditing = stakeholder;
     },
+    addPurpose(state, purpose) {
+      state.purposes.push(purpose);
+      state.bodyEditing = purpose;
+    },
     editBody(state, obj) {
       state.bodyEditing = obj;
     },
