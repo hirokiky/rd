@@ -32,6 +32,10 @@ class Node {
     return this.children.length > 0;
   }
 
+  hasParent() {
+    return this.parent;
+  }
+
   flatten() {
     let ret = [this];
     this.children.forEach((child) => {

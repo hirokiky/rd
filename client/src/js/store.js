@@ -37,6 +37,31 @@ const store = new Vuex.Store({
     showModal: false,
     modalEditing: null
   },
+  getters: {
+    noParents(state) {
+      let l = [];
+      function add(r) {
+        if (!r.hasParent() &&
+            state.requirements.indexOf(r) == -1) {
+          l.push(r);
+        }
+      }
+      state.purposes.forEach((p) => {
+        add(p);
+      });
+      add(state.vision);
+      add(state.concept1);
+      add(state.concept2);
+      add(state.concept3);
+
+      state.requirements.forEach((req) => {
+        req.flatten().forEach((r) => {
+          add(r);
+        });
+      });
+      return l
+    }
+  },
   mutations: {
     addStakeholder(state, stakeholder) {
       state.stakeholders.push(stakeholder);
@@ -62,8 +87,8 @@ store.state.requirements.push(
         .addChild(store.state.purposes[0])
         .addChild(store.state.purposes[1])
     )
-    .addChild(store.state.concept2)
-    .addChild(store.state.concept3)
+    // .addChild(store.state.concept2)
+    // .addChild(store.state.concept3)
 );
 
 module.exports = store;

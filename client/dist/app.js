@@ -6923,6 +6923,10 @@
 	    return this.children.length > 0;
 	  }
 
+	  hasParent() {
+	    return this.parent;
+	  }
+
 	  flatten() {
 	    let ret = [this];
 	    this.children.forEach((child) => {
@@ -7176,6 +7180,31 @@
 	    showModal: false,
 	    modalEditing: null
 	  },
+	  getters: {
+	    noParents(state) {
+	      let l = [];
+	      function add(r) {
+	        if (!r.hasParent() &&
+	            state.requirements.indexOf(r) == -1) {
+	          l.push(r);
+	        }
+	      }
+	      state.purposes.forEach((p) => {
+	        add(p);
+	      });
+	      add(state.vision);
+	      add(state.concept1);
+	      add(state.concept2);
+	      add(state.concept3);
+
+	      state.requirements.forEach((req) => {
+	        req.flatten().forEach((r) => {
+	          add(r);
+	        });
+	      });
+	      return l
+	    }
+	  },
 	  mutations: {
 	    addStakeholder(state, stakeholder) {
 	      state.stakeholders.push(stakeholder);
@@ -7201,8 +7230,8 @@
 	        .addChild(store.state.purposes[0])
 	        .addChild(store.state.purposes[1])
 	    )
-	    .addChild(store.state.concept2)
-	    .addChild(store.state.concept3)
+	    // .addChild(store.state.concept2)
+	    // .addChild(store.state.concept3)
 	);
 
 	module.exports = store;
@@ -11048,10 +11077,23 @@
 
 	
 	const models = __webpack_require__(10);
+	const store = __webpack_require__(12);
 
 	module.exports = {
 	  props: {
 	    requirement: models.BaseRequirementModel
+	  },
+	  methods: {
+	    addChildRequirement(requirement) {
+	      let req = new models.Requirement();
+	      requirement.addChild(req);
+	      store.commit('editBody', req);
+	    }
+	  },
+	  computed: {
+	    noParents() {
+	      return store.getters.noParents;
+	    }
 	  }
 	}
 
@@ -11061,9 +11103,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [_c('span', {
-	    domProps: {
-	      "textContent": _vm._s(_vm.requirement.body)
+	  return _c('li', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.requirement,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
 	    }
 	  }), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
 	    return _c('requirement', {
@@ -11071,10 +11115,25 @@
 	        "requirement": child
 	      }
 	    })
-	  }), _vm._v(" "), _vm._m(0)], 2)])
-	},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [_c('button', [_vm._v("Add Requirement")])])
-	}]}
+	  }), _vm._v(" "), _c('li', [_c('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.addChildRequirement(_vm.requirement)
+	      }
+	    }
+	  }, [_vm._v("New Child")]), _vm._v(" "), _c('select', _vm._l((_vm.noParents), function(req) {
+	    return _c('option', {
+	      domProps: {
+	        "textContent": _vm._s(req.body)
+	      },
+	      on: {
+	        "click": function($event) {
+	          _vm.requirement.addChild(req)
+	        }
+	      }
+	    })
+	  }))])], 2)], 1)
+	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
