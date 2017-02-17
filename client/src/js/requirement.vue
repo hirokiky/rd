@@ -1,4 +1,4 @@
-<script>
+<scripat>
   const models = require('./models');
   const store = require('./store');
 

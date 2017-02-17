@@ -21,7 +21,7 @@ const store = new Vuex.Store({
         .addValue(new models.Value(null, null, "楽しいので嬉しい"))
     ],
     bodyEditing: null,
-      
+
     purposes: [
       new models.Purpose('地域の活性化'),
       new models.Purpose('個人学習の促進')

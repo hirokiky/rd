@@ -1,5 +1,5 @@
 {
-  "name": "rd",
+  "Name": "rd",
   "version": "1.0.0",
   "description": "rd client",
   "main": "src/js/app.js",
