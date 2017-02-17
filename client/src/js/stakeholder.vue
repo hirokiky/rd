@@ -40,6 +40,7 @@
         <bodyedit :obj="demand"
                   bodyAttr="body"
                   widget="textarea"></bodyedit>
+        <modal-button :model="demand"></modal-button>
       </li>
     </ul>
     <ul>

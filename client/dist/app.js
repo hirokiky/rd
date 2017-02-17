@@ -10915,6 +10915,10 @@
 	        "bodyAttr": "body",
 	        "widget": "textarea"
 	      }
+	    }), _vm._v(" "), _c('modal-button', {
+	      attrs: {
+	        "model": demand
+	      }
 	    })], 1)
 	  })), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.children), function(child) {
 	    return _c('stakeholder', {
