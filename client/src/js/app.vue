@@ -1,14 +1,15 @@
 <script>
   const Vue = require('vue');
+  const VueFormGenerator = require('vue-form-generator');
   const VueRouter = require('vue-router');
 
   const models = require('./models');
 
 
+  Vue.use(VueFormGenerator)
   Vue.use(VueRouter);
   Vue.component('modal', require('./modal.vue'));
   Vue.component('bodyedit', require('./bodyedit.vue'));
-
 
   const router = new VueRouter({
     routes: [

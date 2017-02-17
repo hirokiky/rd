@@ -76,6 +76,9 @@ const store = new Vuex.Store({
     },
     endBodyEditing(state) {
       state.bodyEditing = null;
+    },
+    editOnModal(state, obj) {
+      state.modalEditing = obj;
     }
   }
 });

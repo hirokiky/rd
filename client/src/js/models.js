@@ -43,7 +43,15 @@ class Node {
     });
     return ret;
   }
+
+  get schema() {
+    /**
+     * Specify schema for vue-form-generator.
+     */
+    return null;
+  }
 }
+
 
 class BaseRequirementNode extends Node {
   constructor(body) {
@@ -104,7 +112,7 @@ const DEMAND_TYPE = {
   positive: 2,
   0: '---',
   1: '否定',
-  2: '肯定',
+  2: '肯定'
 };
 
 class Demand {
@@ -133,6 +141,18 @@ class Stakeholder extends Node {
     value.stakeholder = this;
     this.values.push(value);
     return this;
+  }
+
+  get schema() {
+    return {
+      fields: [
+        {
+          model: "name",
+          type: "input",
+          label: "名前"
+        }
+      ]
+    };
   }
 }
 

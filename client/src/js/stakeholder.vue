@@ -18,6 +18,9 @@
         this.stakeholder.addDemand(d);
         store.commit('editBody', d);
       },
+      edit(o) {
+        store.commit('editOnModal', o);
+      }
     }
   }
 </script>
@@ -33,6 +36,7 @@
 
     <button @click="addChild">Add Child</button>
     <button @click="addDemand">Add Demand</button>
+    <button @click="edit(stakeholder)">Edit</button>
 
     <ul>
       <li v-for="demand in stakeholder.demands">
