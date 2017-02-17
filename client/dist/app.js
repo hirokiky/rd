@@ -11251,9 +11251,9 @@
 
 	var Component = __webpack_require__(8)(
 	  /* script */
-	  null,
+	  __webpack_require__(44),
 	  /* template */
-	  null,
+	  __webpack_require__(45),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -11261,6 +11261,20 @@
 	)
 	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/requirement.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] requirement.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-317033a2", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-317033a2", Component.options)
+	  }
+	})()}
 
 	module.exports = Component.exports
 
@@ -11314,6 +11328,81 @@
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-03cb0de6", module.exports)
+	  }
+	}
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const models = __webpack_require__(10);
+	const store = __webpack_require__(12);
+
+	module.exports = {
+	  props: {
+	    requirement: models.BaseRequirementModel
+	  },
+	  methods: {
+	    addChildRequirement(requirement) {
+	      let req = new models.Requirement();
+	      requirement.addChild(req);
+	      store.commit('editBody', req);
+	    }
+	  },
+	  computed: {
+	    noParents() {
+	      return store.getters.noParents;
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('li', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.requirement,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
+	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.requirement
+	    }
+	  }), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": child
+	      }
+	    })
+	  }), _vm._v(" "), _c('li', [_c('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.addChildRequirement(_vm.requirement)
+	      }
+	    }
+	  }, [_vm._v("New Child")]), _vm._v(" "), _c('select', [_c('option', [_vm._v("Add Non Parent Node")]), _vm._v(" "), _vm._l((_vm.noParents), function(req) {
+	    return _c('option', {
+	      domProps: {
+	        "textContent": _vm._s(req.body)
+	      },
+	      on: {
+	        "click": function($event) {
+	          _vm.requirement.addChild(req)
+	        }
+	      }
+	    })
+	  })], 2)])], 2)], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-317033a2", module.exports)
 	  }
 	}
 
