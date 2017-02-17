@@ -13,8 +13,8 @@ const store = new Vuex.Store({
         .addChild(
           new models.Stakeholder("BPメンバー")
             .addDemand(new models.Demand(
-              'オフィスに活気が溢れてほしい',
-              models.DEMAND_TYPE.positive))
+              'オフィスに活気が溢れてほしい'
+            ))
         )
         .addChild(new models.Stakeholder("経営者")),
       new models.Stakeholder("お客さん")

@@ -7027,14 +7027,14 @@
 
 	// StakeholderModel
 
-	const DEMAND_TYPE = {
-	  unselected: 0,
-	  negative: 1,
-	  positive: 2,
-	  0: '---',
-	  1: '否定',
-	  2: '肯定'
-	};
+	const DEMAND_TYPE_NEGATIVE = 'negative';
+	const DEMAND_TYPE_POSITIVE = 'positive';
+
+	const DEMAND_TYPE = [
+	  {id: DEMAND_TYPE_NEGATIVE, name: "否定"},
+	  {id: DEMAND_TYPE_POSITIVE, name: "肯定"}
+	];
+
 
 	class Demand {
 	  constructor(body, type) {
@@ -7049,6 +7049,12 @@
 	        model: "body",
 	        type: "textArea",
 	        label: "内容"
+	      },
+	      {
+	        model: "type",
+	        type: "select",
+	        label: "肯定/否定",
+	        values: DEMAND_TYPE
 	      }
 	    ]};
 	  }
@@ -7115,6 +7121,12 @@
 	        model: "body",
 	        type: "textArea",
 	        label: "内容"
+	      },
+	      {
+	        model: "color",
+	        type: "color",
+	        label: "色",
+	        default: "#888"
 	      }
 	    ]};
 	  }
@@ -7236,8 +7248,8 @@
 	        .addChild(
 	          new models.Stakeholder("BPメンバー")
 	            .addDemand(new models.Demand(
-	              'オフィスに活気が溢れてほしい',
-	              models.DEMAND_TYPE.positive))
+	              'オフィスに活気が溢れてほしい'
+	            ))
 	        )
 	        .addChild(new models.Stakeholder("経営者")),
 	      new models.Stakeholder("お客さん")

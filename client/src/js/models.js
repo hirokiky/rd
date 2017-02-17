@@ -136,14 +136,14 @@ class Design {
 
 // StakeholderModel
 
-const DEMAND_TYPE = {
-  unselected: 0,
-  negative: 1,
-  positive: 2,
-  0: '---',
-  1: '否定',
-  2: '肯定'
-};
+const DEMAND_TYPE_NEGATIVE = 'negative';
+const DEMAND_TYPE_POSITIVE = 'positive';
+
+const DEMAND_TYPE = [
+  {id: DEMAND_TYPE_NEGATIVE, name: "否定"},
+  {id: DEMAND_TYPE_POSITIVE, name: "肯定"}
+];
+
 
 class Demand {
   constructor(body, type) {
@@ -158,6 +158,12 @@ class Demand {
         model: "body",
         type: "textArea",
         label: "内容"
+      },
+      {
+        model: "type",
+        type: "select",
+        label: "肯定/否定",
+        values: DEMAND_TYPE
       }
     ]};
   }
@@ -224,6 +230,12 @@ class Purpose extends BaseRequirementNode {
         model: "body",
         type: "textArea",
         label: "内容"
+      },
+      {
+        model: "color",
+        type: "color",
+        label: "色",
+        default: "#888"
       }
     ]};
   }
