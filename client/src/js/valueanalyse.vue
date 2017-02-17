@@ -34,17 +34,22 @@
         <bodyedit :obj="purpose"
                   bodyAttr="body"
                   widget="textarea"></bodyedit>
+        <modal-button :model="purpose"></modal-button>
       </li>
       <li><button @click="addPurpose">Add Purpose</button></li>
     </ul>
     <ul>
       <li v-for="stakeholder in stakeholders">
-        <div><i class="material-icons">person</i><span v-text="stakeholder.name"></span></div>
+        <div>
+          <i class="material-icons">person</i><span v-text="stakeholder.name"></span>
+          <modal-button :model="stakeholder"></modal-button>
+        </div>
         <ul>
           <li v-for="value in stakeholder.values">
             <bodyedit :obj="value"
                       bodyAttr="body"
                       widget="textarea"></bodyedit>
+            <modal-button :model="value"></modal-button>
           </li>
           <li><button @click="addValue(stakeholder)">Add Value</button></li>
         </ul>

@@ -9,6 +9,7 @@
   Vue.use(VueFormGenerator)
   Vue.use(VueRouter);
   Vue.component('modal', require('./modal.vue'));
+  Vue.component('modal-button', require('./modalButton.vue'));
   Vue.component('bodyedit', require('./bodyedit.vue'));
 
   const router = new VueRouter({

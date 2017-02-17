@@ -17,9 +17,6 @@
         let d = new models.Demand('');
         this.stakeholder.addDemand(d);
         store.commit('editBody', d);
-      },
-      edit(o) {
-        store.commit('editOnModal', o);
       }
     }
   }
@@ -36,7 +33,7 @@
 
     <button @click="addChild">Add Child</button>
     <button @click="addDemand">Add Demand</button>
-    <button @click="edit(stakeholder)">Edit</button>
+    <modal-button :model="stakeholder"></modal-button>
 
     <ul>
       <li v-for="demand in stakeholder.demands">

@@ -6955,6 +6955,16 @@
 	  constructor(layer, priority, body) {
 	    super(layer, priority, body);
 	  }
+
+	  get schema() {
+	    return {fields: [
+	      {
+	        model: "body",
+	        type: "textArea",
+	        label: "内容"
+	      }
+	    ]};
+	  }
 	}
 
 	// ValueDesign
@@ -6963,11 +6973,31 @@
 	  constructor(body) {
 	    super(body);
 	  }
+
+	  get schema() {
+	    return {fields: [
+	        {
+	          model: "body",
+	          type: "textArea",
+	          label: "内容"
+	        }
+	      ]};
+	  }
 	}
 
 	class Concept extends BaseRequirementNode {
 	  constructor(body) {
 	    super(body);
+	  }
+
+	  get schema() {
+	    return {fields: [
+	      {
+	        model: "body",
+	        type: "textArea",
+	        label: "内容"
+	      }
+	    ]};
 	  }
 	}
 
@@ -7011,6 +7041,16 @@
 	    this.stakeholder = null;
 	    this.body = body;
 	    this.type = type;
+	  }
+
+	  get schema() {
+	    return {fields: [
+	      {
+	        model: "body",
+	        type: "textArea",
+	        label: "内容"
+	      }
+	    ]};
 	  }
 	}
 
@@ -7068,6 +7108,16 @@
 	    super(body);
 	    this.color = color || COLORS[0];
 	  }
+
+	  get schema() {
+	    return {fields: [
+	      {
+	        model: "body",
+	        type: "textArea",
+	        label: "内容"
+	      }
+	    ]};
+	  }
 	}
 
 	class Value {
@@ -7075,6 +7125,16 @@
 	    this.stakeholder = stakeholder;
 	    this.purpose = purpose || null;
 	    this.body = body || '';
+	  }
+
+	  get schema() {
+	    return {fields: [
+	      {
+	        model: "body",
+	        type: "textArea",
+	        label: "内容"
+	      }
+	    ]};
 	  }
 	}
 
@@ -8075,6 +8135,7 @@
 	Vue.use(VueFormGenerator)
 	Vue.use(VueRouter);
 	Vue.component('modal', __webpack_require__(18));
+	Vue.component('modal-button', __webpack_require__(43));
 	Vue.component('bodyedit', __webpack_require__(21));
 
 	const router = new VueRouter({
@@ -10738,9 +10799,6 @@
 	      let d = new models.Demand('');
 	      this.stakeholder.addDemand(d);
 	      store.commit('editBody', d);
-	    },
-	    edit(o) {
-	      store.commit('editOnModal', o);
 	    }
 	  }
 	}
@@ -10767,13 +10825,11 @@
 	    on: {
 	      "click": _vm.addDemand
 	    }
-	  }, [_vm._v("Add Demand")]), _vm._v(" "), _c('button', {
-	    on: {
-	      "click": function($event) {
-	        _vm.edit(_vm.stakeholder)
-	      }
+	  }, [_vm._v("Add Demand")]), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.stakeholder
 	    }
-	  }, [_vm._v("Edit")]), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
+	  }), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
 	    return _c('li', [_c('bodyedit', {
 	      attrs: {
 	        "obj": demand,
@@ -10787,7 +10843,7 @@
 	        "stakeholder": child
 	      }
 	    })
-	  }))])
+	  }))], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -10901,6 +10957,10 @@
 	        "bodyAttr": "body",
 	        "widget": "textarea"
 	      }
+	    }), _vm._v(" "), _c('modal-button', {
+	      attrs: {
+	        "model": purpose
+	      }
 	    })], 1)
 	  }), _vm._v(" "), _c('li', [_c('button', {
 	    on: {
@@ -10913,12 +10973,20 @@
 	      domProps: {
 	        "textContent": _vm._s(stakeholder.name)
 	      }
-	    })]), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
+	    }), _vm._v(" "), _c('modal-button', {
+	      attrs: {
+	        "model": stakeholder
+	      }
+	    })], 1), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
 	      return _c('li', [_c('bodyedit', {
 	        attrs: {
 	          "obj": value,
 	          "bodyAttr": "body",
 	          "widget": "textarea"
+	        }
+	      }), _vm._v(" "), _c('modal-button', {
+	        attrs: {
+	          "model": value
 	        }
 	      })], 1)
 	    }), _vm._v(" "), _c('li', [_c('button', {
@@ -11000,11 +11068,19 @@
 	      "bodyAttr": "body",
 	      "widget": "textarea"
 	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.vision
+	    }
 	  })], 1), _vm._v(" "), _c('h3', [_vm._v("コンセプト1")]), _vm._v(" "), _c('p', [_c('bodyedit', {
 	    attrs: {
 	      "obj": _vm.concept1,
 	      "bodyAttr": "body",
 	      "widget": "textarea"
+	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.concept1
 	    }
 	  })], 1), _vm._v(" "), _c('h3', [_vm._v("コンセプト2")]), _vm._v(" "), _c('p', [_c('bodyedit', {
 	    attrs: {
@@ -11012,11 +11088,19 @@
 	      "bodyAttr": "body",
 	      "widget": "textarea"
 	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.concept2
+	    }
 	  })], 1), _vm._v(" "), _c('h3', [_vm._v("コンセプト3")]), _vm._v(" "), _c('p', [_c('bodyedit', {
 	    attrs: {
 	      "obj": _vm.concept3,
 	      "bodyAttr": "body",
 	      "widget": "textarea"
+	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.concept3
 	    }
 	  })], 1)])
 	},staticRenderFns: []}
@@ -11154,6 +11238,10 @@
 	      "bodyAttr": "body",
 	      "widget": "textarea"
 	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.requirement
+	    }
 	  }), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
 	    return _c('requirement', {
 	      attrs: {
@@ -11236,6 +11324,76 @@
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-46b66df0", module.exports)
+	  }
+	}
+
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Component = __webpack_require__(8)(
+	  /* script */
+	  __webpack_require__(44),
+	  /* template */
+	  __webpack_require__(45),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/modalButton.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] modalButton.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (false) {(function () {
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-c98b2db4", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-c98b2db4", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	const store = __webpack_require__(12);
+
+	module.exports = {
+	  props: ["model"],
+	  methods: {
+	    open() {
+	      store.commit('editOnModal', this.model);
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('button', {
+	    on: {
+	      "click": _vm.open
+	    }
+	  }, [_vm._v("Edit")])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-c98b2db4", module.exports)
 	  }
 	}
 

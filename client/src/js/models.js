@@ -64,6 +64,16 @@ class Requirement extends BaseRequirementNode {
   constructor(layer, priority, body) {
     super(layer, priority, body);
   }
+
+  get schema() {
+    return {fields: [
+      {
+        model: "body",
+        type: "textArea",
+        label: "内容"
+      }
+    ]};
+  }
 }
 
 // ValueDesign
@@ -72,11 +82,31 @@ class Vision extends BaseRequirementNode {
   constructor(body) {
     super(body);
   }
+
+  get schema() {
+    return {fields: [
+        {
+          model: "body",
+          type: "textArea",
+          label: "内容"
+        }
+      ]};
+  }
 }
 
 class Concept extends BaseRequirementNode {
   constructor(body) {
     super(body);
+  }
+
+  get schema() {
+    return {fields: [
+      {
+        model: "body",
+        type: "textArea",
+        label: "内容"
+      }
+    ]};
   }
 }
 
@@ -120,6 +150,16 @@ class Demand {
     this.stakeholder = null;
     this.body = body;
     this.type = type;
+  }
+
+  get schema() {
+    return {fields: [
+      {
+        model: "body",
+        type: "textArea",
+        label: "内容"
+      }
+    ]};
   }
 }
 
@@ -177,6 +217,16 @@ class Purpose extends BaseRequirementNode {
     super(body);
     this.color = color || COLORS[0];
   }
+
+  get schema() {
+    return {fields: [
+      {
+        model: "body",
+        type: "textArea",
+        label: "内容"
+      }
+    ]};
+  }
 }
 
 class Value {
@@ -184,6 +234,16 @@ class Value {
     this.stakeholder = stakeholder;
     this.purpose = purpose || null;
     this.body = body || '';
+  }
+
+  get schema() {
+    return {fields: [
+      {
+        model: "body",
+        type: "textArea",
+        label: "内容"
+      }
+    ]};
   }
 }
 
