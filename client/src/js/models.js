@@ -1,16 +1,26 @@
 // RequirementsModel
 
+
+const LAYER_STRATEGY = 'strategy';
+const LAYER_BUSINESS = 'business';
+const LAYER_IT = 'it';
+
 const LAYERS = [
-  '戦略要求',
-  '業務要求',
-  'IT要求'
+  {id: LAYER_STRATEGY, name: '戦略要求'},
+  {id: LAYER_BUSINESS, name: '業務要求'},
+  {id: LAYER_IT, name: 'IT要求'}
 ];
 
+const PRIORITIES_LOW = 'low';
+const PRIORITIES_MIDDLE = 'middle';
+const PRIORITIES_HIGH_MIDDLE = 'high_middle';
+const PRIORITIES_HIGH = 'high';
+
 const PRIORITIES = [
-  '重要度（低）',
-  '重要度（中）',
-  '重要度（高）優先度（中）',
-  '重要度（高）優先度（高）'
+  {id: PRIORITIES_LOW, name: '重要度（低）'},
+  {id: PRIORITIES_MIDDLE, name: '重要度（中）'},
+  {id: PRIORITIES_HIGH_MIDDLE, name: '重要度（高）優先度（中）'},
+  {id: PRIORITIES_HIGH, name: '重要度（高）優先度（高）'}
 ];
 
 
@@ -56,23 +66,44 @@ class Node {
 class BaseRequirementNode extends Node {
   constructor(body) {
     super();
+    this.layer = null;
+    this.priority = null;
     this.body = body;
+  }
+
+  get fields() {
+    return [];
+  }
+
+  get schema() {
+    return {
+      fields: this.fields.concat([
+        {model: 'layer',
+         type: 'select',
+         label: '要求レイヤー',
+         values: LAYERS},
+        {model: 'priority',
+         type: 'select',
+         label: '優先度',
+         values: PRIORITIES}
+      ])
+    };
   }
 }
 
 class Requirement extends BaseRequirementNode {
-  constructor(layer, priority, body) {
-    super(layer, priority, body);
+  constructor(body) {
+    super(body);
   }
 
-  get schema() {
-    return {fields: [
+  get fields() {
+    return  [
       {
         model: "body",
         type: "textArea",
         label: "内容"
       }
-    ]};
+    ];
   }
 }
 
@@ -83,14 +114,14 @@ class Vision extends BaseRequirementNode {
     super(body);
   }
 
-  get schema() {
-    return {fields: [
+  get fields() {
+    return [
         {
           model: "body",
           type: "textArea",
           label: "内容"
         }
-      ]};
+      ];
   }
 }
 
@@ -99,14 +130,14 @@ class Concept extends BaseRequirementNode {
     super(body);
   }
 
-  get schema() {
-    return {fields: [
+  get fields() {
+    return [
       {
         model: "body",
         type: "textArea",
         label: "内容"
       }
-    ]};
+    ];
   }
 }
 
@@ -204,28 +235,14 @@ class Stakeholder extends Node {
 
 // ValueAnalysisModel
 
-const COLORS = [
-  '#888',
-  '#feffa5',
-  '#b4dc7f',
-  '#596859',
-  '#7b886f',
-  '#9cfffa',
-  '#565676',
-  '#aeadf0',
-  '#613f75',
-  '#ffa0ac',
-  '#dab6c4',
-];
-
 class Purpose extends BaseRequirementNode {
   constructor(body, color) {
     super(body);
-    this.color = color || COLORS[0];
+    this.color = color || '#888';
   }
 
-  get schema() {
-    return {fields: [
+  get fields() {
+    return [
       {
         model: "body",
         type: "textArea",
@@ -237,7 +254,7 @@ class Purpose extends BaseRequirementNode {
         label: "色",
         default: "#888"
       }
-    ]};
+    ];
   }
 }
 
