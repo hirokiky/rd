@@ -22,7 +22,7 @@
         let value = new models.Value();
         stakeholder.addValue(value);
         store.commit('editBody', value);
-      },
+      }
     }
   }
 </script>
@@ -50,6 +50,13 @@
                       bodyAttr="body"
                       widget="textarea"></bodyedit>
             <modal-button :model="value"></modal-button>
+            <select v-model="value.purpose">
+              <option :value="null">unselected</option>
+              <option v-for="purpose in purposes"
+                      :value="purpose"
+                      :selected="value.purpose == purpose"
+                      v-text="purpose.body" />
+            </select>
           </li>
           <li><button @click="addValue(stakeholder)">Add Value</button></li>
         </ul>

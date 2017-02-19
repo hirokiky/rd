@@ -8123,7 +8123,7 @@
 	  /* script */
 	  __webpack_require__(15),
 	  /* template */
-	  __webpack_require__(43),
+	  __webpack_require__(45),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -11052,7 +11052,7 @@
 	      let value = new models.Value();
 	      stakeholder.addValue(value);
 	      store.commit('editBody', value);
-	    },
+	    }
 	  }
 	}
 
@@ -11100,7 +11100,36 @@
 	        attrs: {
 	          "model": value
 	        }
-	      })], 1)
+	      }), _vm._v(" "), _c('select', {
+	        directives: [{
+	          name: "model",
+	          rawName: "v-model",
+	          value: (value.purpose),
+	          expression: "value.purpose"
+	        }],
+	        on: {
+	          "change": function($event) {
+	            value.purpose = Array.prototype.filter.call($event.target.options, function(o) {
+	              return o.selected
+	            }).map(function(o) {
+	              var val = "_value" in o ? o._value : o.value;
+	              return val
+	            })[0]
+	          }
+	        }
+	      }, [_c('option', {
+	        domProps: {
+	          "value": null
+	        }
+	      }, [_vm._v("unselected")]), _vm._v(" "), _vm._l((_vm.purposes), function(purpose) {
+	        return _c('option', {
+	          domProps: {
+	            "value": purpose,
+	            "selected": value.purpose == purpose,
+	            "textContent": _vm._s(purpose.body)
+	          }
+	        })
+	      })], 2)], 1)
 	    }), _vm._v(" "), _c('li', [_c('button', {
 	      on: {
 	        "click": function($event) {
@@ -11232,7 +11261,7 @@
 	  /* script */
 	  __webpack_require__(40),
 	  /* template */
-	  __webpack_require__(42),
+	  __webpack_require__(44),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -11284,9 +11313,9 @@
 
 	var Component = __webpack_require__(8)(
 	  /* script */
-	  __webpack_require__(44),
+	  __webpack_require__(42),
 	  /* template */
-	  __webpack_require__(45),
+	  __webpack_require__(43),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -11316,58 +11345,6 @@
 /* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('ul', _vm._l((_vm.requirements), function(req) {
-	    return _c('requirement', {
-	      attrs: {
-	        "requirement": req
-	      }
-	    })
-	  }))])
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-056080d4", module.exports)
-	  }
-	}
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('router-link', {
-	    attrs: {
-	      "to": "/stakeholders"
-	    }
-	  }, [_vm._v("Stakeholders")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/valueanalyse"
-	    }
-	  }, [_vm._v("ValueAnalyse")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/valuedesign"
-	    }
-	  }, [_vm._v("ValueDesign")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/requirements"
-	    }
-	  }, [_vm._v("Requirements")]), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('modal')], 1)
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-03cb0de6", module.exports)
-	  }
-	}
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
 	
 	const models = __webpack_require__(10);
 	const store = __webpack_require__(12);
@@ -11392,7 +11369,7 @@
 
 
 /***/ },
-/* 45 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11436,6 +11413,58 @@
 	  module.hot.accept()
 	  if (module.hot.data) {
 	     require("vue-hot-reload-api").rerender("data-v-317033a2", module.exports)
+	  }
+	}
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('ul', _vm._l((_vm.requirements), function(req) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": req
+	      }
+	    })
+	  }))])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-056080d4", module.exports)
+	  }
+	}
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('router-link', {
+	    attrs: {
+	      "to": "/stakeholders"
+	    }
+	  }, [_vm._v("Stakeholders")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valueanalyse"
+	    }
+	  }, [_vm._v("ValueAnalyse")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valuedesign"
+	    }
+	  }, [_vm._v("ValueDesign")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/requirements"
+	    }
+	  }, [_vm._v("Requirements")]), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('modal')], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-03cb0de6", module.exports)
 	  }
 	}
 
