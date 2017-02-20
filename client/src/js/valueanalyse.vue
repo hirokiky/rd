@@ -50,11 +50,13 @@
                       bodyAttr="body"
                       widget="textarea"></bodyedit>
             <modal-button :model="value"></modal-button>
-            <select v-model="value.purpose">
+            <!-- If use v-model it will run JSON.stringify  -->
+            <select>
               <option :value="null">unselected</option>
               <option v-for="purpose in purposes"
                       :value="purpose"
                       :selected="value.purpose == purpose"
+                      @click="value.purpose = purpose"
                       v-text="purpose.body" />
             </select>
           </li>

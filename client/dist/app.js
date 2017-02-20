@@ -11100,24 +11100,7 @@
 	        attrs: {
 	          "model": value
 	        }
-	      }), _vm._v(" "), _c('select', {
-	        directives: [{
-	          name: "model",
-	          rawName: "v-model",
-	          value: (value.purpose),
-	          expression: "value.purpose"
-	        }],
-	        on: {
-	          "change": function($event) {
-	            value.purpose = Array.prototype.filter.call($event.target.options, function(o) {
-	              return o.selected
-	            }).map(function(o) {
-	              var val = "_value" in o ? o._value : o.value;
-	              return val
-	            })[0]
-	          }
-	        }
-	      }, [_c('option', {
+	      }), _vm._v(" "), _c('select', [_c('option', {
 	        domProps: {
 	          "value": null
 	        }
@@ -11127,6 +11110,11 @@
 	            "value": purpose,
 	            "selected": value.purpose == purpose,
 	            "textContent": _vm._s(purpose.body)
+	          },
+	          on: {
+	            "click": function($event) {
+	              value.purpose = purpose
+	            }
 	          }
 	        })
 	      })], 2)], 1)
