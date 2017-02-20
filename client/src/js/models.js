@@ -107,6 +107,8 @@ class Requirement extends BaseRequirementNode {
     super(body);
   }
 
+  get modelVerboseName() {return '要求';}
+
   get schema() {
     return makeSchema([
       {
@@ -125,6 +127,8 @@ class Vision extends BaseRequirementNode {
     super(body);
   }
 
+  get modelVerboseName() {return 'ビジョン';}
+
   get schema() {
     return makeSchema([
       {
@@ -140,6 +144,8 @@ class Concept extends BaseRequirementNode {
   constructor(body) {
     super(body);
   }
+
+  get modelVerboseName() {return 'コンセプト';}
 
   get schema() {
     return makeSchema([
@@ -194,6 +200,8 @@ class Demand {
     this.type = type;
   }
 
+  get modelVerboseName() {return '要望';}
+
   get schema() {
     return makeSchema([
       {
@@ -231,6 +239,8 @@ class Stakeholder extends Node {
     return this;
   }
 
+  get modelVerboseName() {return 'ステークホルダー';}
+
   get schema() {
     return makeSchema([
       {
@@ -249,6 +259,8 @@ class Purpose extends BaseRequirementNode {
     super(body);
     this.color = color || '#888';
   }
+
+  get modelVerboseName() {return '目的';}
 
   get schema() {
     return makeSchema([
@@ -273,6 +285,8 @@ class Value {
     this.purpose = purpose || null;
     this.body = body || '';
   }
+
+  get modelVerboseName() {return '価値';}
 
   get schema() {
     return makeSchema([

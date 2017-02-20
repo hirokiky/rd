@@ -7435,6 +7435,8 @@
 	    super(body);
 	  }
 
+	  get modelVerboseName() {return '要求';}
+
 	  get schema() {
 	    return makeSchema([
 	      {
@@ -7453,6 +7455,8 @@
 	    super(body);
 	  }
 
+	  get modelVerboseName() {return 'ビジョン';}
+
 	  get schema() {
 	    return makeSchema([
 	      {
@@ -7468,6 +7472,8 @@
 	  constructor(body) {
 	    super(body);
 	  }
+
+	  get modelVerboseName() {return 'コンセプト';}
 
 	  get schema() {
 	    return makeSchema([
@@ -7522,6 +7528,8 @@
 	    this.type = type;
 	  }
 
+	  get modelVerboseName() {return '要望';}
+
 	  get schema() {
 	    return makeSchema([
 	      {
@@ -7559,6 +7567,8 @@
 	    return this;
 	  }
 
+	  get modelVerboseName() {return 'ステークホルダー';}
+
 	  get schema() {
 	    return makeSchema([
 	      {
@@ -7577,6 +7587,8 @@
 	    super(body);
 	    this.color = color || '#888';
 	  }
+
+	  get modelVerboseName() {return '目的';}
 
 	  get schema() {
 	    return makeSchema([
@@ -7601,6 +7613,8 @@
 	    this.purpose = purpose || null;
 	    this.body = body || '';
 	  }
+
+	  get modelVerboseName() {return '価値';}
 
 	  get schema() {
 	    return makeSchema([
@@ -10114,7 +10128,11 @@
 	    on: {
 	      "click": _vm.close
 	    }
-	  }, [_vm._v("close")]), _vm._v(" "), _c('vue-form-generator', {
+	  }, [_vm._v("close")]), _vm._v(" "), _c('h2', {
+	    domProps: {
+	      "textContent": _vm._s(_vm.modalEditing.modelVerboseName)
+	    }
+	  }), _vm._v(" "), _c('vue-form-generator', {
 	    attrs: {
 	      "schema": _vm.modalEditing.schema,
 	      "model": _vm.modalEditing
