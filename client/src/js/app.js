@@ -1,7 +1,5 @@
 const Vue = require('vue');
 
-Vue.component('node', require('./node.vue'));
-
 require('./store');  // Just Initializing
 
 
