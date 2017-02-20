@@ -27,6 +27,7 @@
               bodyAttr="body"
               widget="textarea"></bodyedit>
     <modal-button :model="requirement"></modal-button>
+    <button @click="requirement.removeFromParent()">Remove</button>
     <ul>
       <requirement v-for="child in requirement.children"
                    :requirement="child"></requirement>

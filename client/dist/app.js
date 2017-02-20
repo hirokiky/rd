@@ -7366,6 +7366,17 @@
 	    return this;
 	  }
 
+	  removeChild(child) {
+	    child.parent = null;
+	    this.children.splice(this.children.indexOf(child), 1);
+	  }
+
+	  removeFromParent() {
+	    if (this.parent) {
+	      this.parent.removeChild(this);
+	    }
+	  }
+
 	  hasChild() {
 	    return this.children.length > 0;
 	  }
@@ -10934,7 +10945,13 @@
 	    attrs: {
 	      "model": _vm.requirement
 	    }
-	  }), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
+	  }), _vm._v(" "), _c('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.requirement.removeFromParent()
+	      }
+	    }
+	  }, [_vm._v("Remove")]), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
 	    return _c('requirement', {
 	      attrs: {
 	        "requirement": child

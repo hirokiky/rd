@@ -38,6 +38,17 @@ class Node {
     return this;
   }
 
+  removeChild(child) {
+    child.parent = null;
+    this.children.splice(this.children.indexOf(child), 1);
+  }
+
+  removeFromParent() {
+    if (this.parent) {
+      this.parent.removeChild(this);
+    }
+  }
+
   hasChild() {
     return this.children.length > 0;
   }
