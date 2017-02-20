@@ -7352,12 +7352,38 @@
 	];
 
 
+	const BASE_FIELDS = [
+	  {model: 'note',
+	   type: 'textArea',
+	   label: 'ノート'}
+	];
+
+	const REQUIREMENT_FIELDS = [
+	  {model: 'layer',
+	   type: 'select',
+	   label: '要求レイヤー',
+	   values: LAYERS},
+	  {model: 'priority',
+	   type: 'select',
+	   label: '優先度',
+	   values: PRIORITIES}
+	].concat(BASE_FIELDS);
+
+
+	function makeSchema(fields) {
+	  // Make schema object for vue-form-generator
+	  return {
+	    fields: fields
+	  };
+	}
+
+
 	class Node {
 	  constructor() {
 	    this.parent = null;
 	    this.children = [];
 
-	    this.editing = false;
+	    this.note = '';
 	  }
 
 	  addChild(child) {
@@ -7392,13 +7418,6 @@
 	    });
 	    return ret;
 	  }
-
-	  get schema() {
-	    /**
-	     * Specify schema for vue-form-generator.
-	     */
-	    return null;
-	  }
 	}
 
 
@@ -7409,25 +7428,6 @@
 	    this.priority = null;
 	    this.body = body;
 	  }
-
-	  get fields() {
-	    return [];
-	  }
-
-	  get schema() {
-	    return {
-	      fields: this.fields.concat([
-	        {model: 'layer',
-	         type: 'select',
-	         label: '要求レイヤー',
-	         values: LAYERS},
-	        {model: 'priority',
-	         type: 'select',
-	         label: '優先度',
-	         values: PRIORITIES}
-	      ])
-	    };
-	  }
 	}
 
 	class Requirement extends BaseRequirementNode {
@@ -7435,14 +7435,14 @@
 	    super(body);
 	  }
 
-	  get fields() {
-	    return  [
+	  get schema() {
+	    return makeSchema([
 	      {
 	        model: "body",
 	        type: "textArea",
 	        label: "内容"
 	      }
-	    ];
+	    ].concat(REQUIREMENT_FIELDS));
 	  }
 	}
 
@@ -7453,14 +7453,14 @@
 	    super(body);
 	  }
 
-	  get fields() {
-	    return [
-	        {
-	          model: "body",
-	          type: "textArea",
-	          label: "内容"
-	        }
-	      ];
+	  get schema() {
+	    return makeSchema([
+	      {
+	        model: "body",
+	        type: "textArea",
+	        label: "内容"
+	      }
+	    ].concat(REQUIREMENT_FIELDS));
 	  }
 	}
 
@@ -7469,14 +7469,14 @@
 	    super(body);
 	  }
 
-	  get fields() {
-	    return [
+	  get schema() {
+	    return makeSchema([
 	      {
 	        model: "body",
 	        type: "textArea",
 	        label: "内容"
 	      }
-	    ];
+	    ].concat(REQUIREMENT_FIELDS));
 	  }
 	}
 
@@ -7523,7 +7523,7 @@
 	  }
 
 	  get schema() {
-	    return {fields: [
+	    return makeSchema([
 	      {
 	        model: "body",
 	        type: "textArea",
@@ -7535,7 +7535,7 @@
 	        label: "肯定/否定",
 	        values: DEMAND_TYPE
 	      }
-	    ]};
+	    ].concat(BASE_FIELDS));
 	  }
 	}
 
@@ -7560,15 +7560,13 @@
 	  }
 
 	  get schema() {
-	    return {
-	      fields: [
-	        {
-	          model: "name",
-	          type: "input",
-	          label: "名前"
-	        }
-	      ]
-	    };
+	    return makeSchema([
+	      {
+	        model: "name",
+	        type: "input",
+	        label: "名前"
+	      }
+	    ].concat(BASE_FIELDS));
 	  }
 	}
 
@@ -7580,8 +7578,8 @@
 	    this.color = color || '#888';
 	  }
 
-	  get fields() {
-	    return [
+	  get schema() {
+	    return makeSchema([
 	      {
 	        model: "body",
 	        type: "textArea",
@@ -7593,7 +7591,7 @@
 	        label: "色",
 	        default: "#888"
 	      }
-	    ];
+	    ].concat(REQUIREMENT_FIELDS));
 	  }
 	}
 
@@ -7605,13 +7603,13 @@
 	  }
 
 	  get schema() {
-	    return {fields: [
+	    return makeSchema([
 	      {
 	        model: "body",
 	        type: "textArea",
 	        label: "内容"
 	      }
-	    ]};
+	    ].concat(BASE_FIELDS));
 	  }
 	}
 
