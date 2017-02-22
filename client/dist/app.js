@@ -6461,7 +6461,7 @@
 	const Vuex = __webpack_require__(4);
 
 	const models = __webpack_require__(5);
-
+	const utils = __webpack_require__(39);
 
 	Vue.use(Vuex);
 
@@ -6526,9 +6526,15 @@
 	      state.stakeholders.push(stakeholder);
 	      state.bodyEditing = stakeholder;
 	    },
+	    removeStakeholder(state, stakeholder) {
+	      utils.remove(state.stakeholders, stakeholder);
+	    },
 	    addPurpose(state, purpose) {
 	      state.purposes.push(purpose);
 	      state.bodyEditing = purpose;
+	    },
+	    removePurpose(state, purpose) {
+	      utils.remove(state.purposes, purpose);
 	    },
 	    editBody(state, obj) {
 	      state.bodyEditing = obj;
@@ -7324,10 +7330,9 @@
 
 /***/ },
 /* 5 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	// RequirementsModel
-
+	const utils = __webpack_require__(39);
 
 	const LAYER_STRATEGY = 'strategy';
 	const LAYER_BUSINESS = 'business';
@@ -7394,7 +7399,7 @@
 
 	  removeChild(child) {
 	    child.parent = null;
-	    this.children.splice(this.children.indexOf(child), 1);
+	    utils.remove(this.children, child);n
 	  }
 
 	  removeFromParent() {
@@ -7609,10 +7614,18 @@
 	    return this;
 	  }
 
+	  removeDemand(demand) {
+	    utils.remove(this.demands, demand);
+	  }
+
 	  addValue(value) {
 	    value.stakeholder = this;
 	    this.values.push(value);
 	    return this;
+	  }
+
+	  removeValue(value) {
+	    utils.remove(this.values, value);
 	  }
 
 	  get modelVerboseName() {return 'ステークホルダー';}
@@ -10483,6 +10496,9 @@
 	    addStakeholder() {
 	      let s = new models.Stakeholder('');
 	      store.commit('addStakeholder', s);
+	    },
+	    removeStakeholder(stakeholder) {
+	      store.commit('removeStakeholder', stakeholder);
 	    }
 	  }
 	}
@@ -10575,7 +10591,13 @@
 	    attrs: {
 	      "model": _vm.stakeholder
 	    }
-	  }), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
+	  }), _vm._v(" "), _c('button', {
+	    on: {
+	      "click": function($event) {
+	        _vm.stakeholder.removeFromParent()
+	      }
+	    }
+	  }, [_vm._v("Remove")]), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
 	    return _c('li', [_c('bodyedit', {
 	      attrs: {
 	        "obj": demand,
@@ -10586,7 +10608,13 @@
 	      attrs: {
 	        "model": demand
 	      }
-	    })], 1)
+	    }), _vm._v(" "), _c('button', {
+	      on: {
+	        "click": function($event) {
+	          _vm.stakeholder.removeDemand(demand)
+	        }
+	      }
+	    }, [_vm._v("Remove")])], 1)
 	  })), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.children), function(child) {
 	    return _c('stakeholder', {
 	      attrs: {
@@ -10609,11 +10637,15 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('ul', [_vm._l((_vm.stakeholders), function(stakeholder) {
-	    return _c('stakeholder', {
+	    return _c('div', [_c('button', {
+	      on: {
+	        "click": _vm.removeStakeholder
+	      }
+	    }, [_vm._v("Remove")]), _vm._v(" "), _c('stakeholder', {
 	      attrs: {
 	        "stakeholder": stakeholder
 	      }
-	    })
+	    })], 1)
 	  }), _vm._v(" "), _c('button', {
 	    on: {
 	      "click": _vm.addStakeholder
@@ -10690,6 +10722,9 @@
 	      let value = new models.Value();
 	      stakeholder.addValue(value);
 	      store.commit('editBody', value);
+	    },
+	    removePurpose(purpose) {
+	      store.commit('removePurpose', purpose)
 	    }
 	  }
 	}
@@ -10711,7 +10746,13 @@
 	      attrs: {
 	        "model": purpose
 	      }
-	    })], 1)
+	    }), _vm._v(" "), _c('button', {
+	      on: {
+	        "click": function($event) {
+	          _vm.removePurpose(purpose)
+	        }
+	      }
+	    }, [_vm._v("Remove")])], 1)
 	  }), _vm._v(" "), _c('li', [_c('button', {
 	    on: {
 	      "click": _vm.addPurpose
@@ -10738,7 +10779,13 @@
 	        attrs: {
 	          "model": value
 	        }
-	      }), _vm._v(" "), _c('select', [_c('option', {
+	      }), _vm._v(" "), _c('button', {
+	        on: {
+	          "click": function($event) {
+	            stakeholder.removeValue(value)
+	          }
+	        }
+	      }, [_vm._v("Remove")]), _vm._v(" "), _c('select', [_c('option', {
 	        domProps: {
 	          "value": null
 	        }
@@ -11139,6 +11186,19 @@
 	     require("vue-hot-reload-api").rerender("data-v-03cb0de6", module.exports)
 	  }
 	}
+
+/***/ },
+/* 39 */
+/***/ function(module, exports) {
+
+	function remove(arr, obj) {
+	  arr.splice(arr.indexOf(obj), 1);
+	}
+
+	module.exports = {
+	  remove: remove
+	};
+
 
 /***/ }
 /******/ ]);

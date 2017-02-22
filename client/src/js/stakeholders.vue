@@ -14,6 +14,9 @@
       addStakeholder() {
         let s = new models.Stakeholder('');
         store.commit('addStakeholder', s);
+      },
+      removeStakeholder(stakeholder) {
+        store.commit('removeStakeholder', stakeholder);
       }
     }
   }
@@ -21,8 +24,10 @@
 
 <template>
   <ul>
-    <stakeholder v-for="stakeholder in stakeholders"
-                 :stakeholder="stakeholder"></stakeholder>
+    <div v-for="stakeholder in stakeholders">
+      <button @click="removeStakeholder">Remove</button>
+      <stakeholder :stakeholder="stakeholder"></stakeholder>
+    </div>
     <button @click="addStakeholder">Add Stakeholder</button>
   </ul>
 </template>

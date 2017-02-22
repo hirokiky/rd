@@ -22,6 +22,9 @@
         let value = new models.Value();
         stakeholder.addValue(value);
         store.commit('editBody', value);
+      },
+      removePurpose(purpose) {
+        store.commit('removePurpose', purpose)
       }
     }
   }
@@ -35,6 +38,7 @@
                   bodyAttr="body"
                   widget="textarea"></bodyedit>
         <modal-button :model="purpose"></modal-button>
+        <button @click="removePurpose(purpose)">Remove</button>
       </li>
       <li><button @click="addPurpose">Add Purpose</button></li>
     </ul>
@@ -50,6 +54,7 @@
                       bodyAttr="body"
                       widget="textarea"></bodyedit>
             <modal-button :model="value"></modal-button>
+            <button @click="stakeholder.removeValue(value)">Remove</button>
             <!-- If use v-model it will run JSON.stringify  -->
             <select>
               <option :value="null">unselected</option>

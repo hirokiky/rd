@@ -1,5 +1,4 @@
-// RequirementsModel
-
+const utils = require('./utils');
 
 const LAYER_STRATEGY = 'strategy';
 const LAYER_BUSINESS = 'business';
@@ -66,7 +65,7 @@ class Node {
 
   removeChild(child) {
     child.parent = null;
-    this.children.splice(this.children.indexOf(child), 1);
+    utils.remove(this.children, child);n
   }
 
   removeFromParent() {
@@ -281,10 +280,18 @@ class Stakeholder extends Node {
     return this;
   }
 
+  removeDemand(demand) {
+    utils.remove(this.demands, demand);
+  }
+
   addValue(value) {
     value.stakeholder = this;
     this.values.push(value);
     return this;
+  }
+
+  removeValue(value) {
+    utils.remove(this.values, value);
   }
 
   get modelVerboseName() {return 'ステークホルダー';}

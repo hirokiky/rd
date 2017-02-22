@@ -2,7 +2,7 @@ const Vue = require('vue');
 const Vuex = require('vuex');
 
 const models = require('./models');
-
+const utils = require('./utils');
 
 Vue.use(Vuex);
 
@@ -67,9 +67,15 @@ const store = new Vuex.Store({
       state.stakeholders.push(stakeholder);
       state.bodyEditing = stakeholder;
     },
+    removeStakeholder(state, stakeholder) {
+      utils.remove(state.stakeholders, stakeholder);
+    },
     addPurpose(state, purpose) {
       state.purposes.push(purpose);
       state.bodyEditing = purpose;
+    },
+    removePurpose(state, purpose) {
+      utils.remove(state.purposes, purpose);
     },
     editBody(state, obj) {
       state.bodyEditing = obj;

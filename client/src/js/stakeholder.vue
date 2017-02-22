@@ -34,6 +34,7 @@
     <button @click="addChild">Add Child</button>
     <button @click="addDemand">Add Demand</button>
     <modal-button :model="stakeholder"></modal-button>
+    <button @click="stakeholder.removeFromParent()">Remove</button>
 
     <ul>
       <li v-for="demand in stakeholder.demands">
@@ -41,6 +42,7 @@
                   bodyAttr="body"
                   widget="textarea"></bodyedit>
         <modal-button :model="demand"></modal-button>
+        <button @click="stakeholder.removeDemand(demand)">Remove</button>
       </li>
     </ul>
     <ul>
