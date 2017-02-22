@@ -1,0 +1,35 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 944px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+nav {
+    background-color: #5e747b;
+    color: white;
+    height: 38px;
+    display: flex;
+    align-items: center;
+}
+
+nav > div > a {
+    color: white;
+}
+
+nav > div > *:not(:first-child) {
+    margin-left: 8px;
+}

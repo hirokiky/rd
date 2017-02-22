@@ -26,12 +26,20 @@
 
 <template>
   <div>
-    <router-link to="/stakeholders">Stakeholders</router-link>
-    <router-link to="/valueanalyse">ValueAnalyse</router-link>
-    <router-link to="/valuedesign">ValueDesign</router-link>
-    <router-link to="/requirements">Requirements</router-link>
-    <router-view></router-view>
+    <nav>
+      <div class="wrapper">
+        <router-link to="/stakeholders">ステークホルダー</router-link>
+        <router-link to="/valueanalyse">価値分析</router-link>
+        <router-link to="/valuedesign">価値デザイン</router-link>
+        <router-link to="/requirements">要求分析</router-link>
+      </div>
+    </nav>
+    <div class="wrapper">
+      <router-view></router-view>
+    </div>
 
     <modal></modal>
   </div>
 </template>
+
+<style src="../css/app.css"></stlye>
