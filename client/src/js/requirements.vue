@@ -7,8 +7,8 @@
 
   module.exports = {
     computed: {
-      requirements() {
-        return store.state.requirements
+      requirement() {
+        return store.state.rootRequirement
       }
     }
   }
@@ -17,8 +17,7 @@
 <template>
   <div>
     <ul>
-      <requirement v-for="req in requirements"
-                   :requirement="req"></requirement>
+      <requirement :requirement="requirement"></requirement>
     </ul>
   </div>
 </template>

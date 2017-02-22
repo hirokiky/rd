@@ -6491,7 +6491,8 @@
 	    concept2: new models.Concept("コンセプト2"),
 	    concept3: new models.Concept("コンセプト3"),
 
-	    requirements: [],
+	    // Just empty requirement to bundle top level requiremnts.
+	    rootRequirement: new models.Requirement(),
 
 	    showModal: false,
 	    modalEditing: null
@@ -6500,8 +6501,7 @@
 	    noParents(state) {
 	      let l = [];
 	      function add(r) {
-	        if (!r.hasParent() &&
-	            state.requirements.indexOf(r) == -1) {
+	        if (!r.hasParent() && r !== state.rootRequirement) {
 	          l.push(r);
 	        }
 	      }
@@ -6513,11 +6513,7 @@
 	      add(state.concept2);
 	      add(state.concept3);
 
-	      state.requirements.forEach((req) => {
-	        req.flatten().forEach((r) => {
-	          add(r);
-	        });
-	      });
+	      state.rootRequirement.flatten().forEach((req) => { add(req); });
 	      return l
 	    }
 	  },
@@ -6542,7 +6538,7 @@
 	  }
 	});
 
-	store.state.requirements.push(
+	store.state.rootRequirement.addChild(
 	  store.state.vision
 	    .addChild(
 	      store.state.concept1
@@ -10878,8 +10874,8 @@
 
 	module.exports = {
 	  computed: {
-	    requirements() {
-	      return store.state.requirements
+	    requirement() {
+	      return store.state.rootRequirement
 	    }
 	  }
 	}
@@ -10951,7 +10947,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [_c('bodyedit', {
+	  return _c('li', [(_vm.requirement.hasParent()) ? _c('div', [_c('bodyedit', {
 	    attrs: {
 	      "obj": _vm.requirement,
 	      "bodyAttr": "body",
@@ -10967,7 +10963,7 @@
 	        _vm.requirement.removeFromParent()
 	      }
 	    }
-	  }, [_vm._v("Remove")]), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
+	  }, [_vm._v("Remove")])], 1) : _vm._e(), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
 	    return _c('requirement', {
 	      attrs: {
 	        "requirement": child
@@ -10990,7 +10986,7 @@
 	        }
 	      }
 	    })
-	  })], 2)])], 2)], 1)
+	  })], 2)])], 2)])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -11005,13 +11001,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('ul', _vm._l((_vm.requirements), function(req) {
-	    return _c('requirement', {
-	      attrs: {
-	        "requirement": req
-	      }
-	    })
-	  }))])
+	  return _c('div', [_c('ul', [_c('requirement', {
+	    attrs: {
+	      "requirement": _vm.requirement
+	    }
+	  })], 1)])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {

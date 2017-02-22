@@ -32,7 +32,8 @@ const store = new Vuex.Store({
     concept2: new models.Concept("コンセプト2"),
     concept3: new models.Concept("コンセプト3"),
 
-    requirements: [],
+    // Just empty requirement to bundle top level requiremnts.
+    rootRequirement: new models.Requirement(),
 
     showModal: false,
     modalEditing: null
@@ -41,8 +42,7 @@ const store = new Vuex.Store({
     noParents(state) {
       let l = [];
       function add(r) {
-        if (!r.hasParent() &&
-            state.requirements.indexOf(r) == -1) {
+        if (!r.hasParent() && r !== state.rootRequirement) {
           l.push(r);
         }
       }
@@ -54,11 +54,7 @@ const store = new Vuex.Store({
       add(state.concept2);
       add(state.concept3);
 
-      state.requirements.forEach((req) => {
-        req.flatten().forEach((r) => {
-          add(r);
-        });
-      });
+      state.rootRequirement.flatten().forEach((req) => { add(req); });
       return l
     }
   },
@@ -83,7 +79,7 @@ const store = new Vuex.Store({
   }
 });
 
-store.state.requirements.push(
+store.state.rootRequirement.addChild(
   store.state.vision
     .addChild(
       store.state.concept1

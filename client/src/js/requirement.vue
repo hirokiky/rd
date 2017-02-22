@@ -23,11 +23,14 @@
 
 <template>
   <li>
-    <bodyedit :obj="requirement"
-              bodyAttr="body"
-              widget="textarea"></bodyedit>
-    <modal-button :model="requirement"></modal-button>
-    <button @click="requirement.removeFromParent()">Remove</button>
+    <div v-if="requirement.hasParent()">
+      <!-- Not to show editing forms for root requirement -->
+      <bodyedit :obj="requirement"
+                bodyAttr="body"
+                widget="textarea"></bodyedit>
+      <modal-button :model="requirement"></modal-button>
+      <button @click="requirement.removeFromParent()">Remove</button>
+    </div>
     <ul>
       <requirement v-for="child in requirement.children"
                    :requirement="child"></requirement>
