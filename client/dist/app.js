@@ -6467,7 +6467,7 @@
 
 	const store = new Vuex.Store({
 	  state: {
-	    rootStakeholder: new models.Stakeholder('Your Product')
+	    rootStakeholder: new models.Stakeholder('製品、サービス')
 	      .addChild(
 	        new models.Stakeholder("BeProud")
 	          .addChild(
@@ -7592,8 +7592,8 @@
 	const DEMAND_TYPE_POSITIVE = 'positive';
 
 	const DEMAND_TYPE = [
-	  {id: DEMAND_TYPE_NEGATIVE, name: "否定"},
-	  {id: DEMAND_TYPE_POSITIVE, name: "肯定"}
+	  {id: DEMAND_TYPE_POSITIVE, name: "肯定"},
+	  {id: DEMAND_TYPE_NEGATIVE, name: "否定"}
 	];
 
 
@@ -7602,6 +7602,14 @@
 	    this.stakeholder = null;
 	    this.body = body;
 	    this.type = type;
+	  }
+
+	  get isPositive() {
+	    return this.type == DEMAND_TYPE_POSITIVE;
+	  }
+
+	  get isNegative() {
+	    return this.type == DEMAND_TYPE_NEGATIVE;
 	  }
 
 	  get modelVerboseName() {return '要望';}
@@ -7818,7 +7826,7 @@
 
 
 	// module
-	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n.wrapper {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n", ""]);
+	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.wrapper {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\nbutton > i.material-icons {\n    font-size: 12px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-block;\n\n    border: solid 2px #888;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #51a3f3;\n    background-color: #f3fbff;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #ff8a8a;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
 
 	// exports
 
@@ -10626,7 +10634,9 @@
 	    on: {
 	      "click": _vm.open
 	    }
-	  }, [_vm._v("Edit")])
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("edit")])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -10920,7 +10930,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [_c('div', [_c('i', {
+	  return _c('li', [_c('div', {
+	    staticClass: "stakeholder"
+	  }, [_c('i', {
 	    staticClass: "material-icons"
 	  }, [_vm._v("person")]), _vm._v(" "), _c('bodyedit', {
 	    attrs: {
@@ -10928,15 +10940,21 @@
 	      "bodyAttr": "name",
 	      "widget": "input"
 	    }
-	  })], 1), _vm._v(" "), _c('button', {
+	  }), _vm._v(" "), _c('button', {
 	    on: {
 	      "click": _vm.addChild
 	    }
-	  }, [_vm._v("Add Child")]), _vm._v(" "), (_vm.stakeholder.hasParent()) ? _c('div', [_c('button', {
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("add")]), _vm._v(" "), _c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("person")])]), _vm._v(" "), (_vm.stakeholder.hasParent()) ? _c('span', [_c('button', {
 	    on: {
 	      "click": _vm.addDemand
 	    }
-	  }, [_vm._v("Add Demand")]), _vm._v(" "), _c('modal-button', {
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("add")]), _vm._v("\n        要望\n      ")]), _vm._v(" "), _c('modal-button', {
 	    attrs: {
 	      "model": _vm.stakeholder
 	    }
@@ -10946,8 +10964,18 @@
 	        _vm.stakeholder.removeFromParent()
 	      }
 	    }
-	  }, [_vm._v("Remove")])], 1) : _vm._e(), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
-	    return _c('li', [_c('bodyedit', {
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("delete")])])], 1) : _vm._e()], 1), _vm._v(" "), _c('ul', {
+	    staticClass: "tree"
+	  }, _vm._l((_vm.stakeholder.demands), function(demand) {
+	    return _c('li', [_c('div', {
+	      staticClass: "box",
+	      class: {
+	        'positive': demand.isPositive,
+	          'negative': demand.isNegative
+	      }
+	    }, [_c('bodyedit', {
 	      attrs: {
 	        "obj": demand,
 	        "bodyAttr": "body",
@@ -10963,8 +10991,12 @@
 	          _vm.stakeholder.removeDemand(demand)
 	        }
 	      }
-	    }, [_vm._v("Remove")])], 1)
-	  })), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.children), function(child) {
+	    }, [_c('i', {
+	      staticClass: "material-icons"
+	    }, [_vm._v("delete")])])], 1)])
+	  })), _vm._v(" "), _c('ul', {
+	    staticClass: "tree"
+	  }, _vm._l((_vm.stakeholder.children), function(child) {
 	    return _c('stakeholder', {
 	      attrs: {
 	        "stakeholder": child
@@ -10985,7 +11017,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('ul', [_c('stakeholder', {
+	  return _c('ul', {
+	    staticClass: "tree"
+	  }, [_c('stakeholder', {
 	    attrs: {
 	      "stakeholder": _vm.stakeholder
 	    }
@@ -11093,7 +11127,9 @@
 	      "click": _vm.addPurpose
 	    }
 	  }, [_vm._v("Add Purpose")])])], 2), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
-	    return _c('li', [_c('div', [_c('i', {
+	    return _c('li', [_c('div', {
+	      staticClass: "stakeholder"
+	    }, [_c('i', {
 	      staticClass: "material-icons"
 	    }, [_vm._v("person")]), _c('span', {
 	      domProps: {

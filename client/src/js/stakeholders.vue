@@ -14,7 +14,7 @@
 </script>
 
 <template>
-  <ul>
+  <ul class="tree">
     <stakeholder :stakeholder="stakeholder"></stakeholder>
   </ul>
 </template>

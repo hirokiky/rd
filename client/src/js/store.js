@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    rootStakeholder: new models.Stakeholder('Your Product')
+    rootStakeholder: new models.Stakeholder('製品、サービス')
       .addChild(
         new models.Stakeholder("BeProud")
           .addChild(

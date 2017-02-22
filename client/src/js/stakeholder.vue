@@ -24,31 +24,44 @@
 
 <template>
   <li>
-    <div>
+    <div class="stakeholder">
       <i class="material-icons">person</i>
       <bodyedit :obj="stakeholder"
                 bodyAttr="name"
                 widget="input"></bodyedit>
+      <button @click="addChild">
+        <i class="material-icons">add</i>
+        <i class="material-icons">person</i>
+      </button>
+      <!-- Root stakeholder should not be deleted -->
+      <span v-if="stakeholder.hasParent()">
+        <button @click="addDemand">
+          <i class="material-icons">add</i>
+          要望
+        </button>
+        <modal-button :model="stakeholder"></modal-button>
+        <button @click="stakeholder.removeFromParent()">
+          <i class="material-icons">delete</i>
+        </button>
+      </span>
     </div>
 
-    <button @click="addChild">Add Child</button>
-    <!-- Root stakeholder should not be deleted -->
-    <div v-if="stakeholder.hasParent()">
-      <button @click="addDemand">Add Demand</button>
-      <modal-button :model="stakeholder"></modal-button>
-      <button @click="stakeholder.removeFromParent()">Remove</button>
-    </div>
-
-    <ul>
+    <ul class="tree">
       <li v-for="demand in stakeholder.demands">
-        <bodyedit :obj="demand"
-                  bodyAttr="body"
-                  widget="textarea"></bodyedit>
-        <modal-button :model="demand"></modal-button>
-        <button @click="stakeholder.removeDemand(demand)">Remove</button>
+        <div class="box"
+             :class="{'positive': demand.isPositive,
+                      'negative': demand.isNegative}">
+          <bodyedit :obj="demand"
+                    bodyAttr="body"
+                    widget="textarea"></bodyedit>
+          <modal-button :model="demand"></modal-button>
+          <button @click="stakeholder.removeDemand(demand)">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
       </li>
     </ul>
-    <ul>
+    <ul class="tree">
       <stakeholder v-for="child in stakeholder.children"
                    :stakeholder="child"></stakeholder>
     </ul>

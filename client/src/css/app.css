@@ -2,6 +2,8 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    color: #333;
 }
 
 .wrapper {
@@ -18,6 +20,13 @@ a:hover {
     text-decoration: underline;
 }
 
+button > i.material-icons {
+    font-size: 12px;
+}
+
+/* Componets */
+
+/* Nav Bar */
 nav {
     background-color: #5e747b;
     color: white;
@@ -32,4 +41,57 @@ nav > div > a {
 
 nav > div > *:not(:first-child) {
     margin-left: 8px;
+}
+
+/* Tree */
+ul.tree {
+    padding-left: 60px;
+}
+
+ul.tree > li {
+    list-style: none;
+    margin: 4px 0 8px 0;
+}
+
+/* box */
+
+.box {
+    display: inline-block;
+
+    border: solid 2px #888;
+    border-radius: 4px;
+
+    background-color: #fbfbfb;
+
+    padding: 12px;
+}
+
+.box.positive {
+    border-color: #51a3f3;
+    background-color: #f3fbff;
+}
+
+.box.negative {
+    border-color: #e68e8e;
+    background-color: #fff3f3;
+}
+
+/* Models */
+
+/* Stakeholder */
+
+.stakeholder {
+    display: flex;
+    align-items: center;
+
+}
+
+.stakeholder > i.material-icons {
+    color: #ff8a8a;
+    font-size: 38px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.stakeholder > span {
+    font-size: 18px;
 }

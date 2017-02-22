@@ -259,8 +259,8 @@ const DEMAND_TYPE_NEGATIVE = 'negative';
 const DEMAND_TYPE_POSITIVE = 'positive';
 
 const DEMAND_TYPE = [
-  {id: DEMAND_TYPE_NEGATIVE, name: "否定"},
-  {id: DEMAND_TYPE_POSITIVE, name: "肯定"}
+  {id: DEMAND_TYPE_POSITIVE, name: "肯定"},
+  {id: DEMAND_TYPE_NEGATIVE, name: "否定"}
 ];
 
 
@@ -269,6 +269,14 @@ class Demand {
     this.stakeholder = null;
     this.body = body;
     this.type = type;
+  }
+
+  get isPositive() {
+    return this.type == DEMAND_TYPE_POSITIVE;
+  }
+
+  get isNegative() {
+    return this.type == DEMAND_TYPE_NEGATIVE;
   }
 
   get modelVerboseName() {return '要望';}

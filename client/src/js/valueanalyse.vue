@@ -40,7 +40,7 @@
     </ul>
     <ul>
       <li v-for="stakeholder in stakeholders">
-        <div>
+        <div class="stakeholder">
           <i class="material-icons">person</i><span v-text="stakeholder.name"></span>
           <modal-button :model="stakeholder"></modal-button>
         </div>
