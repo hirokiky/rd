@@ -6467,18 +6467,22 @@
 
 	const store = new Vuex.Store({
 	  state: {
-	    stakeholders: [
-	      new models.Stakeholder("BeProud")
-	        .addChild(
-	          new models.Stakeholder("BPメンバー")
-	            .addDemand(new models.Demand(
-	              'オフィスに活気が溢れてほしい'
-	            ))
-	        )
-	        .addChild(new models.Stakeholder("経営者")),
-	      new models.Stakeholder("お客さん")
-	        .addValue(new models.Value(null, null, "楽しいので嬉しい"))
-	    ],
+	    rootStakeholder: new models.Stakeholder('Your Product')
+	      .addChild(
+	        new models.Stakeholder("BeProud")
+	          .addChild(
+	            new models.Stakeholder("BPメンバー")
+	              .addDemand(new models.Demand(
+	                'オフィスに活気が溢れてほしい'
+	              ))
+	          )
+	          .addChild(new models.Stakeholder("経営者"))
+	      )
+	      .addChild(
+	        new models.Stakeholder("お客さん")
+	          .addValue(new models.Value(null, null,
+	                                     "楽しいので嬉しい"))
+	      ),
 	    bodyEditing: null,
 
 	    purposes: [
@@ -6522,13 +6526,6 @@
 	    }
 	  },
 	  mutations: {
-	    addStakeholder(state, stakeholder) {
-	      state.stakeholders.push(stakeholder);
-	      state.bodyEditing = stakeholder;
-	    },
-	    removeStakeholder(state, stakeholder) {
-	      utils.remove(state.stakeholders, stakeholder);
-	    },
 	    addPurpose(state, purpose) {
 	      state.purposes.push(purpose);
 	      state.bodyEditing = purpose;
@@ -7416,8 +7413,15 @@
 	    return this.parent;
 	  }
 
-	  flatten() {
-	    let ret = [this];
+	  flatten(options) {
+	    options = options || {};
+	    let ignoreMe = options.ignoreMe || false;
+	    var ret;
+	    if (!ignoreMe) {
+	      ret = [this];
+	    } else {
+	      ret = [];
+	    }
 	    this.children.forEach((child) => {
 	      ret = ret.concat(child.flatten());
 	    });
@@ -10490,16 +10494,7 @@
 
 	module.exports = {
 	  computed: {
-	    stakeholders() {return store.state.stakeholders}
-	  },
-	  methods: {
-	    addStakeholder() {
-	      let s = new models.Stakeholder('');
-	      store.commit('addStakeholder', s);
-	    },
-	    removeStakeholder(stakeholder) {
-	      store.commit('removeStakeholder', stakeholder);
-	    }
+	    stakeholder() {return store.state.rootStakeholder}
 	  }
 	}
 
@@ -10583,7 +10578,7 @@
 	    on: {
 	      "click": _vm.addChild
 	    }
-	  }, [_vm._v("Add Child")]), _vm._v(" "), _c('button', {
+	  }, [_vm._v("Add Child")]), _vm._v(" "), (_vm.stakeholder.hasParent()) ? _c('div', [_c('button', {
 	    on: {
 	      "click": _vm.addDemand
 	    }
@@ -10597,7 +10592,7 @@
 	        _vm.stakeholder.removeFromParent()
 	      }
 	    }
-	  }, [_vm._v("Remove")]), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
+	  }, [_vm._v("Remove")])], 1) : _vm._e(), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholder.demands), function(demand) {
 	    return _c('li', [_c('bodyedit', {
 	      attrs: {
 	        "obj": demand,
@@ -10621,7 +10616,7 @@
 	        "stakeholder": child
 	      }
 	    })
-	  }))], 1)
+	  }))])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -10636,21 +10631,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('ul', [_vm._l((_vm.stakeholders), function(stakeholder) {
-	    return _c('div', [_c('button', {
-	      on: {
-	        "click": _vm.removeStakeholder
-	      }
-	    }, [_vm._v("Remove")]), _vm._v(" "), _c('stakeholder', {
-	      attrs: {
-	        "stakeholder": stakeholder
-	      }
-	    })], 1)
-	  }), _vm._v(" "), _c('button', {
-	    on: {
-	      "click": _vm.addStakeholder
+	  return _c('ul', [_c('stakeholder', {
+	    attrs: {
+	      "stakeholder": _vm.stakeholder
 	    }
-	  }, [_vm._v("Add Stakeholder")])], 2)
+	  })], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -10706,11 +10691,7 @@
 	  computed: {
 	    purposes() {return store.state.purposes},
 	    stakeholders() {
-	      let ret = [];
-	      store.state.stakeholders.forEach((s) => {
-	        ret = ret.concat(s.flatten());
-	      });
-	      return ret
+	      return store.state.rootStakeholder.flatten({ignoreMe: true});
 	    }
 	  },
 	  methods: {

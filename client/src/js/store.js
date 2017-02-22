@@ -8,18 +8,22 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    stakeholders: [
-      new models.Stakeholder("BeProud")
-        .addChild(
-          new models.Stakeholder("BPメンバー")
-            .addDemand(new models.Demand(
-              'オフィスに活気が溢れてほしい'
-            ))
-        )
-        .addChild(new models.Stakeholder("経営者")),
-      new models.Stakeholder("お客さん")
-        .addValue(new models.Value(null, null, "楽しいので嬉しい"))
-    ],
+    rootStakeholder: new models.Stakeholder('Your Product')
+      .addChild(
+        new models.Stakeholder("BeProud")
+          .addChild(
+            new models.Stakeholder("BPメンバー")
+              .addDemand(new models.Demand(
+                'オフィスに活気が溢れてほしい'
+              ))
+          )
+          .addChild(new models.Stakeholder("経営者"))
+      )
+      .addChild(
+        new models.Stakeholder("お客さん")
+          .addValue(new models.Value(null, null,
+                                     "楽しいので嬉しい"))
+      ),
     bodyEditing: null,
 
     purposes: [
@@ -63,13 +67,6 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    addStakeholder(state, stakeholder) {
-      state.stakeholders.push(stakeholder);
-      state.bodyEditing = stakeholder;
-    },
-    removeStakeholder(state, stakeholder) {
-      utils.remove(state.stakeholders, stakeholder);
-    },
     addPurpose(state, purpose) {
       state.purposes.push(purpose);
       state.bodyEditing = purpose;

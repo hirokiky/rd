@@ -32,9 +32,12 @@
     </div>
 
     <button @click="addChild">Add Child</button>
-    <button @click="addDemand">Add Demand</button>
-    <modal-button :model="stakeholder"></modal-button>
-    <button @click="stakeholder.removeFromParent()">Remove</button>
+    <!-- Root stakeholder should not be deleted -->
+    <div v-if="stakeholder.hasParent()">
+      <button @click="addDemand">Add Demand</button>
+      <modal-button :model="stakeholder"></modal-button>
+      <button @click="stakeholder.removeFromParent()">Remove</button>
+    </div>
 
     <ul>
       <li v-for="demand in stakeholder.demands">

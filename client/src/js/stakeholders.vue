@@ -8,26 +8,13 @@
 
   module.exports = {
     computed: {
-      stakeholders() {return store.state.stakeholders}
-    },
-    methods: {
-      addStakeholder() {
-        let s = new models.Stakeholder('');
-        store.commit('addStakeholder', s);
-      },
-      removeStakeholder(stakeholder) {
-        store.commit('removeStakeholder', stakeholder);
-      }
+      stakeholder() {return store.state.rootStakeholder}
     }
   }
 </script>
 
 <template>
   <ul>
-    <div v-for="stakeholder in stakeholders">
-      <button @click="removeStakeholder">Remove</button>
-      <stakeholder :stakeholder="stakeholder"></stakeholder>
-    </div>
-    <button @click="addStakeholder">Add Stakeholder</button>
+    <stakeholder :stakeholder="stakeholder"></stakeholder>
   </ul>
 </template>

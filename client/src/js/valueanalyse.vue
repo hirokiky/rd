@@ -6,11 +6,7 @@
     computed: {
       purposes() {return store.state.purposes},
       stakeholders() {
-        let ret = [];
-        store.state.stakeholders.forEach((s) => {
-          ret = ret.concat(s.flatten());
-        });
-        return ret
+        return store.state.rootStakeholder.flatten({ignoreMe: true});
       }
     },
     methods: {

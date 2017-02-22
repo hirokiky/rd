@@ -82,8 +82,15 @@ class Node {
     return this.parent;
   }
 
-  flatten() {
-    let ret = [this];
+  flatten(options) {
+    options = options || {};
+    let ignoreMe = options.ignoreMe || false;
+    var ret;
+    if (!ignoreMe) {
+      ret = [this];
+    } else {
+      ret = [];
+    }
     this.children.forEach((child) => {
       ret = ret.concat(child.flatten());
     });
