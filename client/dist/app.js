@@ -6532,6 +6532,8 @@
 	    },
 	    removePurpose(state, purpose) {
 	      utils.remove(state.purposes, purpose);
+	      // Removing from requirement tree;
+	      state.rootRequirement.searchAndPurge(purpose);
 	    },
 	    editBody(state, obj) {
 	      state.bodyEditing = obj;
@@ -7410,6 +7412,16 @@
 	    this.children.forEach((c) => {
 	      c.purgeAllDescendants();
 	    });
+	  }
+
+	  searchAndPurge(obj) {
+	    if (obj === this) {
+	      this.purgeAllDescendants();
+	    } else {
+	      this.children.forEach((c) => {
+	        c.searchAndPurge(obj);
+	      });
+	    }
 	  }
 
 	  hasChild() {

@@ -73,6 +73,8 @@ const store = new Vuex.Store({
     },
     removePurpose(state, purpose) {
       utils.remove(state.purposes, purpose);
+      // Removing from requirement tree;
+      state.rootRequirement.searchAndPurge(purpose);
     },
     editBody(state, obj) {
       state.bodyEditing = obj;

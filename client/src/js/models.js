@@ -81,6 +81,16 @@ class Node {
     });
   }
 
+  searchAndPurge(obj) {
+    if (obj === this) {
+      this.purgeAllDescendants();
+    } else {
+      this.children.forEach((c) => {
+        c.searchAndPurge(obj);
+      });
+    }
+  }
+
   hasChild() {
     return this.children.length > 0;
   }
