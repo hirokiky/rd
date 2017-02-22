@@ -6490,6 +6490,10 @@
 	    concept1: new models.Concept("コンセプト1"),
 	    concept2: new models.Concept("コンセプト2"),
 	    concept3: new models.Concept("コンセプト3"),
+	    catchcopy: new models.CatchCopy("キャッチコピー"),
+	    meaning: new models.Meaning("意味"),
+	    story: new models.Story("ストーリー"),
+	    design: new models.Design(),
 
 	    // Just empty requirement to bundle top level requiremnts.
 	    rootRequirement: new models.Requirement(),
@@ -7486,11 +7490,35 @@
 	  constructor(body) {
 	    this.body = body;
 	  }
+
+	  get modelVerboseName() {return 'キャッチコピー';}
+
+	  get schema() {
+	    return makeSchema([
+	      {
+	        model: 'body',
+	        type: 'textArea',
+	        label: '内容'
+	      }
+	    ].concat(BASE_FIELDS));
+	  }
 	}
 
 	class Meaning {
 	  constructor(body) {
 	    this.body = body;
+	  }
+
+	  get modelVerboseName() {return '意味';}
+
+	  get schema() {
+	    return makeSchema([
+	      {
+	        model: 'body',
+	        type: 'textArea',
+	        label: '内容'
+	      }
+	    ].concat(BASE_FIELDS));
 	  }
 	}
 
@@ -7498,11 +7526,35 @@
 	  constructor(body) {
 	    this.body = body;
 	  }
+
+	  get modelVerboseName() {return 'ストーリー';}
+
+	  get schema() {
+	    return makeSchema([
+	      {
+	        model: 'body',
+	        type: 'textArea',
+	        label: '内容'
+	      }
+	    ].concat(BASE_FIELDS));
+	  }
 	}
 
 	class Design {
-	  constructor(body) {
-	    this.body = body;
+	  constructor(imageUrl) {
+	    this.imageUrl = imageUrl;
+	  }
+
+	  get modelVerboseName() {return 'デザイン';}
+
+	  get schema() {
+	    return makeSchema([
+	      {
+	        model: 'imageUrl',
+	        type: 'input',
+	        label: '画像URL'
+	      }
+	    ].concat(BASE_FIELDS));
 	  }
 	}
 
@@ -10768,6 +10820,10 @@
 	    concept1() {return store.state.concept1},
 	    concept2() {return store.state.concept2},
 	    concept3() {return store.state.concept3},
+	    catchcopy() {return store.state.catchcopy},
+	    meaning() {return store.state.meaning},
+	    story() {return store.state.story},
+	    design() {return store.state.design},
 	  }
 	}
 
@@ -10816,6 +10872,44 @@
 	  }), _vm._v(" "), _c('modal-button', {
 	    attrs: {
 	      "model": _vm.concept3
+	    }
+	  })], 1), _vm._v(" "), _c('h3', [_vm._v("キャッチコピー")]), _vm._v(" "), _c('p', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.catchcopy,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
+	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.catchcopy
+	    }
+	  })], 1), _c('h3', [_vm._v("意味")]), _vm._v(" "), _c('p', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.meaning,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
+	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.meaning
+	    }
+	  })], 1), _c('h3', [_vm._v("ストーリー")]), _vm._v(" "), _c('p', [_c('bodyedit', {
+	    attrs: {
+	      "obj": _vm.story,
+	      "bodyAttr": "body",
+	      "widget": "textarea"
+	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.story
+	    }
+	  })], 1), _c('h3', [_vm._v("デザイン")]), _vm._v(" "), _c('p', [_c('img', {
+	    attrs: {
+	      "src": _vm.design.imageUrl
+	    }
+	  }), _vm._v(" "), _c('modal-button', {
+	    attrs: {
+	      "model": _vm.design
 	    }
 	  })], 1)])
 	},staticRenderFns: []}

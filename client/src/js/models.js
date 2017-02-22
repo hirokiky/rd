@@ -162,11 +162,35 @@ class CatchCopy {
   constructor(body) {
     this.body = body;
   }
+
+  get modelVerboseName() {return 'キャッチコピー';}
+
+  get schema() {
+    return makeSchema([
+      {
+        model: 'body',
+        type: 'textArea',
+        label: '内容'
+      }
+    ].concat(BASE_FIELDS));
+  }
 }
 
 class Meaning {
   constructor(body) {
     this.body = body;
+  }
+
+  get modelVerboseName() {return '意味';}
+
+  get schema() {
+    return makeSchema([
+      {
+        model: 'body',
+        type: 'textArea',
+        label: '内容'
+      }
+    ].concat(BASE_FIELDS));
   }
 }
 
@@ -174,11 +198,35 @@ class Story {
   constructor(body) {
     this.body = body;
   }
+
+  get modelVerboseName() {return 'ストーリー';}
+
+  get schema() {
+    return makeSchema([
+      {
+        model: 'body',
+        type: 'textArea',
+        label: '内容'
+      }
+    ].concat(BASE_FIELDS));
+  }
 }
 
 class Design {
-  constructor(body) {
-    this.body = body;
+  constructor(imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
+  get modelVerboseName() {return 'デザイン';}
+
+  get schema() {
+    return makeSchema([
+      {
+        model: 'imageUrl',
+        type: 'input',
+        label: '画像URL'
+      }
+    ].concat(BASE_FIELDS));
   }
 }
 

@@ -31,6 +31,10 @@ const store = new Vuex.Store({
     concept1: new models.Concept("コンセプト1"),
     concept2: new models.Concept("コンセプト2"),
     concept3: new models.Concept("コンセプト3"),
+    catchcopy: new models.CatchCopy("キャッチコピー"),
+    meaning: new models.Meaning("意味"),
+    story: new models.Story("ストーリー"),
+    design: new models.Design(),
 
     // Just empty requirement to bundle top level requiremnts.
     rootRequirement: new models.Requirement(),
