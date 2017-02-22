@@ -29,7 +29,7 @@
                 bodyAttr="body"
                 widget="textarea"></bodyedit>
       <modal-button :model="requirement"></modal-button>
-      <button @click="requirement.removeFromParent()">Remove</button>
+      <button @click="requirement.purgeAllDescendants()">Remove</button>
     </div>
     <ul>
       <requirement v-for="child in requirement.children"

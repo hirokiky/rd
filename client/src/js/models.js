@@ -65,13 +65,20 @@ class Node {
 
   removeChild(child) {
     child.parent = null;
-    utils.remove(this.children, child);n
+    utils.remove(this.children, child);
   }
 
   removeFromParent() {
     if (this.parent) {
       this.parent.removeChild(this);
     }
+  }
+
+  purgeAllDescendants() {
+    this.removeFromParent();
+    this.children.forEach((c) => {
+      c.purgeAllDescendants();
+    });
   }
 
   hasChild() {
