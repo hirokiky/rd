@@ -29,13 +29,13 @@
                 bodyAttr="body"
                 widget="textarea"></bodyedit>
       <modal-button :model="requirement"></modal-button>
-      <button @click="requirement.purgeAllDescendants()">Remove</button>
+      <button class="btn" @click="requirement.purgeAllDescendants()">Remove</button>
     </div>
     <ul>
       <requirement v-for="child in requirement.children"
                    :requirement="child"></requirement>
       <li>
-        <button @click="addChildRequirement(requirement)">New Child</button>
+        <button class="btn" @click="addChildRequirement(requirement)">New Child</button>
         <select>
           <option>Add Non Parent Node</option>
           <option v-for="req in noParents"

@@ -7771,7 +7771,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/app.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/app.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -7782,9 +7782,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-03cb0de6", Component.options)
+	    hotAPI.createRecord("data-v-46b66df0", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-03cb0de6", Component.options)
+	    hotAPI.reload("data-v-46b66df0", Component.options)
 	  }
 	})()}
 
@@ -7807,8 +7807,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-03cb0de6!./app.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-03cb0de6!./app.css");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-46b66df0!./app.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-46b66df0!./app.css");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -7826,7 +7826,7 @@
 
 
 	// module
-	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.wrapper {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\nbutton > i.material-icons {\n    font-size: 12px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-block;\n\n    border: solid 2px #888;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #51a3f3;\n    background-color: #f3fbff;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #ff8a8a;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
+	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n}\nbutton > i.material-icons {\n    font-size: 12px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-block;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #51a3f3;\n    background-color: #f3fbff;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #ff8a8a;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
 
 	// exports
 
@@ -10506,7 +10506,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/modal.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/modal.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10517,9 +10517,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-4843ee99", Component.options)
+	    hotAPI.createRecord("data-v-a50ba858", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-4843ee99", Component.options)
+	    hotAPI.reload("data-v-a50ba858", Component.options)
 	  }
 	})()}
 
@@ -10570,7 +10570,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-4843ee99", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-a50ba858", module.exports)
 	  }
 	}
 
@@ -10588,7 +10588,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/modalButton.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/modalButton.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] modalButton.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10599,9 +10599,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-6956442b", Component.options)
+	    hotAPI.createRecord("data-v-c98b2db4", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-6956442b", Component.options)
+	    hotAPI.reload("data-v-c98b2db4", Component.options)
 	  }
 	})()}
 
@@ -10631,6 +10631,7 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('button', {
+	    staticClass: "btn",
 	    on: {
 	      "click": _vm.open
 	    }
@@ -10642,7 +10643,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-6956442b", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-c98b2db4", module.exports)
 	  }
 	}
 
@@ -10660,7 +10661,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/bodyedit.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/bodyedit.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] bodyedit.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10671,9 +10672,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-662f22f0", Component.options)
+	    hotAPI.createRecord("data-v-ede2d056", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-662f22f0", Component.options)
+	    hotAPI.reload("data-v-ede2d056", Component.options)
 	  }
 	})()}
 
@@ -10806,7 +10807,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-662f22f0", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-ede2d056", module.exports)
 	  }
 	}
 
@@ -10824,7 +10825,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/stakeholders.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/stakeholders.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] stakeholders.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10835,9 +10836,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-7b543551", Component.options)
+	    hotAPI.createRecord("data-v-f416a094", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-7b543551", Component.options)
+	    hotAPI.reload("data-v-f416a094", Component.options)
 	  }
 	})()}
 
@@ -10877,7 +10878,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/stakeholder.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/stakeholder.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] stakeholder.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -10888,9 +10889,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-f005a3dc", Component.options)
+	    hotAPI.createRecord("data-v-8c3d59e6", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-f005a3dc", Component.options)
+	    hotAPI.reload("data-v-8c3d59e6", Component.options)
 	  }
 	})()}
 
@@ -10941,6 +10942,7 @@
 	      "widget": "input"
 	    }
 	  }), _vm._v(" "), _c('button', {
+	    staticClass: "btn",
 	    on: {
 	      "click": _vm.addChild
 	    }
@@ -10949,6 +10951,7 @@
 	  }, [_vm._v("add")]), _vm._v(" "), _c('i', {
 	    staticClass: "material-icons"
 	  }, [_vm._v("person")])]), _vm._v(" "), (_vm.stakeholder.hasParent()) ? _c('span', [_c('button', {
+	    staticClass: "btn",
 	    on: {
 	      "click": _vm.addDemand
 	    }
@@ -10959,6 +10962,7 @@
 	      "model": _vm.stakeholder
 	    }
 	  }), _vm._v(" "), _c('button', {
+	    staticClass: "btn",
 	    on: {
 	      "click": function($event) {
 	        _vm.stakeholder.removeFromParent()
@@ -10986,6 +10990,7 @@
 	        "model": demand
 	      }
 	    }), _vm._v(" "), _c('button', {
+	      staticClass: "btn",
 	      on: {
 	        "click": function($event) {
 	          _vm.stakeholder.removeDemand(demand)
@@ -11008,7 +11013,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-f005a3dc", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-8c3d59e6", module.exports)
 	  }
 	}
 
@@ -11029,7 +11034,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-7b543551", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-f416a094", module.exports)
 	  }
 	}
 
@@ -11047,7 +11052,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/valueanalyse.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/valueanalyse.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] valueanalyse.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11058,9 +11063,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-76e15526", Component.options)
+	    hotAPI.createRecord("data-v-fcfc60ea", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-76e15526", Component.options)
+	    hotAPI.reload("data-v-fcfc60ea", Component.options)
 	  }
 	})()}
 
@@ -11116,6 +11121,7 @@
 	        "model": purpose
 	      }
 	    }), _vm._v(" "), _c('button', {
+	      staticClass: "btn",
 	      on: {
 	        "click": function($event) {
 	          _vm.removePurpose(purpose)
@@ -11123,6 +11129,7 @@
 	      }
 	    }, [_vm._v("Remove")])], 1)
 	  }), _vm._v(" "), _c('li', [_c('button', {
+	    staticClass: "btn",
 	    on: {
 	      "click": _vm.addPurpose
 	    }
@@ -11151,6 +11158,7 @@
 	          "model": value
 	        }
 	      }), _vm._v(" "), _c('button', {
+	        staticClass: "btn",
 	        on: {
 	          "click": function($event) {
 	            stakeholder.removeValue(value)
@@ -11175,6 +11183,7 @@
 	        })
 	      })], 2)], 1)
 	    }), _vm._v(" "), _c('li', [_c('button', {
+	      staticClass: "btn",
 	      on: {
 	        "click": function($event) {
 	          _vm.addValue(stakeholder)
@@ -11187,7 +11196,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-76e15526", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-fcfc60ea", module.exports)
 	  }
 	}
 
@@ -11205,7 +11214,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/valuedesign.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/valuedesign.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] valuedesign.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11216,9 +11225,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-b49c634a", Component.options)
+	    hotAPI.createRecord("data-v-50d41954", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-b49c634a", Component.options)
+	    hotAPI.reload("data-v-50d41954", Component.options)
 	  }
 	})()}
 
@@ -11335,7 +11344,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-b49c634a", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-50d41954", module.exports)
 	  }
 	}
 
@@ -11353,7 +11362,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/requirements.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/requirements.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] requirements.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11364,9 +11373,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-056080d4", Component.options)
+	    hotAPI.createRecord("data-v-1000fb39", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-056080d4", Component.options)
+	    hotAPI.reload("data-v-1000fb39", Component.options)
 	  }
 	})()}
 
@@ -11407,7 +11416,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/requirement.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/requirement.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] requirement.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -11418,9 +11427,9 @@
 	  if (!hotAPI.compatible) return
 	  module.hot.accept()
 	  if (!module.hot.data) {
-	    hotAPI.createRecord("data-v-317033a2", Component.options)
+	    hotAPI.createRecord("data-v-192c0b2a", Component.options)
 	  } else {
-	    hotAPI.reload("data-v-317033a2", Component.options)
+	    hotAPI.reload("data-v-192c0b2a", Component.options)
 	  }
 	})()}
 
@@ -11470,6 +11479,7 @@
 	      "model": _vm.requirement
 	    }
 	  }), _vm._v(" "), _c('button', {
+	    staticClass: "btn",
 	    on: {
 	      "click": function($event) {
 	        _vm.requirement.purgeAllDescendants()
@@ -11482,6 +11492,7 @@
 	      }
 	    })
 	  }), _vm._v(" "), _c('li', [_c('button', {
+	    staticClass: "btn",
 	    on: {
 	      "click": function($event) {
 	        _vm.addChildRequirement(_vm.requirement)
@@ -11504,7 +11515,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-317033a2", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-192c0b2a", module.exports)
 	  }
 	}
 
@@ -11523,7 +11534,7 @@
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-056080d4", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-1000fb39", module.exports)
 	  }
 	}
 
@@ -11533,7 +11544,7 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', [_c('nav', [_c('div', {
-	    staticClass: "wrapper"
+	    staticClass: "container"
 	  }, [_c('router-link', {
 	    attrs: {
 	      "to": "/stakeholders"
@@ -11551,14 +11562,14 @@
 	      "to": "/requirements"
 	    }
 	  }, [_vm._v("要求分析")])], 1)]), _vm._v(" "), _c('div', {
-	    staticClass: "wrapper"
+	    staticClass: "container"
 	  }, [_c('router-view')], 1), _vm._v(" "), _c('modal')], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
 	  module.hot.accept()
 	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-03cb0de6", module.exports)
+	     require("vue-hot-reload-api").rerender("data-v-46b66df0", module.exports)
 	  }
 	}
 

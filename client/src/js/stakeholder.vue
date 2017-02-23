@@ -29,18 +29,18 @@
       <bodyedit :obj="stakeholder"
                 bodyAttr="name"
                 widget="input"></bodyedit>
-      <button @click="addChild">
+      <button class="btn" @click="addChild">
         <i class="material-icons">add</i>
         <i class="material-icons">person</i>
       </button>
       <!-- Root stakeholder should not be deleted -->
       <span v-if="stakeholder.hasParent()">
-        <button @click="addDemand">
+        <button class="btn" @click="addDemand">
           <i class="material-icons">add</i>
           要望
         </button>
         <modal-button :model="stakeholder"></modal-button>
-        <button @click="stakeholder.removeFromParent()">
+        <button class="btn" @click="stakeholder.removeFromParent()">
           <i class="material-icons">delete</i>
         </button>
       </span>
@@ -55,7 +55,7 @@
                     bodyAttr="body"
                     widget="textarea"></bodyedit>
           <modal-button :model="demand"></modal-button>
-          <button @click="stakeholder.removeDemand(demand)">
+          <button class="btn" @click="stakeholder.removeDemand(demand)">
             <i class="material-icons">delete</i>
           </button>
         </div>

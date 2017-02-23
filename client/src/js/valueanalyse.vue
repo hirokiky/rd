@@ -34,9 +34,9 @@
                   bodyAttr="body"
                   widget="textarea"></bodyedit>
         <modal-button :model="purpose"></modal-button>
-        <button @click="removePurpose(purpose)">Remove</button>
+        <button class="btn" @click="removePurpose(purpose)">Remove</button>
       </li>
-      <li><button @click="addPurpose">Add Purpose</button></li>
+      <li><button class="btn" @click="addPurpose">Add Purpose</button></li>
     </ul>
     <ul>
       <li v-for="stakeholder in stakeholders">
@@ -50,7 +50,7 @@
                       bodyAttr="body"
                       widget="textarea"></bodyedit>
             <modal-button :model="value"></modal-button>
-            <button @click="stakeholder.removeValue(value)">Remove</button>
+            <button class="btn" @click="stakeholder.removeValue(value)">Remove</button>
             <!-- If use v-model it will run JSON.stringify  -->
             <select>
               <option :value="null">unselected</option>
@@ -61,7 +61,7 @@
                       v-text="purpose.body" />
             </select>
           </li>
-          <li><button @click="addValue(stakeholder)">Add Value</button></li>
+          <li><button class="btn" @click="addValue(stakeholder)">Add Value</button></li>
         </ul>
       </li>
     </ul>

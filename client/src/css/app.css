@@ -6,7 +6,7 @@ body {
     color: #333;
 }
 
-.wrapper {
+.container {
     width: 944px;
     margin: 0 auto;
     padding: 0 16px;
@@ -18,6 +18,12 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+button.btn {
+    border: solid 1px #d0cdcd;
+    border-radius: 4px;
+    background: linear-gradient(#fdfafa, #e2e2e2);
 }
 
 button > i.material-icons {
@@ -58,7 +64,7 @@ ul.tree > li {
 .box {
     display: inline-block;
 
-    border: solid 2px #888;
+    border: solid 2px #c7c7c7;
     border-radius: 4px;
 
     background-color: #fbfbfb;
