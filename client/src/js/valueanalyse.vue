@@ -41,7 +41,11 @@
     <ul>
       <li v-for="stakeholder in stakeholders">
         <div class="stakeholder">
-          <i class="material-icons">person</i><span v-text="stakeholder.name"></span>
+          <i class="material-icons">person</i>
+          <bodyedit :obj="stakeholder"
+                    bodyAttr="name"
+                    widget="input">
+          </span>
           <modal-button :model="stakeholder"></modal-button>
         </div>
         <ul>

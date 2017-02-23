@@ -11142,15 +11142,17 @@
 	      staticClass: "stakeholder"
 	    }, [_c('i', {
 	      staticClass: "material-icons"
-	    }, [_vm._v("person")]), _c('span', {
-	      domProps: {
-	        "textContent": _vm._s(stakeholder.name)
+	    }, [_vm._v("person")]), _vm._v(" "), _c('bodyedit', {
+	      attrs: {
+	        "obj": stakeholder,
+	        "bodyAttr": "name",
+	        "widget": "input"
 	      }
-	    }), _vm._v(" "), _c('modal-button', {
+	    }, [_c('modal-button', {
 	      attrs: {
 	        "model": stakeholder
 	      }
-	    })], 1), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
+	    })], 1)], 1), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
 	      return _c('li', [_c('bodyedit', {
 	        attrs: {
 	          "obj": value,
