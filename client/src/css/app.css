@@ -20,13 +20,20 @@ a:hover {
     text-decoration: underline;
 }
 
+i.material-icons {
+    vertical-align: text-bottom;
+}
+
 button.btn {
     border: solid 1px #d0cdcd;
     border-radius: 4px;
     background: linear-gradient(#fdfafa, #e2e2e2);
+
+    min-height: 24px;
+    vertical-align: middle;
 }
 
-button > i.material-icons {
+button.btn > i.material-icons {
     font-size: 12px;
 }
 
@@ -62,7 +69,7 @@ ul.tree > li {
 /* box */
 
 .box {
-    display: inline-block;
+    display: inline-flex;
 
     border: solid 2px #c7c7c7;
     border-radius: 4px;
@@ -82,6 +89,19 @@ ul.tree > li {
     background-color: #fff3f3;
 }
 
+/* buttons */
+.action-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    margin-left: 12px;
+}
+
+.action-buttons > button:not(:first-child) {
+    margin-left: 4px;
+}
+
 /* Models */
 
 /* Stakeholder */
@@ -93,7 +113,7 @@ ul.tree > li {
 }
 
 .stakeholder > i.material-icons {
-    color: #ff8a8a;
+    color: #fb97b5;
     font-size: 38px;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }

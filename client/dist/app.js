@@ -7826,7 +7826,7 @@
 
 
 	// module
-	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n}\nbutton > i.material-icons {\n    font-size: 12px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-block;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #51a3f3;\n    background-color: #f3fbff;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #ff8a8a;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
+	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #51a3f3;\n    background-color: #f3fbff;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
 
 	// exports
 
@@ -10941,7 +10941,9 @@
 	      "bodyAttr": "name",
 	      "widget": "input"
 	    }
-	  }), _vm._v(" "), _c('button', {
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "action-buttons"
+	  }, [_c('button', {
 	    staticClass: "btn",
 	    on: {
 	      "click": _vm.addChild
@@ -10950,14 +10952,14 @@
 	    staticClass: "material-icons"
 	  }, [_vm._v("add")]), _vm._v(" "), _c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("person")])]), _vm._v(" "), (_vm.stakeholder.hasParent()) ? _c('span', [_c('button', {
+	  }, [_vm._v("person")])]), _vm._v(" "), (_vm.stakeholder.hasParent()) ? [_c('button', {
 	    staticClass: "btn",
 	    on: {
 	      "click": _vm.addDemand
 	    }
 	  }, [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("add")]), _vm._v("\n        要望\n      ")]), _vm._v(" "), _c('modal-button', {
+	  }, [_vm._v("add")]), _vm._v("\n          要望\n        ")]), _vm._v(" "), _c('modal-button', {
 	    attrs: {
 	      "model": _vm.stakeholder
 	    }
@@ -10970,7 +10972,7 @@
 	    }
 	  }, [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("delete")])])], 1) : _vm._e()], 1), _vm._v(" "), _c('ul', {
+	  }, [_vm._v("delete")])])] : _vm._e()], 2)], 1), _vm._v(" "), _c('ul', {
 	    staticClass: "tree"
 	  }, _vm._l((_vm.stakeholder.demands), function(demand) {
 	    return _c('li', [_c('div', {
@@ -10985,7 +10987,9 @@
 	        "bodyAttr": "body",
 	        "widget": "textarea"
 	      }
-	    }), _vm._v(" "), _c('modal-button', {
+	    }), _vm._v(" "), _c('div', {
+	      staticClass: "action-buttons"
+	    }, [_c('modal-button', {
 	      attrs: {
 	        "model": demand
 	      }
@@ -10998,7 +11002,7 @@
 	      }
 	    }, [_c('i', {
 	      staticClass: "material-icons"
-	    }, [_vm._v("delete")])])], 1)])
+	    }, [_vm._v("delete")])])], 1)], 1)])
 	  })), _vm._v(" "), _c('ul', {
 	    staticClass: "tree"
 	  }, _vm._l((_vm.stakeholder.children), function(child) {

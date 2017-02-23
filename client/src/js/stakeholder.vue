@@ -29,21 +29,23 @@
       <bodyedit :obj="stakeholder"
                 bodyAttr="name"
                 widget="input"></bodyedit>
-      <button class="btn" @click="addChild">
-        <i class="material-icons">add</i>
-        <i class="material-icons">person</i>
-      </button>
-      <!-- Root stakeholder should not be deleted -->
-      <span v-if="stakeholder.hasParent()">
-        <button class="btn" @click="addDemand">
+      <div class="action-buttons">
+        <button class="btn" @click="addChild">
           <i class="material-icons">add</i>
-          要望
+          <i class="material-icons">person</i>
         </button>
-        <modal-button :model="stakeholder"></modal-button>
-        <button class="btn" @click="stakeholder.removeFromParent()">
-          <i class="material-icons">delete</i>
-        </button>
-      </span>
+        <!-- Root stakeholder should not be deleted -->
+        <template v-if="stakeholder.hasParent()">
+          <button class="btn" @click="addDemand">
+            <i class="material-icons">add</i>
+            要望
+          </button>
+          <modal-button :model="stakeholder"></modal-button>
+          <button class="btn" @click="stakeholder.removeFromParent()">
+            <i class="material-icons">delete</i>
+          </button>
+        </template>
+      </div>
     </div>
 
     <ul class="tree">
@@ -54,10 +56,12 @@
           <bodyedit :obj="demand"
                     bodyAttr="body"
                     widget="textarea"></bodyedit>
-          <modal-button :model="demand"></modal-button>
-          <button class="btn" @click="stakeholder.removeDemand(demand)">
-            <i class="material-icons">delete</i>
-          </button>
+          <div class="action-buttons">
+            <modal-button :model="demand"></modal-button>
+            <button class="btn" @click="stakeholder.removeDemand(demand)">
+              <i class="material-icons">delete</i>
+            </button>
+          </div>
         </div>
       </li>
     </ul>
