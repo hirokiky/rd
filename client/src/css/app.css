@@ -37,6 +37,10 @@ button.btn > i.material-icons {
     font-size: 12px;
 }
 
+input, textarea {
+    font-size: inherit;
+}
+
 /* Componets */
 
 /* Nav Bar */
