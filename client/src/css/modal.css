@@ -1,0 +1,31 @@
+.modal {
+    z-index: 1000;
+}
+
+.modal-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-inner {
+    margin: auto;
+    margin-top: 100px;
+    width: 660px;
+}
+
+.modal-container {
+    position: relative;
+    border-radius: 4px;
+    background-color: white;
+    padding: 32px;
+}
+
+.modal-close {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+}

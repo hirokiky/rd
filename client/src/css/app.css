@@ -37,8 +37,29 @@ button.btn > i.material-icons {
     font-size: 12px;
 }
 
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.form-group:not(:first-child) {
+    margin-top: 16px;
+}
+
+label {
+    font-weight: 600;
+}
+
 input, textarea {
     font-size: inherit;
+    border: solid 1px #d0cece;
+    border-radius: 2px
+}
+
+textarea {
+    min-height: 80px;
+    min-width: 320px;
 }
 
 /* Componets */

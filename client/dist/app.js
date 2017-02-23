@@ -7826,7 +7826,7 @@
 
 
 	// module
-	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\ninput, textarea {\n    font-size: inherit;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #51a3f3;\n    background-color: #f3fbff;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
+	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\nfieldset {\n    border: none;\n    margin: 0;\n    padding: 0;\n}\n.form-group:not(:first-child) {\n    margin-top: 16px;\n}\nlabel {\n    font-weight: 600;\n}\ninput, textarea {\n    font-size: inherit;\n    border: solid 1px #d0cece;\n    border-radius: 2px\n}\ntextarea {\n    min-height: 80px;\n    min-width: 320px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #51a3f3;\n    background-color: #f3fbff;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
 
 	// exports
 
@@ -10496,13 +10496,17 @@
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	/* styles */
+	__webpack_require__(46)
+
 	var Component = __webpack_require__(12)(
 	  /* script */
 	  __webpack_require__(17),
 	  /* template */
 	  __webpack_require__(18),
 	  /* scopeId */
-	  null,
+	  "data-v-a50ba858",
 	  /* cssModules */
 	  null
 	)
@@ -10551,11 +10555,28 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return (_vm.modalEditing) ? _c('div', [_c('button', {
+	  return (_vm.modalEditing) ? _c('div', {
+	    staticClass: "modal"
+	  }, [_c('div', {
+	    staticClass: "modal-mask",
+	    on: {
+	      "click": function($event) {
+	        if ($event.target !== $event.currentTarget) { return; }
+	        _vm.close($event)
+	      }
+	    }
+	  }, [_c('div', {
+	    staticClass: "modal-inner"
+	  }, [_c('div', {
+	    staticClass: "modal-container"
+	  }, [_c('button', {
+	    staticClass: "btn modal-close",
 	    on: {
 	      "click": _vm.close
 	    }
-	  }, [_vm._v("close")]), _vm._v(" "), _c('h2', {
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("close")])]), _vm._v(" "), _c('h2', {
 	    domProps: {
 	      "textContent": _vm._s(_vm.modalEditing.modelVerboseName)
 	    }
@@ -10564,7 +10585,7 @@
 	      "schema": _vm.modalEditing.schema,
 	      "model": _vm.modalEditing
 	    }
-	  })], 1) : _vm._e()
+	  })], 1)])])]) : _vm._e()
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -11578,6 +11599,48 @@
 	     require("vue-hot-reload-api").rerender("data-v-46b66df0", module.exports)
 	  }
 	}
+
+/***/ },
+/* 44 */,
+/* 45 */,
+/* 46 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(47);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-a50ba858&scoped=true!./modal.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-a50ba858&scoped=true!./modal.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.modal[data-v-a50ba858] {\n    z-index: 1000;\n}\n.modal-mask[data-v-a50ba858] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    background-color: rgba(0, 0, 0, 0.3);\n}\n.modal-inner[data-v-a50ba858] {\n    margin: auto;\n    margin-top: 100px;\n    width: 660px;\n}\n.modal-container[data-v-a50ba858] {\n    position: relative;\n    border-radius: 4px;\n    background-color: white;\n    padding: 32px;\n}\n.modal-close[data-v-a50ba858] {\n    position: absolute;\n    right: 16px;\n    top: 16px;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);
