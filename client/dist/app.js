@@ -7706,6 +7706,14 @@
 	    this.body = body || '';
 	  }
 
+	  get color() {
+	    if (this.purpose) {
+	      return this.purpose.color;
+	    } else {
+	      return null;
+	    }
+	  }
+
 	  get modelVerboseName() {return '価値';}
 
 	  get schema() {
@@ -7826,7 +7834,7 @@
 
 
 	// module
-	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\nfieldset {\n    border: none;\n    margin: 0;\n    padding: 0;\n}\n.form-group:not(:first-child) {\n    margin-top: 16px;\n}\nlabel {\n    font-weight: 600;\n}\ninput, textarea {\n    font-size: inherit;\n    border: solid 1px #d0cece;\n    border-radius: 2px\n}\ntextarea {\n    min-height: 80px;\n    min-width: 320px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree.root {\n    padding: 0;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #47cb69;\n    background-color: #f6fff3;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
+	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\nfieldset {\n    border: none;\n    margin: 0;\n    padding: 0;\n}\n.form-group:not(:first-child) {\n    margin-top: 16px;\n}\nlabel {\n    font-weight: 600;\n}\ninput, textarea {\n    font-size: inherit;\n    border: solid 1px #d0cece;\n    border-radius: 2px\n}\ntextarea {\n    min-height: 80px;\n    min-width: 320px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree.root {\n    padding: 0;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n.inline {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #47cb69;\n    background-color: #f6fff3;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
 
 	// exports
 
@@ -10993,7 +11001,7 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('li', [_c('div', {
-	    staticClass: "stakeholder"
+	    staticClass: "stakeholder inline"
 	  }, [_c('i', {
 	    staticClass: "material-icons"
 	  }, [_vm._v("person")]), _vm._v(" "), _c('bodyedit', {
@@ -11037,6 +11045,8 @@
 	    staticClass: "tree"
 	  }, _vm._l((_vm.stakeholder.demands), function(demand) {
 	    return _c('li', [_c('div', {
+	      staticClass: "inline"
+	    }, [_c('div', {
 	      staticClass: "box",
 	      class: {
 	        'positive': demand.isPositive,
@@ -11048,7 +11058,7 @@
 	        "bodyAttr": "body",
 	        "widget": "textarea"
 	      }
-	    }), _vm._v(" "), _c('div', {
+	    })], 1), _vm._v(" "), _c('div', {
 	      staticClass: "action-buttons"
 	    }, [_c('modal-button', {
 	      attrs: {
@@ -11063,7 +11073,7 @@
 	      }
 	    }, [_c('i', {
 	      staticClass: "material-icons"
-	    }, [_vm._v("delete")])])], 1)], 1)])
+	    }, [_vm._v("delete")])])], 1)])])
 	  })), _vm._v(" "), _c('ul', {
 	    staticClass: "tree"
 	  }, _vm._l((_vm.stakeholder.children), function(child) {
@@ -11177,13 +11187,22 @@
 	  return _c('div', [_c('ul', {
 	    staticClass: "tree root"
 	  }, [_vm._l((_vm.purposes), function(purpose) {
-	    return _c('li', [_c('bodyedit', {
+	    return _c('li', [_c('div', {
+	      staticClass: "inline"
+	    }, [_c('div', {
+	      staticClass: "box",
+	      style: ({
+	        'border-color': purpose.color
+	      })
+	    }, [_c('bodyedit', {
 	      attrs: {
 	        "obj": purpose,
 	        "bodyAttr": "body",
 	        "widget": "textarea"
 	      }
-	    }), _vm._v(" "), _c('modal-button', {
+	    })], 1), _vm._v(" "), _c('div', {
+	      staticClass: "action-buttons"
+	    }, [_c('modal-button', {
 	      attrs: {
 	        "model": purpose
 	      }
@@ -11196,7 +11215,7 @@
 	      }
 	    }, [_c('i', {
 	      staticClass: "material-icons"
-	    }, [_vm._v("delete")])])], 1)
+	    }, [_vm._v("delete")])])], 1)])])
 	  }), _vm._v(" "), _c('li', [_c('button', {
 	    staticClass: "btn",
 	    on: {
@@ -11235,13 +11254,20 @@
 	    }, [_vm._v("add")]), _vm._v("価値\n          ")])], 1)]), _vm._v(" "), _c('ul', {
 	      staticClass: "tree"
 	    }, _vm._l((stakeholder.values), function(value) {
-	      return _c('li', [_c('bodyedit', {
+	      return _c('li', [_c('div', {
+	        staticClass: "inline"
+	      }, [_c('div', {
+	        staticClass: "box",
+	        style: ({
+	          'border-color': value.color
+	        })
+	      }, [_c('bodyedit', {
 	        attrs: {
 	          "obj": value,
 	          "bodyAttr": "body",
 	          "widget": "textarea"
 	        }
-	      }), _vm._v(" "), _c('modal-button', {
+	      })], 1), _vm._v(" "), _c('modal-button', {
 	        attrs: {
 	          "model": value
 	        }
@@ -11271,7 +11297,7 @@
 	            }
 	          }
 	        })
-	      })], 2)], 1)
+	      })], 2)], 1)])
 	    }))])
 	  }))])
 	},staticRenderFns: []}
@@ -11489,17 +11515,13 @@
 /* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
-	/* styles */
-	__webpack_require__(46)
-
 	var Component = __webpack_require__(12)(
 	  /* script */
 	  __webpack_require__(42),
 	  /* template */
 	  __webpack_require__(43),
 	  /* scopeId */
-	  "data-v-192c0b2a",
+	  null,
 	  /* cssModules */
 	  null
 	)
@@ -11556,7 +11578,7 @@
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return (_vm.requirement.hasParent()) ? _c('li', [_c('div', {
-	    staticClass: "requirement"
+	    staticClass: "inline"
 	  }, [_c('bodyedit', {
 	    attrs: {
 	      "obj": _vm.requirement,
@@ -11675,46 +11697,6 @@
 	     require("vue-hot-reload-api").rerender("data-v-46b66df0", module.exports)
 	  }
 	}
-
-/***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(47);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(11)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-192c0b2a&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./requirement.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-192c0b2a&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./requirement.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(10)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "\n.requirement[data-v-192c0b2a] {\n  display: flex;\n  flex-flow: row nowrap;\n  align-items: center;\n}\n", ""]);
-
-	// exports
-
 
 /***/ }
 /******/ ]);

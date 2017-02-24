@@ -373,6 +373,14 @@ class Value {
     this.body = body || '';
   }
 
+  get color() {
+    if (this.purpose) {
+      return this.purpose.color;
+    } else {
+      return null;
+    }
+  }
+
   get modelVerboseName() {return '価値';}
 
   get schema() {

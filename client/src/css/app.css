@@ -94,6 +94,12 @@ ul.tree > li {
     margin: 4px 0 8px 0;
 }
 
+.inline {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
 /* box */
 
 .box {
@@ -133,12 +139,6 @@ ul.tree > li {
 /* Models */
 
 /* Stakeholder */
-
-.stakeholder {
-    display: flex;
-    align-items: center;
-
-}
 
 .stakeholder > i.material-icons {
     color: #fb97b5;

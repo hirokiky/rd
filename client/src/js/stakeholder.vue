@@ -24,7 +24,7 @@
 
 <template>
   <li>
-    <div class="stakeholder">
+    <div class="stakeholder inline">
       <i class="material-icons">person</i>
       <bodyedit :obj="stakeholder"
                 bodyAttr="name"
@@ -50,12 +50,14 @@
 
     <ul class="tree">
       <li v-for="demand in stakeholder.demands">
-        <div class="box"
-             :class="{'positive': demand.isPositive,
+        <div class="inline">
+          <div class="box"
+               :class="{'positive': demand.isPositive,
                       'negative': demand.isNegative}">
-          <bodyedit :obj="demand"
-                    bodyAttr="body"
-                    widget="textarea"></bodyedit>
+            <bodyedit :obj="demand"
+                      bodyAttr="body"
+                      widget="textarea"></bodyedit>
+          </div>
           <div class="action-buttons">
             <modal-button :model="demand"></modal-button>
             <button class="btn" @click="stakeholder.removeDemand(demand)">

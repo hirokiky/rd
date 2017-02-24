@@ -23,7 +23,7 @@
 
 <template>
   <li v-if="requirement.hasParent()">
-    <div class="requirement">
+    <div class="inline">
       <!-- Not to show editing forms for root requirement -->
       <bodyedit :obj="requirement"
                 bodyAttr="body"
@@ -52,11 +52,3 @@
                  :requirement="child"></requirement>
   </ul>
 </template>
-
-<style scoped>
-  .requirement {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-  }
-</style>
