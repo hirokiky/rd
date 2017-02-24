@@ -7765,7 +7765,7 @@
 	  /* script */
 	  __webpack_require__(13),
 	  /* template */
-	  __webpack_require__(43),
+	  __webpack_require__(45),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -7826,7 +7826,7 @@
 
 
 	// module
-	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\nfieldset {\n    border: none;\n    margin: 0;\n    padding: 0;\n}\n.form-group:not(:first-child) {\n    margin-top: 16px;\n}\nlabel {\n    font-weight: 600;\n}\ninput, textarea {\n    font-size: inherit;\n    border: solid 1px #d0cece;\n    border-radius: 2px\n}\ntextarea {\n    min-height: 80px;\n    min-width: 320px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #47cb69;\n    background-color: #f6fff3;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
+	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\nfieldset {\n    border: none;\n    margin: 0;\n    padding: 0;\n}\n.form-group:not(:first-child) {\n    margin-top: 16px;\n}\nlabel {\n    font-weight: 600;\n}\ninput, textarea {\n    font-size: inherit;\n    border: solid 1px #d0cece;\n    border-radius: 2px\n}\ntextarea {\n    min-height: 80px;\n    min-width: 320px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree.root {\n    padding: 0;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #47cb69;\n    background-color: #f6fff3;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder {\n    display: flex;\n    align-items: center;\n}\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
 
 	// exports
 
@@ -8177,15 +8177,15 @@
 	Vue.use(VueFormGenerator)
 	Vue.use(VueRouter);
 	Vue.component('modal', __webpack_require__(16));
-	Vue.component('modal-button', __webpack_require__(19));
-	Vue.component('bodyedit', __webpack_require__(22));
+	Vue.component('modal-button', __webpack_require__(21));
+	Vue.component('bodyedit', __webpack_require__(24));
 
 	const router = new VueRouter({
 	  routes: [
-	    {path: '/stakeholders', component: __webpack_require__(25)},
-	    {path: '/valueanalyse', component: __webpack_require__(31)},
-	    {path: '/valuedesign', component: __webpack_require__(34)},
-	    {path: '/requirements', component: __webpack_require__(37)},
+	    {path: '/stakeholders', component: __webpack_require__(27)},
+	    {path: '/valueanalyse', component: __webpack_require__(33)},
+	    {path: '/valuedesign', component: __webpack_require__(36)},
+	    {path: '/requirements', component: __webpack_require__(39)},
 	  ]
 	});
 
@@ -10498,13 +10498,13 @@
 
 	
 	/* styles */
-	__webpack_require__(46)
+	__webpack_require__(17)
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(17),
+	  __webpack_require__(19),
 	  /* template */
-	  __webpack_require__(18),
+	  __webpack_require__(20),
 	  /* scopeId */
 	  "data-v-a50ba858",
 	  /* cssModules */
@@ -10534,6 +10534,46 @@
 /* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(18);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-a50ba858&scoped=true!./modal.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-a50ba858&scoped=true!./modal.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.modal[data-v-a50ba858] {\n    z-index: 1000;\n}\n.modal-mask[data-v-a50ba858] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    background-color: rgba(0, 0, 0, 0.3);\n}\n.modal-inner[data-v-a50ba858] {\n    margin: auto;\n    margin-top: 100px;\n    width: 660px;\n}\n.modal-container[data-v-a50ba858] {\n    position: relative;\n    border-radius: 4px;\n    background-color: white;\n    padding: 32px;\n}\n.modal-close[data-v-a50ba858] {\n    position: absolute;\n    right: 16px;\n    top: 16px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
 	
 	// Requires vue-form-generator loaded
 	const store = __webpack_require__(3);
@@ -10551,7 +10591,7 @@
 
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10596,14 +10636,14 @@
 	}
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(20),
+	  __webpack_require__(22),
 	  /* template */
-	  __webpack_require__(21),
+	  __webpack_require__(23),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -10630,7 +10670,7 @@
 
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10647,7 +10687,7 @@
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10669,14 +10709,14 @@
 	}
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(23),
+	  __webpack_require__(25),
 	  /* template */
-	  __webpack_require__(24),
+	  __webpack_require__(26),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -10703,7 +10743,7 @@
 
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10745,7 +10785,7 @@
 
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -10833,14 +10873,14 @@
 	}
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(26),
+	  __webpack_require__(28),
 	  /* template */
-	  __webpack_require__(30),
+	  __webpack_require__(32),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -10867,7 +10907,7 @@
 
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10876,7 +10916,7 @@
 	const models = __webpack_require__(5);
 	const store = __webpack_require__(3);
 
-	Vue.component('stakeholder', __webpack_require__(27));
+	Vue.component('stakeholder', __webpack_require__(29));
 
 	module.exports = {
 	  computed: {
@@ -10886,14 +10926,14 @@
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(28),
+	  __webpack_require__(30),
 	  /* template */
-	  __webpack_require__(29),
+	  __webpack_require__(31),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -10920,7 +10960,7 @@
 
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10948,7 +10988,7 @@
 
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11043,12 +11083,12 @@
 	}
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('ul', {
-	    staticClass: "tree"
+	    staticClass: "tree root"
 	  }, [_c('stakeholder', {
 	    attrs: {
 	      "stakeholder": _vm.stakeholder
@@ -11064,14 +11104,14 @@
 	}
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(32),
+	  __webpack_require__(34),
 	  /* template */
-	  __webpack_require__(33),
+	  __webpack_require__(35),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -11098,7 +11138,7 @@
 
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -11130,11 +11170,13 @@
 
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('ul', [_vm._l((_vm.purposes), function(purpose) {
+	  return _c('div', [_c('ul', {
+	    staticClass: "tree root"
+	  }, [_vm._l((_vm.purposes), function(purpose) {
 	    return _c('li', [_c('bodyedit', {
 	      attrs: {
 	        "obj": purpose,
@@ -11152,28 +11194,47 @@
 	          _vm.removePurpose(purpose)
 	        }
 	      }
-	    }, [_vm._v("Remove")])], 1)
+	    }, [_c('i', {
+	      staticClass: "material-icons"
+	    }, [_vm._v("delete")])])], 1)
 	  }), _vm._v(" "), _c('li', [_c('button', {
 	    staticClass: "btn",
 	    on: {
 	      "click": _vm.addPurpose
 	    }
-	  }, [_vm._v("Add Purpose")])])], 2), _vm._v(" "), _c('ul', _vm._l((_vm.stakeholders), function(stakeholder) {
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("add")]), _vm._v("目的\n    ")])])], 2), _vm._v(" "), _c('ul', {
+	    staticClass: "tree root"
+	  }, _vm._l((_vm.stakeholders), function(stakeholder) {
 	    return _c('li', [_c('div', {
 	      staticClass: "stakeholder"
 	    }, [_c('i', {
 	      staticClass: "material-icons"
-	    }, [_vm._v("person")]), _vm._v(" "), _c('bodyedit', {
+	    }, [_vm._v("person")]), _vm._v(" "), _c('div', {
+	      staticClass: "action-buttons"
+	    }, [_c('bodyedit', {
 	      attrs: {
 	        "obj": stakeholder,
 	        "bodyAttr": "name",
 	        "widget": "input"
 	      }
-	    }, [_c('modal-button', {
+	    }), _vm._v(" "), _c('modal-button', {
 	      attrs: {
 	        "model": stakeholder
 	      }
-	    })], 1)], 1), _vm._v(" "), _c('ul', [_vm._l((stakeholder.values), function(value) {
+	    }), _vm._v(" "), _c('button', {
+	      staticClass: "btn",
+	      on: {
+	        "click": function($event) {
+	          _vm.addValue(stakeholder)
+	        }
+	      }
+	    }, [_c('i', {
+	      staticClass: "material-icons"
+	    }, [_vm._v("add")]), _vm._v("価値\n          ")])], 1)]), _vm._v(" "), _c('ul', {
+	      staticClass: "tree"
+	    }, _vm._l((stakeholder.values), function(value) {
 	      return _c('li', [_c('bodyedit', {
 	        attrs: {
 	          "obj": value,
@@ -11191,7 +11252,9 @@
 	            stakeholder.removeValue(value)
 	          }
 	        }
-	      }, [_vm._v("Remove")]), _vm._v(" "), _c('select', [_c('option', {
+	      }, [_c('i', {
+	        staticClass: "material-icons"
+	      }, [_vm._v("delete")])]), _vm._v(" "), _c('select', [_c('option', {
 	        domProps: {
 	          "value": null
 	        }
@@ -11209,14 +11272,7 @@
 	          }
 	        })
 	      })], 2)], 1)
-	    }), _vm._v(" "), _c('li', [_c('button', {
-	      staticClass: "btn",
-	      on: {
-	        "click": function($event) {
-	          _vm.addValue(stakeholder)
-	        }
-	      }
-	    }, [_vm._v("Add Value")])])], 2)])
+	    }))])
 	  }))])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
@@ -11228,14 +11284,14 @@
 	}
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(35),
+	  __webpack_require__(37),
 	  /* template */
-	  __webpack_require__(36),
+	  __webpack_require__(38),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -11262,7 +11318,7 @@
 
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -11283,7 +11339,7 @@
 
 
 /***/ },
-/* 36 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11376,14 +11432,14 @@
 	}
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(38),
+	  __webpack_require__(40),
 	  /* template */
-	  __webpack_require__(42),
+	  __webpack_require__(44),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -11410,7 +11466,7 @@
 
 
 /***/ },
-/* 38 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -11418,7 +11474,7 @@
 
 	const store = __webpack_require__(3);
 
-	Vue.component('requirement', __webpack_require__(39));
+	Vue.component('requirement', __webpack_require__(41));
 
 	module.exports = {
 	  computed: {
@@ -11430,16 +11486,20 @@
 
 
 /***/ },
-/* 39 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
+
+	
+	/* styles */
+	__webpack_require__(46)
 
 	var Component = __webpack_require__(12)(
 	  /* script */
-	  __webpack_require__(40),
+	  __webpack_require__(42),
 	  /* template */
-	  __webpack_require__(41),
+	  __webpack_require__(43),
 	  /* scopeId */
-	  null,
+	  "data-v-192c0b2a",
 	  /* cssModules */
 	  null
 	)
@@ -11464,7 +11524,7 @@
 
 
 /***/ },
-/* 40 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -11491,17 +11551,21 @@
 
 
 /***/ },
-/* 41 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('li', [(_vm.requirement.hasParent()) ? _c('div', [_c('bodyedit', {
+	  return (_vm.requirement.hasParent()) ? _c('li', [_c('div', {
+	    staticClass: "requirement"
+	  }, [_c('bodyedit', {
 	    attrs: {
 	      "obj": _vm.requirement,
 	      "bodyAttr": "body",
 	      "widget": "textarea"
 	    }
-	  }), _vm._v(" "), _c('modal-button', {
+	  }), _vm._v(" "), _c('div', {
+	    staticClass: "action-buttons"
+	  }, [_c('modal-button', {
 	    attrs: {
 	      "model": _vm.requirement
 	    }
@@ -11512,13 +11576,9 @@
 	        _vm.requirement.purgeAllDescendants()
 	      }
 	    }
-	  }, [_vm._v("Remove")])], 1) : _vm._e(), _vm._v(" "), _c('ul', [_vm._l((_vm.requirement.children), function(child) {
-	    return _c('requirement', {
-	      attrs: {
-	        "requirement": child
-	      }
-	    })
-	  }), _vm._v(" "), _c('li', [_c('button', {
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("delete")])]), _vm._v(" "), _c('button', {
 	    staticClass: "btn",
 	    on: {
 	      "click": function($event) {
@@ -11536,7 +11596,23 @@
 	        }
 	      }
 	    })
-	  })], 2)])], 2)])
+	  })], 2)], 1)], 1), _vm._v(" "), _c('ul', {
+	    staticClass: "tree"
+	  }, _vm._l((_vm.requirement.children), function(child) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": child
+	      }
+	    })
+	  }))]) : _c('ul', {
+	    staticClass: "tree root"
+	  }, _vm._l((_vm.requirement.children), function(child) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": child
+	      }
+	    })
+	  }))
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -11547,15 +11623,15 @@
 	}
 
 /***/ },
-/* 42 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('ul', [_c('requirement', {
+	  return _c('div', [_c('requirement', {
 	    attrs: {
 	      "requirement": _vm.requirement
 	    }
-	  })], 1)])
+	  })], 1)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -11566,7 +11642,7 @@
 	}
 
 /***/ },
-/* 43 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -11601,8 +11677,6 @@
 	}
 
 /***/ },
-/* 44 */,
-/* 45 */,
 /* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -11618,8 +11692,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-a50ba858&scoped=true!./modal.css", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-a50ba858&scoped=true!./modal.css");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-192c0b2a&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./requirement.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-192c0b2a&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./requirement.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -11637,7 +11711,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.modal[data-v-a50ba858] {\n    z-index: 1000;\n}\n.modal-mask[data-v-a50ba858] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    background-color: rgba(0, 0, 0, 0.3);\n}\n.modal-inner[data-v-a50ba858] {\n    margin: auto;\n    margin-top: 100px;\n    width: 660px;\n}\n.modal-container[data-v-a50ba858] {\n    position: relative;\n    border-radius: 4px;\n    background-color: white;\n    padding: 32px;\n}\n.modal-close[data-v-a50ba858] {\n    position: absolute;\n    right: 16px;\n    top: 16px;\n}\n", ""]);
+	exports.push([module.id, "\n.requirement[data-v-192c0b2a] {\n  display: flex;\n  flex-flow: row nowrap;\n  align-items: center;\n}\n", ""]);
 
 	// exports
 

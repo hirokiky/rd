@@ -16,8 +16,6 @@
 
 <template>
   <div>
-    <ul>
-      <requirement :requirement="requirement"></requirement>
-    </ul>
+    <requirement :requirement="requirement"></requirement>
   </div>
 </template>

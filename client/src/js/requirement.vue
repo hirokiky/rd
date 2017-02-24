@@ -22,19 +22,17 @@
 </script>
 
 <template>
-  <li>
-    <div v-if="requirement.hasParent()">
+  <li v-if="requirement.hasParent()">
+    <div class="requirement">
       <!-- Not to show editing forms for root requirement -->
       <bodyedit :obj="requirement"
                 bodyAttr="body"
                 widget="textarea"></bodyedit>
-      <modal-button :model="requirement"></modal-button>
-      <button class="btn" @click="requirement.purgeAllDescendants()">Remove</button>
-    </div>
-    <ul>
-      <requirement v-for="child in requirement.children"
-                   :requirement="child"></requirement>
-      <li>
+      <div class="action-buttons">
+        <modal-button :model="requirement"></modal-button>
+        <button class="btn" @click="requirement.purgeAllDescendants()">
+          <i class="material-icons">delete</i>
+        </button>
         <button class="btn" @click="addChildRequirement(requirement)">New Child</button>
         <select>
           <option>Add Non Parent Node</option>
@@ -42,7 +40,23 @@
                   v-text="req.body"
                   @click="requirement.addChild(req)"></option>
         </select>
-      </li>
+      </div>
+    </div>
+    <ul class="tree">
+      <requirement v-for="child in requirement.children"
+                   :requirement="child"></requirement>
     </ul>
   </li>
+  <ul v-else class="tree root">
+    <requirement v-for="child in requirement.children"
+                 :requirement="child"></requirement>
+  </ul>
 </template>
+
+<style scoped>
+  .requirement {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+  }
+</style>

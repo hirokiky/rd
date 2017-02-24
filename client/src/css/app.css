@@ -85,6 +85,9 @@ nav > div > *:not(:first-child) {
 ul.tree {
     padding-left: 60px;
 }
+ul.tree.root {
+    padding: 0;
+}
 
 ul.tree > li {
     list-style: none;
