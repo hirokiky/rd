@@ -130,6 +130,10 @@ class Requirement extends BaseRequirementNode {
     super(body);
   }
 
+  get color() {
+    return null;
+  }
+
   get modelVerboseName() {return '要求';}
 
   get schema() {
@@ -150,6 +154,11 @@ class Vision extends BaseRequirementNode {
     super(body);
   }
 
+  get color() {
+    return 'rgb(107, 155, 239)';
+  }
+
+
   get modelVerboseName() {return 'ビジョン';}
 
   get schema() {
@@ -166,6 +175,10 @@ class Vision extends BaseRequirementNode {
 class Concept extends BaseRequirementNode {
   constructor(body) {
     super(body);
+  }
+
+  get color() {
+    return 'rgb(80, 193, 218)';
   }
 
   get modelVerboseName() {return 'コンセプト';}

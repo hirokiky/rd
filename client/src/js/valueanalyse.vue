@@ -50,7 +50,7 @@
     </ul>
     <ul class="tree root">
       <li v-for="stakeholder in stakeholders">
-        <div class="stakeholder">
+        <div class="stakeholder inline">
           <i class="material-icons">person</i>
           <div class="action-buttons">
             <bodyedit :obj="stakeholder"

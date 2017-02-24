@@ -7463,6 +7463,10 @@
 	    super(body);
 	  }
 
+	  get color() {
+	    return null;
+	  }
+
 	  get modelVerboseName() {return '要求';}
 
 	  get schema() {
@@ -7483,6 +7487,11 @@
 	    super(body);
 	  }
 
+	  get color() {
+	    return 'rgb(107, 155, 239)';
+	  }
+
+
 	  get modelVerboseName() {return 'ビジョン';}
 
 	  get schema() {
@@ -7499,6 +7508,10 @@
 	class Concept extends BaseRequirementNode {
 	  constructor(body) {
 	    super(body);
+	  }
+
+	  get color() {
+	    return 'rgb(80, 193, 218)';
 	  }
 
 	  get modelVerboseName() {return 'コンセプト';}
@@ -11227,7 +11240,7 @@
 	    staticClass: "tree root"
 	  }, _vm._l((_vm.stakeholders), function(stakeholder) {
 	    return _c('li', [_c('div', {
-	      staticClass: "stakeholder"
+	      staticClass: "stakeholder inline"
 	    }, [_c('i', {
 	      staticClass: "material-icons"
 	    }, [_vm._v("person")]), _vm._v(" "), _c('div', {
@@ -11579,13 +11592,18 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return (_vm.requirement.hasParent()) ? _c('li', [_c('div', {
 	    staticClass: "inline"
+	  }, [_c('div', {
+	    staticClass: "box",
+	    style: ({
+	      'border-color': _vm.requirement.color
+	    })
 	  }, [_c('bodyedit', {
 	    attrs: {
 	      "obj": _vm.requirement,
 	      "bodyAttr": "body",
 	      "widget": "textarea"
 	    }
-	  }), _vm._v(" "), _c('div', {
+	  })], 1), _vm._v(" "), _c('div', {
 	    staticClass: "action-buttons"
 	  }, [_c('modal-button', {
 	    attrs: {
@@ -11595,19 +11613,12 @@
 	    staticClass: "btn",
 	    on: {
 	      "click": function($event) {
-	        _vm.requirement.purgeAllDescendants()
+	        _vm.addChildRequirement(_vm.requirement)
 	      }
 	    }
 	  }, [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("delete")])]), _vm._v(" "), _c('button', {
-	    staticClass: "btn",
-	    on: {
-	      "click": function($event) {
-	        _vm.addChildRequirement(_vm.requirement)
-	      }
-	    }
-	  }, [_vm._v("New Child")]), _vm._v(" "), _c('select', [_c('option', [_vm._v("Add Non Parent Node")]), _vm._v(" "), _vm._l((_vm.noParents), function(req) {
+	  }, [_vm._v("add")]), _vm._v("\n        要求\n      ")]), _vm._v(" "), _c('select', [_c('option', [_vm._v("\n          -- モデル追加 --\n        ")]), _vm._v(" "), _vm._l((_vm.noParents), function(req) {
 	    return _c('option', {
 	      domProps: {
 	        "textContent": _vm._s(req.body)
@@ -11618,7 +11629,16 @@
 	        }
 	      }
 	    })
-	  })], 2)], 1)], 1), _vm._v(" "), _c('ul', {
+	  })], 2), _vm._v(" "), _c('button', {
+	    staticClass: "btn",
+	    on: {
+	      "click": function($event) {
+	        _vm.requirement.purgeAllDescendants()
+	      }
+	    }
+	  }, [_c('i', {
+	    staticClass: "material-icons"
+	  }, [_vm._v("delete")])])], 1)]), _vm._v(" "), _c('ul', {
 	    staticClass: "tree"
 	  }, _vm._l((_vm.requirement.children), function(child) {
 	    return _c('requirement', {

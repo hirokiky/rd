@@ -25,21 +25,28 @@
   <li v-if="requirement.hasParent()">
     <div class="inline">
       <!-- Not to show editing forms for root requirement -->
-      <bodyedit :obj="requirement"
-                bodyAttr="body"
-                widget="textarea"></bodyedit>
+      <div class="box" :style="{'border-color': requirement.color}">
+        <bodyedit :obj="requirement"
+                  bodyAttr="body"
+                  widget="textarea"></bodyedit>
+      </div>
       <div class="action-buttons">
         <modal-button :model="requirement"></modal-button>
-        <button class="btn" @click="requirement.purgeAllDescendants()">
-          <i class="material-icons">delete</i>
+        <button class="btn" @click="addChildRequirement(requirement)">
+          <i class="material-icons">add</i>
+          要求
         </button>
-        <button class="btn" @click="addChildRequirement(requirement)">New Child</button>
         <select>
-          <option>Add Non Parent Node</option>
+          <option>
+            -- モデル追加 --
+          </option>
           <option v-for="req in noParents"
                   v-text="req.body"
                   @click="requirement.addChild(req)"></option>
         </select>
+        <button class="btn" @click="requirement.purgeAllDescendants()">
+          <i class="material-icons">delete</i>
+        </button>
       </div>
     </div>
     <ul class="tree">
