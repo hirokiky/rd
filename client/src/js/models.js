@@ -57,6 +57,13 @@ class Node {
     this.note = '';
   }
 
+  toJSON() {
+    return {
+      note: this.note,
+      children: this.children.map((c) => {return c.toJSON();})
+    };
+  }
+
   addChild(child) {
     this.children.push(child);
     child.parent = this;
@@ -123,13 +130,17 @@ class BaseRequirementNode extends Node {
     this.priority = null;
     this.body = body;
   }
+
+  toJSON() {
+    var d = super.toJSON();
+    d.layer = this.layer;
+    d.priority = this.priority;
+    d.body = this.body;
+    return d;
+  }
 }
 
 class Requirement extends BaseRequirementNode {
-  constructor(body) {
-    super(body);
-  }
-
   get color() {
     return null;
   }
@@ -150,10 +161,6 @@ class Requirement extends BaseRequirementNode {
 // ValueDesign
 
 class Vision extends BaseRequirementNode {
-  constructor(body) {
-    super(body);
-  }
-
   get color() {
     return 'rgb(107, 155, 239)';
   }
@@ -173,10 +180,6 @@ class Vision extends BaseRequirementNode {
 }
 
 class Concept extends BaseRequirementNode {
-  constructor(body) {
-    super(body);
-  }
-
   get color() {
     return 'rgb(80, 193, 218)';
   }
@@ -199,6 +202,12 @@ class CatchCopy {
     this.body = body;
   }
 
+  toJSON() {
+    return {
+      body: this.body
+    };
+  }
+
   get modelVerboseName() {return 'キャッチコピー';}
 
   get schema() {
@@ -215,6 +224,12 @@ class CatchCopy {
 class Meaning {
   constructor(body) {
     this.body = body;
+  }
+
+  toJSON() {
+    return {
+      body: this.body
+    };
   }
 
   get modelVerboseName() {return '意味';}
@@ -235,6 +250,12 @@ class Story {
     this.body = body;
   }
 
+  toJSON() {
+    return {
+      body: this.body
+    };
+  }
+
   get modelVerboseName() {return 'ストーリー';}
 
   get schema() {
@@ -251,6 +272,12 @@ class Story {
 class Design {
   constructor(imageUrl) {
     this.imageUrl = imageUrl;
+  }
+
+  toJSON() {
+    return {
+      imageUrl: this.imageUrl
+    };
   }
 
   get modelVerboseName() {return 'デザイン';}
@@ -282,6 +309,13 @@ class Demand {
     this.stakeholder = null;
     this.body = body;
     this.type = type;
+  }
+
+  toJSON() {
+    return {
+      body: this.body,
+      type: this.type
+    };
   }
 
   get isPositive() {
@@ -317,6 +351,12 @@ class Stakeholder extends Node {
     this.name = name;
     this.demands = [];
     this.values = [];
+  }
+
+  toJSON() {
+    return {
+      name: this.name
+    };
   }
 
   addDemand(demand) {
@@ -360,6 +400,12 @@ class Purpose extends BaseRequirementNode {
     this.color = color || '#888';
   }
 
+  toJSON() {
+    var d = super.toJSON();
+    d.color = this.color;
+    return d;
+  }
+
   get modelVerboseName() {return '目的';}
 
   get schema() {
@@ -386,6 +432,12 @@ class Value {
     this.body = body || '';
   }
 
+  toJSON() {
+    var d = super.toJSON();
+    d.body = this.body;
+    return d;
+  }
+
   get color() {
     if (this.purpose) {
       return this.purpose.color;
@@ -406,8 +458,6 @@ class Value {
     ].concat(BASE_FIELDS));
   }
 }
-
-// Notes
 
 module.exports = {
   LAYERS: LAYERS,

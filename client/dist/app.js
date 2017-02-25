@@ -7390,6 +7390,13 @@
 	    this.note = '';
 	  }
 
+	  toJSON() {
+	    return {
+	      note: this.note,
+	      children: this.children.map((c) => {return c.toJSON();})
+	    };
+	  }
+
 	  addChild(child) {
 	    this.children.push(child);
 	    child.parent = this;
@@ -7456,13 +7463,17 @@
 	    this.priority = null;
 	    this.body = body;
 	  }
+
+	  toJSON() {
+	    var d = super.toJSON();
+	    d.layer = this.layer;
+	    d.priority = this.priority;
+	    d.body = this.body;
+	    return d;
+	  }
 	}
 
 	class Requirement extends BaseRequirementNode {
-	  constructor(body) {
-	    super(body);
-	  }
-
 	  get color() {
 	    return null;
 	  }
@@ -7483,10 +7494,6 @@
 	// ValueDesign
 
 	class Vision extends BaseRequirementNode {
-	  constructor(body) {
-	    super(body);
-	  }
-
 	  get color() {
 	    return 'rgb(107, 155, 239)';
 	  }
@@ -7506,10 +7513,6 @@
 	}
 
 	class Concept extends BaseRequirementNode {
-	  constructor(body) {
-	    super(body);
-	  }
-
 	  get color() {
 	    return 'rgb(80, 193, 218)';
 	  }
@@ -7532,6 +7535,12 @@
 	    this.body = body;
 	  }
 
+	  toJSON() {
+	    return {
+	      body: this.body
+	    };
+	  }
+
 	  get modelVerboseName() {return 'キャッチコピー';}
 
 	  get schema() {
@@ -7548,6 +7557,12 @@
 	class Meaning {
 	  constructor(body) {
 	    this.body = body;
+	  }
+
+	  toJSON() {
+	    return {
+	      body: this.body
+	    };
 	  }
 
 	  get modelVerboseName() {return '意味';}
@@ -7568,6 +7583,12 @@
 	    this.body = body;
 	  }
 
+	  toJSON() {
+	    return {
+	      body: this.body
+	    };
+	  }
+
 	  get modelVerboseName() {return 'ストーリー';}
 
 	  get schema() {
@@ -7584,6 +7605,12 @@
 	class Design {
 	  constructor(imageUrl) {
 	    this.imageUrl = imageUrl;
+	  }
+
+	  toJSON() {
+	    return {
+	      imageUrl: this.imageUrl
+	    };
 	  }
 
 	  get modelVerboseName() {return 'デザイン';}
@@ -7615,6 +7642,13 @@
 	    this.stakeholder = null;
 	    this.body = body;
 	    this.type = type;
+	  }
+
+	  toJSON() {
+	    return {
+	      body: this.body,
+	      type: this.type
+	    };
 	  }
 
 	  get isPositive() {
@@ -7650,6 +7684,12 @@
 	    this.name = name;
 	    this.demands = [];
 	    this.values = [];
+	  }
+
+	  toJSON() {
+	    return {
+	      name: this.name
+	    };
 	  }
 
 	  addDemand(demand) {
@@ -7693,6 +7733,12 @@
 	    this.color = color || '#888';
 	  }
 
+	  toJSON() {
+	    var d = super.toJSON();
+	    d.color = this.color;
+	    return d;
+	  }
+
 	  get modelVerboseName() {return '目的';}
 
 	  get schema() {
@@ -7719,6 +7765,12 @@
 	    this.body = body || '';
 	  }
 
+	  toJSON() {
+	    var d = super.toJSON();
+	    d.body = this.body;
+	    return d;
+	  }
+
 	  get color() {
 	    if (this.purpose) {
 	      return this.purpose.color;
@@ -7739,8 +7791,6 @@
 	    ].concat(BASE_FIELDS));
 	  }
 	}
-
-	// Notes
 
 	module.exports = {
 	  LAYERS: LAYERS,
@@ -11340,7 +11390,24 @@
 	        }
 	      }, [_c('i', {
 	        staticClass: "material-icons"
-	      }, [_vm._v("delete")])])], 1), _vm._v(" "), _c('select', [_c('option', {
+	      }, [_vm._v("delete")])])], 1), _vm._v(" "), _c('select', {
+	        directives: [{
+	          name: "model",
+	          rawName: "v-model",
+	          value: (value.purpose),
+	          expression: "value.purpose"
+	        }],
+	        on: {
+	          "change": function($event) {
+	            value.purpose = Array.prototype.filter.call($event.target.options, function(o) {
+	              return o.selected
+	            }).map(function(o) {
+	              var val = "_value" in o ? o._value : o.value;
+	              return val
+	            })[0]
+	          }
+	        }
+	      }, [_c('option', {
 	        domProps: {
 	          "value": null
 	        }
@@ -11350,11 +11417,6 @@
 	            "value": purpose,
 	            "selected": value.purpose == purpose,
 	            "textContent": _vm._s(purpose.body)
-	          },
-	          on: {
-	            "click": function($event) {
-	              value.purpose = purpose
-	            }
 	          }
 	        })
 	      })], 2)])])

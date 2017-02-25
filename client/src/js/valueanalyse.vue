@@ -77,12 +77,11 @@
                 </button>
               </div>
               <!-- If use v-model it will run JSON.stringify  -->
-              <select>
+              <select v-model="value.purpose">
                 <option :value="null">&lt;目的を選択&gt;</option>
                 <option v-for="purpose in purposes"
                         :value="purpose"
                         :selected="value.purpose == purpose"
-                        @click="value.purpose = purpose"
                         v-text="purpose.body" />
               </select>
             </div>
