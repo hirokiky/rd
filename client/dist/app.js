@@ -7346,7 +7346,7 @@
 	const LAYER_COLOR = {};
 	LAYER_COLOR[LAYER_STRATEGY] = 'rgb(244, 235, 255)';
 	LAYER_COLOR[LAYER_BUSINESS] = 'rgb(235, 220, 253)';
-	LAYER_COLOR[LAYER_IT] = 'rgb(224, 204, 249)';
+	LAYER_COLOR[LAYER_IT] = 'rgb(203, 170, 243)';
 
 	const PRIORITIES_LOW = 'low';
 	const PRIORITIES_MIDDLE = 'middle';
@@ -11716,13 +11716,17 @@
 /* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	/* styles */
+	__webpack_require__(50)
+
 	var Component = __webpack_require__(12)(
 	  /* script */
 	  __webpack_require__(46),
 	  /* template */
 	  __webpack_require__(47),
 	  /* scopeId */
-	  null,
+	  "data-v-317033a2",
 	  /* cssModules */
 	  null
 	)
@@ -11790,7 +11794,7 @@
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return (_vm.requirement.hasParent()) ? _c('li', {
 	    style: ({
-	      'background-color': _vm.requirement.layerColor
+	      'border-color': _vm.requirement.layerColor
 	    })
 	  }, [_c('div', {
 	    staticClass: "inline"
@@ -11975,6 +11979,46 @@
 	     require("vue-hot-reload-api").rerender("data-v-03cb0de6", module.exports)
 	  }
 	}
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(51);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(11)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-317033a2&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./requirement.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-317033a2&scoped=true!./../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./requirement.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(10)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\nli[data-v-317033a2] {\n  border-left: solid 4px;\n  border-color: transparent;\n  padding-left: 12px;\n}\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

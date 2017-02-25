@@ -33,7 +33,7 @@
 
 <template>
   <li v-if="requirement.hasParent()"
-      :style="{'background-color': requirement.layerColor}">
+      :style="{'border-color': requirement.layerColor}">
     <div class="inline">
       <!-- Not to show editing forms for root requirement -->
       <div class="box" :style="{'border-color': requirement.color}">
@@ -86,3 +86,11 @@
 
   </ul>
 </template>
+
+<style scoped>
+  li {
+    border-left: solid 4px;
+    border-color: transparent;
+    padding-left: 12px;
+  }
+</style>
