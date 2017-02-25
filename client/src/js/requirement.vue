@@ -42,6 +42,7 @@
       </div>
       <div class="action-buttons">
         <modal-button :model="requirement"></modal-button>
+
         <select v-model="selectedChild">
           <option :value="null">新しい要求</option>
           <option v-for="req in noParents"
@@ -51,6 +52,7 @@
         <button class="btn" @click="addChildRequirement(requirement)">
           追加する
         </button>
+
         <button class="btn" @click="requirement.purgeAllDescendants()">
           <i class="material-icons">delete</i>
         </button>
@@ -64,5 +66,17 @@
   <ul v-else class="tree root">
     <requirement v-for="child in requirement.children"
                  :requirement="child"></requirement>
+
+    <!-- Little bit copy pasted code -->
+    <select v-model="selectedChild">
+      <option :value="null">新しい要求</option>
+      <option v-for="req in noParents"
+              v-text="req.body"
+              :value="req"></option>
+    </select>
+    <button class="btn" @click="addChildRequirement(requirement)">
+      追加する
+    </button>
+
   </ul>
 </template>

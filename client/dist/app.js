@@ -7390,16 +7390,6 @@
 	    this.note = '';
 	  }
 
-	  toJson() {
-	    return JSON.stringify(this, (key, value) => {
-	        if (key == 'parent') {
-	          return;
-	        } else {
-	          return value;
-	        }
-	    });
-	  }
-
 	  addChild(child) {
 	    this.children.push(child);
 	    child.parent = this;
@@ -11790,13 +11780,48 @@
 	    })
 	  }))]) : _c('ul', {
 	    staticClass: "tree root"
-	  }, _vm._l((_vm.requirement.children), function(child) {
+	  }, [_vm._l((_vm.requirement.children), function(child) {
 	    return _c('requirement', {
 	      attrs: {
 	        "requirement": child
 	      }
 	    })
-	  }))
+	  }), _vm._v(" "), _c('select', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.selectedChild),
+	      expression: "selectedChild"
+	    }],
+	    on: {
+	      "change": function($event) {
+	        _vm.selectedChild = Array.prototype.filter.call($event.target.options, function(o) {
+	          return o.selected
+	        }).map(function(o) {
+	          var val = "_value" in o ? o._value : o.value;
+	          return val
+	        })[0]
+	      }
+	    }
+	  }, [_c('option', {
+	    domProps: {
+	      "value": null
+	    }
+	  }, [_vm._v("新しい要求")]), _vm._v(" "), _vm._l((_vm.noParents), function(req) {
+	    return _c('option', {
+	      domProps: {
+	        "value": req,
+	        "textContent": _vm._s(req.body)
+	      }
+	    })
+	  })], 2), _vm._v(" "), _c('button', {
+	    staticClass: "btn",
+	    on: {
+	      "click": function($event) {
+	        _vm.addChildRequirement(_vm.requirement)
+	      }
+	    }
+	  }, [_vm._v("\n    追加する\n  ")])], 2)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
