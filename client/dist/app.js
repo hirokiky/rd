@@ -7343,6 +7343,11 @@
 	  {id: LAYER_IT, name: 'IT要求'}
 	];
 
+	const LAYER_COLOR = {};
+	LAYER_COLOR[LAYER_STRATEGY] = 'rgb(244, 235, 255)';
+	LAYER_COLOR[LAYER_BUSINESS] = 'rgb(235, 220, 253)';
+	LAYER_COLOR[LAYER_IT] = 'rgb(224, 204, 249)';
+
 	const PRIORITIES_LOW = 'low';
 	const PRIORITIES_MIDDLE = 'middle';
 	const PRIORITIES_HIGH_MIDDLE = 'high_middle';
@@ -7470,6 +7475,13 @@
 	    d.priority = this.priority;
 	    d.body = this.body;
 	    return d;
+	  }
+
+	  get layerColor() {
+	    if (!this.layer) {
+	      return null;
+	    }
+	    return LAYER_COLOR[this.layer];
 	  }
 	}
 
@@ -10636,7 +10648,7 @@
 
 
 	// module
-	exports.push([module.id, "\n.modal[data-v-4843ee99] {\n    z-index: 1000;\n}\n.modal-mask[data-v-4843ee99] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100vw;\n    height: 100vh;\n    background-color: rgba(0, 0, 0, 0.3);\n}\n.modal-inner[data-v-4843ee99] {\n    margin: auto;\n    margin-top: 100px;\n    width: 660px;\n}\n.modal-container[data-v-4843ee99] {\n    position: relative;\n    border-radius: 4px;\n    background-color: white;\n    padding: 32px;\n}\n.modal-close[data-v-4843ee99] {\n    position: absolute;\n    right: 16px;\n    top: 16px;\n}\n", ""]);
+	exports.push([module.id, "\n.modal[data-v-4843ee99] {\n    z-index: 1000;\n}\n.modal-mask[data-v-4843ee99] {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, 0.3);\n}\n.modal-inner[data-v-4843ee99] {\n    margin: auto;\n    margin-top: 100px;\n    width: 660px;\n}\n.modal-container[data-v-4843ee99] {\n    position: relative;\n    border-radius: 4px;\n    background-color: white;\n    padding: 32px;\n}\n.modal-close[data-v-4843ee99] {\n    position: absolute;\n    right: 16px;\n    top: 16px;\n}\n", ""]);
 
 	// exports
 
@@ -11769,7 +11781,11 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return (_vm.requirement.hasParent()) ? _c('li', [_c('div', {
+	  return (_vm.requirement.hasParent()) ? _c('li', {
+	    style: ({
+	      'background-color': _vm.requirement.layerColor
+	    })
+	  }, [_c('div', {
 	    staticClass: "inline"
 	  }, [_c('div', {
 	    staticClass: "box",

@@ -32,7 +32,8 @@
 </script>
 
 <template>
-  <li v-if="requirement.hasParent()">
+  <li v-if="requirement.hasParent()"
+      :style="{'background-color': requirement.layerColor}">
     <div class="inline">
       <!-- Not to show editing forms for root requirement -->
       <div class="box" :style="{'border-color': requirement.color}">

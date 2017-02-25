@@ -10,6 +10,11 @@ const LAYERS = [
   {id: LAYER_IT, name: 'IT要求'}
 ];
 
+const LAYER_COLOR = {};
+LAYER_COLOR[LAYER_STRATEGY] = 'rgb(244, 235, 255)';
+LAYER_COLOR[LAYER_BUSINESS] = 'rgb(235, 220, 253)';
+LAYER_COLOR[LAYER_IT] = 'rgb(224, 204, 249)';
+
 const PRIORITIES_LOW = 'low';
 const PRIORITIES_MIDDLE = 'middle';
 const PRIORITIES_HIGH_MIDDLE = 'high_middle';
@@ -137,6 +142,13 @@ class BaseRequirementNode extends Node {
     d.priority = this.priority;
     d.body = this.body;
     return d;
+  }
+
+  get layerColor() {
+    if (!this.layer) {
+      return null;
+    }
+    return LAYER_COLOR[this.layer];
   }
 }
 
