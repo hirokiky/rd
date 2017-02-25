@@ -11299,7 +11299,7 @@
 	        domProps: {
 	          "value": null
 	        }
-	      }, [_vm._v("unselected")]), _vm._v(" "), _vm._l((_vm.purposes), function(purpose) {
+	      }, [_vm._v("<unselected>")]), _vm._v(" "), _vm._l((_vm.purposes), function(purpose) {
 	        return _c('option', {
 	          domProps: {
 	            "value": purpose,
@@ -11640,7 +11640,7 @@
 	    }
 	  }, [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("add")]), _vm._v("\n        要求\n      ")]), _vm._v(" "), _c('select', [_c('option', [_vm._v("\n          -- モデル追加 --\n        ")]), _vm._v(" "), _vm._l((_vm.noParents), function(req) {
+	  }, [_vm._v("add")]), _vm._v("\n        要求\n      ")]), _vm._v(" "), _c('select', [_c('option', [_vm._v("\n          <モデル追加>\n        ")]), _vm._v(" "), _vm._l((_vm.noParents), function(req) {
 	    return _c('option', {
 	      domProps: {
 	        "textContent": _vm._s(req.body)

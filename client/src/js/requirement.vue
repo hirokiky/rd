@@ -38,7 +38,7 @@
         </button>
         <select>
           <option>
-            -- モデル追加 --
+            &lt;モデル追加&gt;
           </option>
           <option v-for="req in noParents"
                   v-text="req.body"

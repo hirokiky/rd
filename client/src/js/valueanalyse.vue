@@ -78,7 +78,7 @@
               </div>
               <!-- If use v-model it will run JSON.stringify  -->
               <select>
-                <option :value="null">unselected</option>
+                <option :value="null">&lt;unselected&gt;</option>
                 <option v-for="purpose in purposes"
                         :value="purpose"
                         :selected="value.purpose == purpose"
