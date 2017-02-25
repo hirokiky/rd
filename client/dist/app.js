@@ -7360,6 +7360,7 @@
 	  {id: PRIORITIES_HIGH, name: '重要度（高）優先度（高）'}
 	];
 
+	const PRIORITY_LEVELS = PRIORITIES.map((p) => {return p.id;});
 
 	const BASE_FIELDS = [
 	  {model: 'note',
@@ -7482,6 +7483,12 @@
 	      return null;
 	    }
 	    return LAYER_COLOR[this.layer];
+	  }
+
+	  get priorityLevel() {
+	    var numStar = PRIORITY_LEVELS.indexOf(this.priority) + 1;
+	    var numEmpty = PRIORITY_LEVELS.length + 1 - numStar;
+	    return Array(numStar).fill(true).concat(Array(numEmpty).fill(false));
 	  }
 	}
 
@@ -7909,7 +7916,7 @@
 
 
 	// module
-	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\nfieldset {\n    border: none;\n    margin: 0;\n    padding: 0;\n}\n.form-group:not(:first-child) {\n    margin-top: 16px;\n}\nlabel {\n    font-weight: 600;\n}\ninput, textarea {\n    font-size: inherit;\n    border: solid 1px #d0cece;\n    border-radius: 2px\n}\ntextarea {\n    min-height: 80px;\n    min-width: 320px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree.root {\n    padding: 0;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n.inline {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n}\n\n/* box */\n.box {\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 12px;\n}\n.box.positive {\n    border-color: #47cb69;\n    background-color: #f6fff3;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
+	exports.push([module.id, "\nbody {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n\n    color: #333;\n}\n.container {\n    width: 944px;\n    margin: 0 auto;\n    padding: 0 16px;\n}\na {\n    text-decoration: none;\n}\na:hover {\n    text-decoration: underline;\n}\ni.material-icons {\n    vertical-align: text-bottom;\n}\nbutton.btn {\n    border: solid 1px #d0cdcd;\n    border-radius: 4px;\n    background: linear-gradient(#fdfafa, #e2e2e2);\n\n    min-height: 24px;\n    vertical-align: middle;\n}\nbutton.btn > i.material-icons {\n    font-size: 12px;\n}\nfieldset {\n    border: none;\n    margin: 0;\n    padding: 0;\n}\n.form-group:not(:first-child) {\n    margin-top: 16px;\n}\nlabel {\n    font-weight: 600;\n}\ninput, textarea {\n    font-size: inherit;\n    border: solid 1px #d0cece;\n    border-radius: 2px\n}\ntextarea {\n    min-height: 80px;\n    min-width: 320px;\n}\n\n/* Componets */\n\n/* Nav Bar */\nnav {\n    background-color: #5e747b;\n    color: white;\n    height: 38px;\n    display: flex;\n    align-items: center;\n}\nnav > div > a {\n    color: white;\n}\nnav > div > *:not(:first-child) {\n    margin-left: 8px;\n}\n\n/* Tree */\nul.tree {\n    padding-left: 60px;\n}\nul.tree.root {\n    padding: 0;\n}\nul.tree > li {\n    list-style: none;\n    margin: 4px 0 8px 0;\n}\n.inline {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n}\n\n/* box */\n.box {\n    position: relative;\n    display: inline-flex;\n\n    border: solid 2px #c7c7c7;\n    border-radius: 4px;\n\n    background-color: #fbfbfb;\n\n    padding: 16px 12px;\n}\n.box.positive {\n    border-color: #47cb69;\n    background-color: #f6fff3;\n}\n.box.negative {\n    border-color: #e68e8e;\n    background-color: #fff3f3;\n}\n.box-stars {\n    position: absolute;\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n    top: 0;\n    right: 0;\n}\n.box-star {\n    font-size: 10px;\n    color: rgba(206, 42, 42, 0.67);\n}\n\n/* buttons */\n.action-buttons {\n    display: flex;\n    flex-flow: row nowrap;\n    align-items: center;\n\n    margin-left: 12px;\n}\n.action-buttons > button:not(:first-child) {\n    margin-left: 4px;\n}\n\n/* Models */\n\n/* Stakeholder */\n.stakeholder > i.material-icons {\n    color: #fb97b5;\n    font-size: 38px;\n    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);\n}\n.stakeholder > span {\n    font-size: 18px;\n}\n", ""]);
 
 	// exports
 
@@ -11792,7 +11799,13 @@
 	    style: ({
 	      'border-color': _vm.requirement.color
 	    })
-	  }, [_c('bodyedit', {
+	  }, [_c('div', {
+	    staticClass: "box-stars"
+	  }, _vm._l((_vm.requirement.priorityLevel), function(isFilled) {
+	    return (isFilled) ? _c('i', {
+	      staticClass: "material-icons box-star"
+	    }, [_vm._v("star")]) : _vm._e()
+	  })), _vm._v(" "), _c('bodyedit', {
 	    attrs: {
 	      "obj": _vm.requirement,
 	      "bodyAttr": "body",

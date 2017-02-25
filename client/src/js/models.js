@@ -27,6 +27,7 @@ const PRIORITIES = [
   {id: PRIORITIES_HIGH, name: '重要度（高）優先度（高）'}
 ];
 
+const PRIORITY_LEVELS = PRIORITIES.map((p) => {return p.id;});
 
 const BASE_FIELDS = [
   {model: 'note',
@@ -149,6 +150,12 @@ class BaseRequirementNode extends Node {
       return null;
     }
     return LAYER_COLOR[this.layer];
+  }
+
+  get priorityLevel() {
+    var numStar = PRIORITY_LEVELS.indexOf(this.priority) + 1;
+    var numEmpty = PRIORITY_LEVELS.length + 1 - numStar;
+    return Array(numStar).fill(true).concat(Array(numEmpty).fill(false));
   }
 }
 

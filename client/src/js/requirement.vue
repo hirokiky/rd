@@ -37,6 +37,11 @@
     <div class="inline">
       <!-- Not to show editing forms for root requirement -->
       <div class="box" :style="{'border-color': requirement.color}">
+        <div class="box-stars">
+          <i class="material-icons box-star"
+             v-for="isFilled in requirement.priorityLevel"
+             v-if="isFilled">star</i>
+        </div>
         <bodyedit :obj="requirement"
                   bodyAttr="body"
                   widget="textarea"></bodyedit>

@@ -103,6 +103,7 @@ ul.tree > li {
 /* box */
 
 .box {
+    position: relative;
     display: inline-flex;
 
     border: solid 2px #c7c7c7;
@@ -110,7 +111,7 @@ ul.tree > li {
 
     background-color: #fbfbfb;
 
-    padding: 12px;
+    padding: 16px 12px;
 }
 
 .box.positive {
@@ -121,6 +122,20 @@ ul.tree > li {
 .box.negative {
     border-color: #e68e8e;
     background-color: #fff3f3;
+}
+
+.box-stars {
+    position: absolute;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    top: 0;
+    right: 0;
+}
+
+.box-star {
+    font-size: 10px;
+    color: rgba(206, 42, 42, 0.67);
 }
 
 /* buttons */
