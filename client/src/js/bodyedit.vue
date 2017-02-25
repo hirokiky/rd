@@ -49,8 +49,15 @@
               @blur="end"
               @keydown.ctrl.enter="end">
     </textarea>
-    <span v-if="!isEditing"
+    <span class="body-text"
+          v-if="!isEditing"
           v-text="obj[bodyAttr]"
           @dblclick="edit"></span>
   </span>
 </template>
+
+<style scoped>
+  span.body-text {
+      white-space: pre-line;
+  }
+</style>
