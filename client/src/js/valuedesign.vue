@@ -71,7 +71,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   h2 {
     border-bottom: solid 2px;
     padding-bottom: 8px;
