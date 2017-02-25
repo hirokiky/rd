@@ -11299,7 +11299,7 @@
 	        domProps: {
 	          "value": null
 	        }
-	      }, [_vm._v("<unselected>")]), _vm._v(" "), _vm._l((_vm.purposes), function(purpose) {
+	      }, [_vm._v("<目的を選択>")]), _vm._v(" "), _vm._l((_vm.purposes), function(purpose) {
 	        return _c('option', {
 	          domProps: {
 	            "value": purpose,
