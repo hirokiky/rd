@@ -11280,7 +11280,9 @@
 	          "bodyAttr": "body",
 	          "widget": "textarea"
 	        }
-	      })], 1), _vm._v(" "), _c('modal-button', {
+	      })], 1), _vm._v(" "), _c('div', {
+	        staticClass: "action-buttons"
+	      }, [_c('modal-button', {
 	        attrs: {
 	          "model": value
 	        }
@@ -11293,7 +11295,7 @@
 	        }
 	      }, [_c('i', {
 	        staticClass: "material-icons"
-	      }, [_vm._v("delete")])]), _vm._v(" "), _c('select', [_c('option', {
+	      }, [_vm._v("delete")])])], 1), _vm._v(" "), _c('select', [_c('option', {
 	        domProps: {
 	          "value": null
 	        }
@@ -11310,7 +11312,7 @@
 	            }
 	          }
 	        })
-	      })], 2)], 1)])
+	      })], 2)])])
 	    }))])
 	  }))])
 	},staticRenderFns: []}

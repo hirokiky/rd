@@ -70,10 +70,12 @@
                           bodyAttr="body"
                           widget="textarea"></bodyedit>
               </div>
-              <modal-button :model="value"></modal-button>
-              <button class="btn" @click="stakeholder.removeValue(value)">
-                <i class="material-icons">delete</i>
-              </button>
+              <div class="action-buttons">
+                <modal-button :model="value"></modal-button>
+                <button class="btn" @click="stakeholder.removeValue(value)">
+                  <i class="material-icons">delete</i>
+                </button>
+              </div>
               <!-- If use v-model it will run JSON.stringify  -->
               <select>
                 <option :value="null">unselected</option>
