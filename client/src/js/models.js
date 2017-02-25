@@ -145,6 +145,15 @@ class BaseRequirementNode extends Node {
     return d;
   }
 
+  get colorLighter() {
+    var c = this.color;
+    if (c) {
+      return utils.colorLuminance(c, 0.8);
+    } else {
+      return null;
+    }
+  }
+
   get layerColor() {
     if (!this.layer) {
       return null;
@@ -160,10 +169,7 @@ class BaseRequirementNode extends Node {
 }
 
 class Requirement extends BaseRequirementNode {
-  get color() {
-    return null;
-  }
-
+  get color() {return null;}
   get modelVerboseName() {return '要求';}
 
   get schema() {
@@ -181,7 +187,7 @@ class Requirement extends BaseRequirementNode {
 
 class Vision extends BaseRequirementNode {
   get color() {
-    return 'rgb(107, 155, 239)';
+    return '#8989f1';
   }
 
 
@@ -200,7 +206,7 @@ class Vision extends BaseRequirementNode {
 
 class Concept extends BaseRequirementNode {
   get color() {
-    return 'rgb(80, 193, 218)';
+    return '#7de3e3';
   }
 
   get modelVerboseName() {return 'コンセプト';}
@@ -460,6 +466,14 @@ class Value {
   get color() {
     if (this.purpose) {
       return this.purpose.color;
+    } else {
+      return null;
+    }
+  }
+
+  get colorLighter() {
+    if (this.purpose) {
+      return this.purpose.colorLighter;
     } else {
       return null;
     }

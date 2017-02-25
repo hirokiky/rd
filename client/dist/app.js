@@ -7478,6 +7478,15 @@
 	    return d;
 	  }
 
+	  get colorLighter() {
+	    var c = this.color;
+	    if (c) {
+	      return utils.colorLuminance(c, 0.8);
+	    } else {
+	      return null;
+	    }
+	  }
+
 	  get layerColor() {
 	    if (!this.layer) {
 	      return null;
@@ -7493,10 +7502,7 @@
 	}
 
 	class Requirement extends BaseRequirementNode {
-	  get color() {
-	    return null;
-	  }
-
+	  get color() {return null;}
 	  get modelVerboseName() {return '要求';}
 
 	  get schema() {
@@ -7514,7 +7520,7 @@
 
 	class Vision extends BaseRequirementNode {
 	  get color() {
-	    return 'rgb(107, 155, 239)';
+	    return '#8989f1';
 	  }
 
 
@@ -7533,7 +7539,7 @@
 
 	class Concept extends BaseRequirementNode {
 	  get color() {
-	    return 'rgb(80, 193, 218)';
+	    return '#7de3e3';
 	  }
 
 	  get modelVerboseName() {return 'コンセプト';}
@@ -7798,6 +7804,14 @@
 	    }
 	  }
 
+	  get colorLighter() {
+	    if (this.purpose) {
+	      return this.purpose.colorLighter;
+	    } else {
+	      return null;
+	    }
+	  }
+
 	  get modelVerboseName() {return '価値';}
 
 	  get schema() {
@@ -7838,8 +7852,29 @@
 	  arr.splice(arr.indexOf(obj), 1);
 	}
 
+	function colorLuminance(hex, lum) {
+
+		// validate hex string
+		hex = String(hex).replace(/[^0-9a-f]/gi, '');
+		if (hex.length < 6) {
+			hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+		}
+		lum = lum || 0;
+
+		// convert to decimal and change luminosity
+		var rgb = "#", c, i;
+		for (i = 0; i < 3; i++) {
+			c = parseInt(hex.substr(i*2,2), 16);
+			c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+			rgb += ("00"+c).substr(c.length);
+		}
+
+		return rgb;
+	}
+
 	module.exports = {
-	  remove: remove
+	  remove: remove,
+	  colorLuminance: colorLuminance
 	};
 
 
@@ -11319,7 +11354,8 @@
 	    }, [_c('div', {
 	      staticClass: "box",
 	      style: ({
-	        'border-color': purpose.color
+	        'border-color': purpose.color,
+	        'background-color': purpose.colorLighter
 	      })
 	    }, [_c('bodyedit', {
 	      attrs: {
@@ -11386,7 +11422,8 @@
 	      }, [_c('div', {
 	        staticClass: "box",
 	        style: ({
-	          'border-color': value.color
+	          'border-color': value.color,
+	          'background-color': value.colorLighter
 	        })
 	      }, [_c('bodyedit', {
 	        attrs: {
@@ -11801,7 +11838,8 @@
 	  }, [_c('div', {
 	    staticClass: "box",
 	    style: ({
-	      'border-color': _vm.requirement.color
+	      'border-color': _vm.requirement.color,
+	      'background-color': _vm.requirement.colorLighter
 	    })
 	  }, [_c('div', {
 	    staticClass: "box-stars"

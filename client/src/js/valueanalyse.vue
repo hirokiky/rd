@@ -31,7 +31,8 @@
     <ul class="tree root">
       <li v-for="purpose in purposes">
         <div class="inline">
-          <div class="box" :style="{'border-color': purpose.color}">
+          <div class="box" :style="{'border-color': purpose.color,
+                                    'background-color': purpose.colorLighter}">
             <bodyedit :obj="purpose"
                       bodyAttr="body"
                       widget="textarea"></bodyedit>
@@ -65,7 +66,9 @@
         <ul class="tree">
           <li v-for="value in stakeholder.values">
             <div class="inline">
-              <div class="box" :style="{'border-color': value.color}">
+              <div class="box"
+                   :style="{'border-color': value.color,
+                            'background-color': value.colorLighter}">
                 <bodyedit :obj="value"
                           bodyAttr="body"
                           widget="textarea"></bodyedit>
