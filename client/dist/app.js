@@ -8322,7 +8322,7 @@
 
 	const router = new VueRouter({
 	  routes: [
-	    {path: '/stakeholders', component: __webpack_require__(29)},
+	    {path: '/', component: __webpack_require__(29)},
 	    {path: '/valueanalyse', component: __webpack_require__(35)},
 	    {path: '/valuedesign', component: __webpack_require__(38)},
 	    {path: '/requirements', component: __webpack_require__(43)},
@@ -12047,7 +12047,7 @@
 	    staticClass: "container"
 	  }, [_c('router-link', {
 	    attrs: {
-	      "to": "/stakeholders"
+	      "to": "/"
 	    }
 	  }, [_vm._v("ステークホルダー")]), _vm._v(" "), _c('router-link', {
 	    attrs: {

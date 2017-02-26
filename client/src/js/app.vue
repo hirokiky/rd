@@ -14,7 +14,7 @@
 
   const router = new VueRouter({
     routes: [
-      {path: '/stakeholders', component: require('./stakeholders.vue')},
+      {path: '/', component: require('./stakeholders.vue')},
       {path: '/valueanalyse', component: require('./valueanalyse.vue')},
       {path: '/valuedesign', component: require('./valuedesign.vue')},
       {path: '/requirements', component: require('./requirements.vue')},
@@ -28,7 +28,7 @@
   <div>
     <nav>
       <div class="container">
-        <router-link to="/stakeholders">ステークホルダー</router-link>
+        <router-link to="/">ステークホルダー</router-link>
         <router-link to="/valueanalyse">価値分析</router-link>
         <router-link to="/valuedesign">価値デザイン</router-link>
         <router-link to="/requirements">要求分析</router-link>
