@@ -6504,7 +6504,7 @@
 	      new models.Purpose('作図やモデリングに手間をかけない', '#fff77f')
 	    ],
 
-	    vision: new models.Vision("老獪とモダンの融合"),
+	    vision: new models.Vision("老練とモダンの融合"),
 	    concept1: new models.Concept("誰もが要求開発に参加できる"),
 	    concept2: new models.Concept("すぐに修正でき、ずっと使われ続ける要求開発"),
 	    concept3: new models.Concept("モダン・要求開発"),
