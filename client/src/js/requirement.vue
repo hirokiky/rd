@@ -50,10 +50,11 @@
       <div class="action-buttons">
         <modal-button :model="requirement"></modal-button>
 
+        <!-- Little bit copy pasted code -->
         <select v-model="selectedChild">
           <option :value="null">新しい要求</option>
           <option v-for="req in noParents"
-                  v-text="req.body"
+                  v-text="req.modelVerboseName + ': ' + req.body"
                   :value="req"></option>
         </select>
         <button class="btn" @click="addChildRequirement(requirement)">
@@ -78,7 +79,7 @@
     <select v-model="selectedChild">
       <option :value="null">新しい要求</option>
       <option v-for="req in noParents"
-              v-text="req.body"
+              v-text="req.modelVerboseName + ': ' + req.body"
               :value="req"></option>
     </select>
     <button class="btn" @click="addChildRequirement(requirement)">
