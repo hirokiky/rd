@@ -206,7 +206,7 @@ class Vision extends BaseRequirementNode {
 
 class Concept extends BaseRequirementNode {
   get color() {
-    return '#7de3e3';
+    return '#d69db1';
   }
 
   get modelVerboseName() {return 'コンセプト';}
