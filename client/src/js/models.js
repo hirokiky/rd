@@ -71,7 +71,7 @@ class Node {
   }
 
   addChild(child) {
-    this.children.push(child);
+    this.children.unshift(child);
     child.parent = this;
     return this;
   }
@@ -385,7 +385,7 @@ class Stakeholder extends Node {
   }
 
   addDemand(demand) {
-    this.demands.push(demand);
+    this.demands.unshift(demand);
     demand.stakeholder = this;
     return this;
   }
@@ -396,7 +396,7 @@ class Stakeholder extends Node {
 
   addValue(value) {
     value.stakeholder = this;
-    this.values.push(value);
+    this.values.unshift(value);
     return this;
   }
 

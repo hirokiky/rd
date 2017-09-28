@@ -15,14 +15,9 @@
       'modalEditing': function(value) {
         this.$nextTick(() => {
           if (value) {
-            let input = this.$refs.container.querySelector('input');
+            let input = this.$refs.container.querySelector('input, textarea');
             if (input) {
               input.focus();
-            } else {
-              let textarea = this.$refs.container.querySelector('textarea');
-              if (textarea) {
-                textarea.focus();
-              }
             }
           }
         });

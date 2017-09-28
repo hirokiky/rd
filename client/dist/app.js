@@ -6542,7 +6542,7 @@
 	  mutations: {
 	    addPurpose(state, purpose) {
 	      state.purposes.push(purpose);
-	      this.editOnModal(state, purpose);
+	      store.commit("editOnModal", purpose);
 	    },
 	    removePurpose(state, purpose) {
 	      utils.remove(state.purposes, purpose);
@@ -7419,7 +7419,7 @@
 	  }
 
 	  addChild(child) {
-	    this.children.push(child);
+	    this.children.unshift(child);
 	    child.parent = this;
 	    return this;
 	  }
@@ -7733,7 +7733,7 @@
 	  }
 
 	  addDemand(demand) {
-	    this.demands.push(demand);
+	    this.demands.unshift(demand);
 	    demand.stakeholder = this;
 	    return this;
 	  }
@@ -7744,7 +7744,7 @@
 
 	  addValue(value) {
 	    value.stakeholder = this;
-	    this.values.push(value);
+	    this.values.unshift(value);
 	    return this;
 	  }
 
@@ -10731,14 +10731,9 @@
 	    'modalEditing': function(value) {
 	      this.$nextTick(() => {
 	        if (value) {
-	          let input = this.$refs.container.querySelector('input');
+	          let input = this.$refs.container.querySelector('input, textarea');
 	          if (input) {
 	            input.focus();
-	          } else {
-	            let textarea = this.$refs.container.querySelector('textarea');
-	            if (textarea) {
-	              textarea.focus();
-	            }
 	          }
 	        }
 	      });
