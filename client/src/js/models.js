@@ -351,7 +351,7 @@ class Demand {
     return this.type == DEMAND_TYPE_NEGATIVE;
   }
 
-  get modelVerboseName() {return '要望';}
+  get modelVerboseName() {return '要望、痛み';}
 
   get schema() {
     return makeSchema([

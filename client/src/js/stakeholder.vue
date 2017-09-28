@@ -38,7 +38,7 @@
         <template v-if="stakeholder.hasParent()">
           <button class="btn" @click="addDemand">
             <i class="material-icons">add</i>
-            要望
+            要望・痛み
           </button>
           <modal-button :model="stakeholder"></modal-button>
           <button class="btn" @click="stakeholder.removeFromParent()">
