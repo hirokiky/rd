@@ -83,7 +83,7 @@ const store = new Vuex.Store({
   mutations: {
     addPurpose(state, purpose) {
       state.purposes.push(purpose);
-      state.bodyEditing = purpose;
+      this.editOnModal(state, purpose);
     },
     removePurpose(state, purpose) {
       utils.remove(state.purposes, purpose);

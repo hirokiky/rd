@@ -16,7 +16,7 @@
         if (this.selectedChild === null) {
           let req = new models.Requirement();
           requirement.addChild(req);
-          store.commit('editBody', req);
+          store.commit('editOnModal', req);
         } else {
           requirement.addChild(this.selectedChild);
           this.selectedChild = null;

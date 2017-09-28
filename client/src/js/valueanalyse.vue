@@ -17,7 +17,7 @@
       addValue(stakeholder) {
         let value = new models.Value();
         stakeholder.addValue(value);
-        store.commit('editBody', value);
+        store.commit('editOnModal', value);
       },
       removePurpose(purpose) {
         store.commit('removePurpose', purpose)

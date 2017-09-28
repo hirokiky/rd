@@ -11,12 +11,12 @@
       addChild() {
         let s = new models.Stakeholder('');
         this.stakeholder.addChild(s);
-        store.commit('editBody', s);
+        store.commit('editOnModal', s);
       },
       addDemand() {
         let d = new models.Demand('');
         this.stakeholder.addDemand(d);
-        store.commit('editBody', d);
+        store.commit('editOnModal', d);
       }
     }
   }

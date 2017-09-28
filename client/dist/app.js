@@ -6542,7 +6542,7 @@
 	  mutations: {
 	    addPurpose(state, purpose) {
 	      state.purposes.push(purpose);
-	      state.bodyEditing = purpose;
+	      this.editOnModal(state, purpose);
 	    },
 	    removePurpose(state, purpose) {
 	      utils.remove(state.purposes, purpose);
@@ -7699,7 +7699,7 @@
 	    return this.type == DEMAND_TYPE_NEGATIVE;
 	  }
 
-	  get modelVerboseName() {return '要望';}
+	  get modelVerboseName() {return '要望、痛み';}
 
 	  get schema() {
 	    return makeSchema([
@@ -10726,6 +10726,23 @@
 	    close() {
 	      store.commit('editOnModal', null);
 	    }
+	  },
+	  watch: {
+	    'modalEditing': function(value) {
+	      this.$nextTick(() => {
+	        if (value) {
+	          let input = this.$refs.container.querySelector('input');
+	          if (input) {
+	            input.focus();
+	          } else {
+	            let textarea = this.$refs.container.querySelector('textarea');
+	            if (textarea) {
+	              textarea.focus();
+	            }
+	          }
+	        }
+	      });
+	    }
 	  }
 	}
 
@@ -10748,6 +10765,7 @@
 	  }, [_c('div', {
 	    staticClass: "modal-inner"
 	  }, [_c('div', {
+	    ref: "container",
 	    staticClass: "modal-container"
 	  }, [_c('button', {
 	    staticClass: "btn modal-close",
@@ -10838,7 +10856,7 @@
 	    }
 	  }, [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("edit")])])
+	  }, [_vm._v("edit")]), _vm._v("編集する")])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -11161,12 +11179,12 @@
 	    addChild() {
 	      let s = new models.Stakeholder('');
 	      this.stakeholder.addChild(s);
-	      store.commit('editBody', s);
+	      store.commit('editOnModal', s);
 	    },
 	    addDemand() {
 	      let d = new models.Demand('');
 	      this.stakeholder.addDemand(d);
-	      store.commit('editBody', d);
+	      store.commit('editOnModal', d);
 	    }
 	  }
 	}
@@ -11205,7 +11223,7 @@
 	    }
 	  }, [_c('i', {
 	    staticClass: "material-icons"
-	  }, [_vm._v("add")]), _vm._v("\n          要望\n        ")]), _vm._v(" "), _c('modal-button', {
+	  }, [_vm._v("add")]), _vm._v("\n          要望・痛み\n        ")]), _vm._v(" "), _c('modal-button', {
 	    attrs: {
 	      "model": _vm.stakeholder
 	    }
@@ -11347,7 +11365,7 @@
 	    addValue(stakeholder) {
 	      let value = new models.Value();
 	      stakeholder.addValue(value);
-	      store.commit('editBody', value);
+	      store.commit('editOnModal', value);
 	    },
 	    removePurpose(purpose) {
 	      store.commit('removePurpose', purpose)
@@ -11907,7 +11925,7 @@
 	      if (this.selectedChild === null) {
 	        let req = new models.Requirement();
 	        requirement.addChild(req);
-	        store.commit('editBody', req);
+	        store.commit('editOnModal', req);
 	      } else {
 	        requirement.addChild(this.selectedChild);
 	        this.selectedChild = null;

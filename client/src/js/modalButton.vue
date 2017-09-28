@@ -12,5 +12,5 @@
 </script>
 
 <template>
-  <button class="btn" @click="open"><i class="material-icons">edit</i></button>
+  <button class="btn" @click="open"><i class="material-icons">edit</i>編集する</button>
 </template>
