@@ -10766,7 +10766,15 @@
 	    staticClass: "modal-inner"
 	  }, [_c('div', {
 	    ref: "container",
-	    staticClass: "modal-container"
+	    staticClass: "modal-container",
+	    on: {
+	      "keydown": function($event) {
+	        if (_vm._k($event.keyCode, "enter", 13)) { return; }
+	        if (!$event.ctrlKey) { return; }
+	        $event.stopPropagation();
+	        _vm.close($event)
+	      }
+	    }
 	  }, [_c('button', {
 	    staticClass: "btn modal-close",
 	    on: {

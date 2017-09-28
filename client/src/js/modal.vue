@@ -35,7 +35,9 @@
   <div class="modal" v-if="modalEditing">
     <div class="modal-mask" @click.self="close">
       <div class="modal-inner">
-        <div class="modal-container" ref="container">
+        <div class="modal-container"
+             ref="container"
+             @keydown.ctrl.enter.stop="close">
           <button class="btn modal-close" @click="close">
             <i class="material-icons">close</i>
           </button>
