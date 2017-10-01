@@ -6,6 +6,7 @@
 
  const Vue = require('vue');
 
+ const models = require('./models');
  const store = require('./store');
 
 
@@ -55,10 +56,43 @@
  }
 
 
+ const LAYER_WIDTH = 500;
+ const LAYER_HEIGHT = 800;
+ const LAYER_VERT_PADDING = 40;
+ const LAYER_HORI_PADDING = 100;
+
  module.exports = {
+   data() {
+     return {
+       draw: null
+     }
+   },
    methods: {
-     updateSVG() {
-       var draw = SVG('requirements').size(1500, 1000);
+     renderRequirement(requirement) {
+       var draw = this.draw;
+       if (!requirement.svg) {
+         requirement.svgGroup = draw.group();
+         requirement.svgRect = requirement.svgGroup.rect();
+         requirement.svgText = requirement.svgGroup.text(requirement.body);
+       }
+       requirement.svgGroup.move(120, 80);
+       requirement.svgGroup.draggy();
+       requirement.svgText.text(requirement.body).attr({x: 10, y: 0}).font({
+         'dominant-baseline': 'central'
+       });
+       var bbox = requirement.svgText.bbox();
+       requirement.svgRect.attr({
+         fill: requirement.colorLighter,
+         stroke: requirement.color,
+         width: bbox.width + 20,
+         height: bbox.height + 30
+       });
+     },
+     initialSVG() {
+       var draw = SVG('requirements').size(LAYER_HORI_PADDING * 2 + LAYER_WIDTH * 3,
+                                           LAYER_VERT_PADDING * 2 + LAYER_HEIGHT);
+       this.draw = draw;
+
        var links = draw.group();
        var markers = draw.group();
 
@@ -66,87 +100,64 @@
        var business = draw.group();
        var it = draw.group();
 
-       strategy.move(100, 40);
-       strategy.rect(350, 800)
+       // 戦略、業務、IT要求を作成
+       strategy.move(LAYER_HORI_PADDING, LAYER_VERT_PADDING);
+       strategy.rect(LAYER_WIDTH, LAYER_HEIGHT)
                .attr({fill: 'none', stroke: '#555'});
-       strategy.text("戦略要求").attr({x: 175}).font({anchor: 'middle'});
-       business.move(450, 40);
-       business.rect(350, 800)
+       strategy.text("戦略要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
+       business.move(100 + LAYER_WIDTH, LAYER_VERT_PADDING);
+       business.rect(LAYER_WIDTH, LAYER_HEIGHT)
                .attr({fill: 'none', stroke: '#555'});
-       business.text("業務要求").attr({x: 175}).font({anchor: 'middle'});
-       it.move(800, 40);
-       it.rect(350, 800)
+       business.text("業務要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
+       it.move(100 + LAYER_WIDTH * 2, LAYER_VERT_PADDING);
+       it.rect(LAYER_WIDTH, LAYER_HEIGHT)
          .attr({fill: 'none', stroke: '#555'});
-       it.text("IT要求").attr({x: 175}).font({anchor: 'middle'});
+       it.text("IT要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
 
-       var reqs = [];
+       // 各要求を作成
        for (var req of this.allRequirements) {
-         var reqGroup = draw.group();
-         reqGroup.move(120, (reqs.length + 1) * 80);
-         reqGroup.draggy();
-         var rect = reqGroup.rect();
-         var text = reqGroup.text(req.body).attr({x: 10, y: 0}).font({
-           'dominant-baseline': 'central'
-         });
-         var bbox = text.bbox();
-         rect.attr({
-           fill: req.colorLighter,
-           stroke: req.color,
-           width: bbox.width + 20,
-           height: bbox.height + 30
-         });
-         reqs.push(reqGroup);
+         this.renderRequirement(req);
        }
 
-       reqs[0].move(120, 340);
-       for (var reqGroup of reqs.slice(1)) {
-         reqGroup.move(300);
-         var con = reqs[0].connectable({
+       // 各要求のコネクションを作成
+       var req0 = this.allRequirements[0].svgGroup;
+       req0.move(120, 340);
+       i = 100;
+       for (var req of this.allRequirements.slice(1)) {
+         var reqGroup = req.svgGroup;
+         reqGroup.move(300, i);
+         var con = req0.connectable({
            container: links,
            markers: markers
          }, reqGroup);
          con.setLineColor("#5D4037");
          con.computeLineCoordinates = myLineCoordinates;
          con.update();
+         i += 80;
        }
      },
+     addRequirement() {
+       var req = new models.Requirement("");
+       store.commit('addRequirement', req);
+       this.renderRequirement(req);
+     }
    },
    computed: {
      requirements() {return store.state.requirements;},
      allRequirements() {return store.getters.allRequirements;}
    },
    mounted() {
-     this.updateSVG();
+     this.initialSVG();
    }
  }
 </script>
 
 <template>
-  <div id="requirements">
+  <div>
+    <div>
+      <button @click="addRequirement">要求を追加</button>
+    </div>
+    <div id="requirements">
+    </div>
   </div>
-  <!--
-  <svg width="1500" height="800" viewBox="0 0 1500 800"
-    xmlns="http://www.w3.org/2000/svg">
-    <g transform="translate(30, 30)">
-      <g>
-        <rect width="380" height="200" fill="none" stroke="blue"/>
-      </g>
-      <g transform="translate(400)">
-        <rect width="380" height="200" fill="none" stroke="blue"/>
-
-        <rect x="20" y="10" width="140" height="60" fill="green"/>
-        <text>テスト</text>
-
-        <rect x="180" y="10" width="140" height="60" fill="green"/>
-        <text>テスト</text>
-
-        <line x1="160" y1="40" x2="180" y2="40"
-          stroke-width="2" stroke="black"/>
-      </g>
-      <g transform="translate(800)">
-        <rect width="380" height="200" fill="none" stroke="blue"/>
-      </g>
-    </g>
-  </svg>
-  -->
 </template>

@@ -80,6 +80,10 @@ const store = new Vuex.Store({
       // Removing from requirement tree;
       state.rootRequirement.searchAndPurge(purpose);
     },
+    addRequirement(state, requirement) {
+      state.requirements.push(requirement);
+      store.commit("editOnModal", requirement);
+    },
     editBody(state, obj) {
       state.bodyEditing = obj;
     },

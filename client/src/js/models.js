@@ -151,7 +151,7 @@ class BaseRequirementNode extends Node {
 }
 
 class Requirement extends BaseRequirementNode {
-  get color() {return null;}
+  get color() {return '#888';}
   get modelVerboseName() {return '要求';}
 
   get schema() {

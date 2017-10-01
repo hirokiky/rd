@@ -7882,6 +7882,10 @@
 	      // Removing from requirement tree;
 	      state.rootRequirement.searchAndPurge(purpose);
 	    },
+	    addRequirement(state, requirement) {
+	      state.requirements.push(requirement);
+	      store.commit("editOnModal", requirement);
+	    },
 	    editBody(state, obj) {
 	      state.bodyEditing = obj;
 	    },
@@ -8958,7 +8962,7 @@
 	}
 
 	class Requirement extends BaseRequirementNode {
-	  get color() {return null;}
+	  get color() {return '#888';}
 	  get modelVerboseName() {return '要求';}
 
 	  get schema() {
@@ -13521,6 +13525,7 @@
 
 	const Vue = __webpack_require__(1);
 
+	const models = __webpack_require__(5);
 	const store = __webpack_require__(3);
 
 
@@ -13570,10 +13575,43 @@
 	}
 
 
+	const LAYER_WIDTH = 500;
+	const LAYER_HEIGHT = 800;
+	const LAYER_VERT_PADDING = 40;
+	const LAYER_HORI_PADDING = 100;
+
 	module.exports = {
+	  data() {
+	    return {
+	      draw: null
+	    }
+	  },
 	  methods: {
-	    updateSVG() {
-	      var draw = SVG('requirements').size(1500, 1000);
+	    renderRequirement(requirement) {
+	      var draw = this.draw;
+	      if (!requirement.svg) {
+	        requirement.svgGroup = draw.group();
+	        requirement.svgRect = requirement.svgGroup.rect();
+	        requirement.svgText = requirement.svgGroup.text(requirement.body);
+	      }
+	      requirement.svgGroup.move(120, 80);
+	      requirement.svgGroup.draggy();
+	      requirement.svgText.text(requirement.body).attr({x: 10, y: 0}).font({
+	        'dominant-baseline': 'central'
+	      });
+	      var bbox = requirement.svgText.bbox();
+	      requirement.svgRect.attr({
+	        fill: requirement.colorLighter,
+	        stroke: requirement.color,
+	        width: bbox.width + 20,
+	        height: bbox.height + 30
+	      });
+	    },
+	    initialSVG() {
+	      var draw = SVG('requirements').size(LAYER_HORI_PADDING * 2 + LAYER_WIDTH * 3,
+	                                          LAYER_VERT_PADDING * 2 + LAYER_HEIGHT);
+	      this.draw = draw;
+
 	      var links = draw.group();
 	      var markers = draw.group();
 
@@ -13581,57 +13619,54 @@
 	      var business = draw.group();
 	      var it = draw.group();
 
-	      strategy.move(100, 40);
-	      strategy.rect(350, 800)
+	      // 戦略、業務、IT要求を作成
+	      strategy.move(LAYER_HORI_PADDING, LAYER_VERT_PADDING);
+	      strategy.rect(LAYER_WIDTH, LAYER_HEIGHT)
 	              .attr({fill: 'none', stroke: '#555'});
-	      strategy.text("戦略要求").attr({x: 175}).font({anchor: 'middle'});
-	      business.move(450, 40);
-	      business.rect(350, 800)
+	      strategy.text("戦略要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
+	      business.move(100 + LAYER_WIDTH, LAYER_VERT_PADDING);
+	      business.rect(LAYER_WIDTH, LAYER_HEIGHT)
 	              .attr({fill: 'none', stroke: '#555'});
-	      business.text("業務要求").attr({x: 175}).font({anchor: 'middle'});
-	      it.move(800, 40);
-	      it.rect(350, 800)
+	      business.text("業務要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
+	      it.move(100 + LAYER_WIDTH * 2, LAYER_VERT_PADDING);
+	      it.rect(LAYER_WIDTH, LAYER_HEIGHT)
 	        .attr({fill: 'none', stroke: '#555'});
-	      it.text("IT要求").attr({x: 175}).font({anchor: 'middle'});
+	      it.text("IT要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
 
-	      var reqs = [];
+	      // 各要求を作成
 	      for (var req of this.allRequirements) {
-	        var reqGroup = draw.group();
-	        reqGroup.move(120, (reqs.length + 1) * 80);
-	        reqGroup.draggy();
-	        var rect = reqGroup.rect();
-	        var text = reqGroup.text(req.body).attr({x: 10, y: 0}).font({
-	          'dominant-baseline': 'central'
-	        });
-	        var bbox = text.bbox();
-	        rect.attr({
-	          fill: req.colorLighter,
-	          stroke: req.color,
-	          width: bbox.width + 20,
-	          height: bbox.height + 30
-	        });
-	        reqs.push(reqGroup);
+	        this.renderRequirement(req);
 	      }
 
-	      reqs[0].move(120, 340);
-	      for (var reqGroup of reqs.slice(1)) {
-	        reqGroup.move(300);
-	        var con = reqs[0].connectable({
+	      // 各要求のコネクションを作成
+	      var req0 = this.allRequirements[0].svgGroup;
+	      req0.move(120, 340);
+	      i = 100;
+	      for (var req of this.allRequirements.slice(1)) {
+	        var reqGroup = req.svgGroup;
+	        reqGroup.move(300, i);
+	        var con = req0.connectable({
 	          container: links,
 	          markers: markers
 	        }, reqGroup);
 	        con.setLineColor("#5D4037");
 	        con.computeLineCoordinates = myLineCoordinates;
 	        con.update();
+	        i += 80;
 	      }
 	    },
+	    addRequirement() {
+	      var req = new models.Requirement("");
+	      store.commit('addRequirement', req);
+	      this.renderRequirement(req);
+	    }
 	  },
 	  computed: {
 	    requirements() {return store.state.requirements;},
 	    allRequirements() {return store.getters.allRequirements;}
 	  },
 	  mounted() {
-	    this.updateSVG();
+	    this.initialSVG();
 	  }
 	}
 
@@ -13641,11 +13676,15 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
+	  return _c('div', [_c('div', [_c('button', {
+	    on: {
+	      "click": _vm.addRequirement
+	    }
+	  }, [_vm._v("要求を追加")])]), _vm._v(" "), _c('div', {
 	    attrs: {
 	      "id": "requirements"
 	    }
-	  })
+	  })])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
