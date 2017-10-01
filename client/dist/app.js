@@ -9351,7 +9351,7 @@
 	  /* script */
 	  __webpack_require__(14),
 	  /* template */
-	  __webpack_require__(57),
+	  __webpack_require__(47),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -13483,7 +13483,7 @@
 	  /* script */
 	  __webpack_require__(45),
 	  /* template */
-	  __webpack_require__(56),
+	  __webpack_require__(46),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -13514,13 +13514,61 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	const SVG = __webpack_require__(46);
-	__webpack_require__(47);
-	__webpack_require__(48);
+	const SVG = __webpack_require__(48);
+	__webpack_require__(49);
+	__webpack_require__(50);
+	const IterateObject = __webpack_require__(57);
 
 	const Vue = __webpack_require__(1);
 
 	const store = __webpack_require__(3);
+
+
+	// My Own computeLineCoordinates
+	// which connects box 'tail' and box head,
+	// not 'centors'.
+	// https://github.com/jillix/svg.connectable.js/blob/4c6827021e1ff9c492e93ced74fadc315b70cbc0/lib/index.js#L116
+	var myLineCoordinates = function (cons) {
+
+	  var output = []
+	    , l = cons.length
+	  ;
+
+	  IterateObject(cons, function (con, i) {
+
+	    var sT = con.source.transform()
+	      , tT = con.target.transform()
+	      , sB = con.source.bbox()
+	      , tB = con.target.bbox()
+	      , x1 = sT.x + sB.width
+	      , y1 = sT.y + sB.height / 2
+	      , x2 = tT.x - 2  // minus 3px for showing arrow heads
+	      , y2 = tT.y + tB.height / 2
+	      , cx = (x1 + x2) / 2
+	      , cy = (y1 + y2) / 2
+	      , dx = Math.abs((x1 - x2) / 2)
+	      , dy = Math.abs((y1 - y2) / 2)
+	      , dd = null
+	      , out = {
+	        x1: x1
+	        , y1: y1
+	        , x2: x2
+	        , y2: y2
+	        , ex: x1
+	        , ey: y1
+	      }
+	    ;
+
+	    if (i !== (l - 1) / 2) {
+	      dd = Math.sqrt(dx * dx + dy * dy);
+	      out.ex = cx + dy / dd * options.k * (i - (l - 1) / 2);
+	      out.ey = cy - dx / dd * options.k * (i - (l - 1) / 2);
+	    }
+	    output.push(out);
+	  });
+	  return output;
+	}
+
 
 	module.exports = {
 	  methods: {
@@ -13568,12 +13616,15 @@
 	      reqs[0].move(120, 340);
 	      for (var reqGroup of reqs.slice(1)) {
 	        reqGroup.move(300);
-	        reqs[0].connectable({
+	        var con = reqs[0].connectable({
 	          container: links,
-	          markers: markers,
-	        }, reqGroup).setLineColor("#5D4037");
+	          markers: markers
+	        }, reqGroup);
+	        con.setLineColor("#5D4037");
+	        con.computeLineCoordinates = myLineCoordinates;
+	        con.update();
 	      }
-	    }
+	    },
 	  },
 	  computed: {
 	    requirements() {return store.state.requirements;},
@@ -13587,6 +13638,58 @@
 
 /***/ }),
 /* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    attrs: {
+	      "id": "requirements"
+	    }
+	  })
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-50ecc496", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('nav', [_c('div', {
+	    staticClass: "container"
+	  }, [_c('router-link', {
+	    attrs: {
+	      "to": "/"
+	    }
+	  }, [_vm._v("ステークホルダー")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valueanalyse"
+	    }
+	  }, [_vm._v("価値分析")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valuedesign"
+	    }
+	  }, [_vm._v("価値デザイン")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/requirements"
+	    }
+	  }, [_vm._v("要求分析")])], 1)]), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('modal')], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-f01fa9e8", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -19143,7 +19246,7 @@
 	}));
 
 /***/ }),
-/* 47 */
+/* 49 */
 /***/ (function(module, exports) {
 
 	(function() {
@@ -19396,14 +19499,14 @@
 
 
 /***/ }),
-/* 48 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Dependencies
-	var Id = __webpack_require__(49)
-	  , SetOrGet = __webpack_require__(50)
-	  , IterateObject = __webpack_require__(55)
-	  , Deffy = __webpack_require__(51)
+	var Id = __webpack_require__(51)
+	  , SetOrGet = __webpack_require__(52)
+	  , IterateObject = __webpack_require__(57)
+	  , Deffy = __webpack_require__(53)
 	  ;
 
 	// Internal cache
@@ -19748,7 +19851,7 @@
 
 
 /***/ }),
-/* 49 */
+/* 51 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -19770,13 +19873,13 @@
 	module.exports = Idy;
 
 /***/ }),
-/* 50 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	// Dependencies
-	var Deffy = __webpack_require__(51);
+	var Deffy = __webpack_require__(53);
 
 	/**
 	 * SetOrGet
@@ -19796,11 +19899,11 @@
 	module.exports = SetOrGet;
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Dependencies
-	var Typpy = __webpack_require__(52);
+	var Typpy = __webpack_require__(54);
 
 	/**
 	 * Deffy
@@ -19849,12 +19952,12 @@
 
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	__webpack_require__(53);
+	__webpack_require__(55);
 
 	/**
 	 * Typpy
@@ -19940,12 +20043,12 @@
 	module.exports = Typpy;
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var noop6 = __webpack_require__(54);
+	var noop6 = __webpack_require__(56);
 
 	(function () {
 	    var NAME_FIELD = "name";
@@ -19979,7 +20082,7 @@
 	};
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -19987,7 +20090,7 @@
 	module.exports = function () {};
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports) {
 
 	/**
@@ -20023,58 +20126,6 @@
 
 	module.exports = iterateObject;
 
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', {
-	    attrs: {
-	      "id": "requirements"
-	    }
-	  })
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-50ecc496", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('nav', [_c('div', {
-	    staticClass: "container"
-	  }, [_c('router-link', {
-	    attrs: {
-	      "to": "/"
-	    }
-	  }, [_vm._v("ステークホルダー")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/valueanalyse"
-	    }
-	  }, [_vm._v("価値分析")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/valuedesign"
-	    }
-	  }, [_vm._v("価値デザイン")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/requirements"
-	    }
-	  }, [_vm._v("要求分析")])], 1)]), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('modal')], 1)
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-f01fa9e8", module.exports)
-	  }
-	}
 
 /***/ })
 /******/ ]);

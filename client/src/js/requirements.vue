@@ -2,10 +2,58 @@
  const SVG = require('svg.js');
  require('svg.draggy.js');
  require('svg.connectable.js');
+ const IterateObject = require("iterate-object");
 
  const Vue = require('vue');
 
  const store = require('./store');
+
+
+ // My Own computeLineCoordinates
+ // which connects box 'tail' and box head,
+ // not 'centors'.
+ // https://github.com/jillix/svg.connectable.js/blob/4c6827021e1ff9c492e93ced74fadc315b70cbc0/lib/index.js#L116
+ var myLineCoordinates = function (cons) {
+
+   var output = []
+     , l = cons.length
+   ;
+
+   IterateObject(cons, function (con, i) {
+
+     var sT = con.source.transform()
+       , tT = con.target.transform()
+       , sB = con.source.bbox()
+       , tB = con.target.bbox()
+       , x1 = sT.x + sB.width
+       , y1 = sT.y + sB.height / 2
+       , x2 = tT.x - 2  // minus 3px for showing arrow heads
+       , y2 = tT.y + tB.height / 2
+       , cx = (x1 + x2) / 2
+       , cy = (y1 + y2) / 2
+       , dx = Math.abs((x1 - x2) / 2)
+       , dy = Math.abs((y1 - y2) / 2)
+       , dd = null
+       , out = {
+         x1: x1
+         , y1: y1
+         , x2: x2
+         , y2: y2
+         , ex: x1
+         , ey: y1
+       }
+     ;
+
+     if (i !== (l - 1) / 2) {
+       dd = Math.sqrt(dx * dx + dy * dy);
+       out.ex = cx + dy / dd * options.k * (i - (l - 1) / 2);
+       out.ey = cy - dx / dd * options.k * (i - (l - 1) / 2);
+     }
+     output.push(out);
+   });
+   return output;
+ }
+
 
  module.exports = {
    methods: {
@@ -53,12 +101,15 @@
        reqs[0].move(120, 340);
        for (var reqGroup of reqs.slice(1)) {
          reqGroup.move(300);
-         reqs[0].connectable({
+         var con = reqs[0].connectable({
            container: links,
-           markers: markers,
-         }, reqGroup).setLineColor("#5D4037");
+           markers: markers
+         }, reqGroup);
+         con.setLineColor("#5D4037");
+         con.computeLineCoordinates = myLineCoordinates;
+         con.update();
        }
-     }
+     },
    },
    computed: {
      requirements() {return store.state.requirements;},
