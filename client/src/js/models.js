@@ -1,20 +1,5 @@
 const utils = require('./utils');
 
-const LAYER_STRATEGY = 'strategy';
-const LAYER_BUSINESS = 'business';
-const LAYER_IT = 'it';
-
-const LAYERS = [
-  {id: LAYER_STRATEGY, name: '戦略要求'},
-  {id: LAYER_BUSINESS, name: '業務要求'},
-  {id: LAYER_IT, name: 'IT要求'}
-];
-
-const LAYER_COLOR = {};
-LAYER_COLOR[LAYER_STRATEGY] = 'rgb(244, 235, 255)';
-LAYER_COLOR[LAYER_BUSINESS] = 'rgb(235, 220, 253)';
-LAYER_COLOR[LAYER_IT] = 'rgb(203, 170, 243)';
-
 const PRIORITIES_LOW = 'low';
 const PRIORITIES_MIDDLE = 'middle';
 const PRIORITIES_HIGH_MIDDLE = 'high_middle';
@@ -36,10 +21,6 @@ const BASE_FIELDS = [
 ];
 
 const REQUIREMENT_FIELDS = [
-  {model: 'layer',
-   type: 'select',
-   label: '要求レイヤー',
-   values: LAYERS},
   {model: 'priority',
    type: 'select',
    label: '優先度',
@@ -160,13 +141,6 @@ class BaseRequirementNode extends Node {
     } else {
       return null;
     }
-  }
-
-  get layerColor() {
-    if (!this.layer) {
-      return null;
-    }
-    return LAYER_COLOR[this.layer];
   }
 
   get priorityLevel() {
@@ -450,8 +424,14 @@ class Purpose extends BaseRequirementNode {
       },
       {
         model: "color",
-        type: "color",
+        type: "select",
         label: "色",
+        values: [
+          {id: '#888', name: '灰色'},
+          {id: '#ff7f7f', name: '赤'},
+          {id: '#7fff7f', name: '緑'},
+          {id: '#7f7fff', name: '青'},
+        ],
         default: "#888"
       }
     ].concat(REQUIREMENT_FIELDS));
@@ -501,7 +481,6 @@ class Value {
 }
 
 module.exports = {
-  LAYERS: LAYERS,
   PRIORITIES: PRIORITIES,
   BaseRequirementModel: BaseRequirementNode,
   Requirement: Requirement,
