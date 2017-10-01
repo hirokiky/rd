@@ -31,28 +31,38 @@
          .attr({fill: 'none', stroke: '#555'});
        it.text("IT要求").attr({x: 175}).font({anchor: 'middle'});
 
-       var req1 = draw.group();
-       req1.move(10, 10);
-       req1.draggy();
-       req1.rect(140, 40).attr({fill: '#0fa', stroke: 'green'});
-       req1.text("要求1").attr({x: 70, y: 0}).font({anchor: 'middle', 'dominant-baseline': 'central'});
+       var reqs = [];
+       for (var req of this.allRequirements) {
+         var reqGroup = draw.group();
+         reqGroup.move(120, (reqs.length + 1) * 80);
+         reqGroup.draggy();
+         var rect = reqGroup.rect();
+         var text = reqGroup.text(req.body).attr({x: 10, y: 0}).font({
+           'dominant-baseline': 'central'
+         });
+         var bbox = text.bbox();
+         rect.attr({
+           fill: req.colorLighter,
+           stroke: req.color,
+           width: bbox.width + 20,
+           height: bbox.height + 30
+         });
+         reqs.push(reqGroup);
+       }
 
-       var req2 = draw.group();
-       req2.move(160, 80);
-       req2.draggy();
-       req2.rect(140, 40).attr({fill: '#0fa', stroke: 'green'});
-       req2.text("要求2").attr({x: 70, y: 0}).font({anchor: 'middle', 'dominant-baseline': 'central'});
-
-       req1.connectable({
-         container: links,
-         markers: markers,
-       }, req2).setLineColor("#5D4037");
+       reqs[0].move(120, 340);
+       for (var reqGroup of reqs.slice(1)) {
+         reqGroup.move(300);
+         reqs[0].connectable({
+           container: links,
+           markers: markers,
+         }, reqGroup).setLineColor("#5D4037");
+       }
      }
    },
    computed: {
-     requirements() {
-       return store.state.requirements
-     }
+     requirements() {return store.state.requirements;},
+     allRequirements() {return store.getters.allRequirements;}
    },
    mounted() {
      this.updateSVG();

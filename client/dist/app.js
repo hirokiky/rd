@@ -7843,8 +7843,8 @@
 
 	    purposes: [
 	      new models.Purpose('要求開発を広める', '#ff7f7f'),
-	      new models.Purpose('誰でも編集、参加できる、属人化しない。', '#76fca8'),
-	      new models.Purpose('作図やモデリングに手間をかけない', '#fff77f')
+	      new models.Purpose('誰でも編集、参加できる、属人化しない。', '#7fff7f'),
+	      new models.Purpose('作図やモデリングに手間をかけない', '#7f7fff')
 	    ],
 
 	    vision: new models.Vision("老練とモダンの融合"),
@@ -7856,30 +7856,20 @@
 	    story: new models.Story("ストーリー"),
 	    design: new models.Design(),
 
-	    // Just empty requirement to bundle top level requiremnts.
+	    reqPaths: [],
 	    requirements: [],
 
 	    showModal: false,
 	    modalEditing: null
 	  },
 	  getters: {
-	    noParents(state) {
-	      let l = [];
-	      function add(r) {
-	        if (!r.hasParent() && r !== state.rootRequirement) {
-	          l.push(r);
-	        }
-	      }
-	      state.purposes.forEach((p) => {
-	        add(p);
-	      });
-	      add(state.vision);
-	      add(state.concept1);
-	      add(state.concept2);
-	      add(state.concept3);
-
-	      state.rootRequirement.flatten().forEach((req) => { add(req); });
-	      return l;
+	    allRequirements(state) {
+	      return [
+	        state.vision,
+	        state.concept1,
+	        state.concept2,
+	        state.concept3,
+	      ].concat(state.purposes).concat(state.requirements);
 	    }
 	  },
 	  mutations: {
@@ -8817,21 +8807,6 @@
 
 	const utils = __webpack_require__(6);
 
-	const LAYER_STRATEGY = 'strategy';
-	const LAYER_BUSINESS = 'business';
-	const LAYER_IT = 'it';
-
-	const LAYERS = [
-	  {id: LAYER_STRATEGY, name: '戦略要求'},
-	  {id: LAYER_BUSINESS, name: '業務要求'},
-	  {id: LAYER_IT, name: 'IT要求'}
-	];
-
-	const LAYER_COLOR = {};
-	LAYER_COLOR[LAYER_STRATEGY] = 'rgb(244, 235, 255)';
-	LAYER_COLOR[LAYER_BUSINESS] = 'rgb(235, 220, 253)';
-	LAYER_COLOR[LAYER_IT] = 'rgb(203, 170, 243)';
-
 	const PRIORITIES_LOW = 'low';
 	const PRIORITIES_MIDDLE = 'middle';
 	const PRIORITIES_HIGH_MIDDLE = 'high_middle';
@@ -8853,10 +8828,6 @@
 	];
 
 	const REQUIREMENT_FIELDS = [
-	  {model: 'layer',
-	   type: 'select',
-	   label: '要求レイヤー',
-	   values: LAYERS},
 	  {model: 'priority',
 	   type: 'select',
 	   label: '優先度',
@@ -8977,13 +8948,6 @@
 	    } else {
 	      return null;
 	    }
-	  }
-
-	  get layerColor() {
-	    if (!this.layer) {
-	      return null;
-	    }
-	    return LAYER_COLOR[this.layer];
 	  }
 
 	  get priorityLevel() {
@@ -9267,8 +9231,14 @@
 	      },
 	      {
 	        model: "color",
-	        type: "color",
+	        type: "select",
 	        label: "色",
+	        values: [
+	          {id: '#888', name: '灰色'},
+	          {id: '#ff7f7f', name: '赤'},
+	          {id: '#7fff7f', name: '緑'},
+	          {id: '#7f7fff', name: '青'},
+	        ],
 	        default: "#888"
 	      }
 	    ].concat(REQUIREMENT_FIELDS));
@@ -9318,7 +9288,6 @@
 	}
 
 	module.exports = {
-	  LAYERS: LAYERS,
 	  PRIORITIES: PRIORITIES,
 	  BaseRequirementModel: BaseRequirementNode,
 	  Requirement: Requirement,
@@ -13577,28 +13546,38 @@
 	        .attr({fill: 'none', stroke: '#555'});
 	      it.text("IT要求").attr({x: 175}).font({anchor: 'middle'});
 
-	      var req1 = draw.group();
-	      req1.move(10, 10);
-	      req1.draggy();
-	      req1.rect(140, 40).attr({fill: '#0fa', stroke: 'green'});
-	      req1.text("要求1").attr({x: 70, y: 0}).font({anchor: 'middle', 'dominant-baseline': 'central'});
+	      var reqs = [];
+	      for (var req of this.allRequirements) {
+	        var reqGroup = draw.group();
+	        reqGroup.move(120, (reqs.length + 1) * 80);
+	        reqGroup.draggy();
+	        var rect = reqGroup.rect();
+	        var text = reqGroup.text(req.body).attr({x: 10, y: 0}).font({
+	          'dominant-baseline': 'central'
+	        });
+	        var bbox = text.bbox();
+	        rect.attr({
+	          fill: req.colorLighter,
+	          stroke: req.color,
+	          width: bbox.width + 20,
+	          height: bbox.height + 30
+	        });
+	        reqs.push(reqGroup);
+	      }
 
-	      var req2 = draw.group();
-	      req2.move(160, 80);
-	      req2.draggy();
-	      req2.rect(140, 40).attr({fill: '#0fa', stroke: 'green'});
-	      req2.text("要求2").attr({x: 70, y: 0}).font({anchor: 'middle', 'dominant-baseline': 'central'});
-
-	      req1.connectable({
-	        container: links,
-	        markers: markers,
-	      }, req2).setLineColor("#5D4037");
+	      reqs[0].move(120, 340);
+	      for (var reqGroup of reqs.slice(1)) {
+	        reqGroup.move(300);
+	        reqs[0].connectable({
+	          container: links,
+	          markers: markers,
+	        }, reqGroup).setLineColor("#5D4037");
+	      }
 	    }
 	  },
 	  computed: {
-	    requirements() {
-	      return store.state.requirements
-	    }
+	    requirements() {return store.state.requirements;},
+	    allRequirements() {return store.getters.allRequirements;}
 	  },
 	  mounted() {
 	    this.updateSVG();

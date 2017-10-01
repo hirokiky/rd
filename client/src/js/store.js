@@ -41,8 +41,8 @@ const store = new Vuex.Store({
 
     purposes: [
       new models.Purpose('要求開発を広める', '#ff7f7f'),
-      new models.Purpose('誰でも編集、参加できる、属人化しない。', '#76fca8'),
-      new models.Purpose('作図やモデリングに手間をかけない', '#fff77f')
+      new models.Purpose('誰でも編集、参加できる、属人化しない。', '#7fff7f'),
+      new models.Purpose('作図やモデリングに手間をかけない', '#7f7fff')
     ],
 
     vision: new models.Vision("老練とモダンの融合"),
@@ -54,30 +54,20 @@ const store = new Vuex.Store({
     story: new models.Story("ストーリー"),
     design: new models.Design(),
 
-    // Just empty requirement to bundle top level requiremnts.
+    reqPaths: [],
     requirements: [],
 
     showModal: false,
     modalEditing: null
   },
   getters: {
-    noParents(state) {
-      let l = [];
-      function add(r) {
-        if (!r.hasParent() && r !== state.rootRequirement) {
-          l.push(r);
-        }
-      }
-      state.purposes.forEach((p) => {
-        add(p);
-      });
-      add(state.vision);
-      add(state.concept1);
-      add(state.concept2);
-      add(state.concept3);
-
-      state.rootRequirement.flatten().forEach((req) => { add(req); });
-      return l;
+    allRequirements(state) {
+      return [
+        state.vision,
+        state.concept1,
+        state.concept2,
+        state.concept3,
+      ].concat(state.purposes).concat(state.requirements);
     }
   },
   mutations: {
