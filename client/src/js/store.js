@@ -55,7 +55,7 @@ const store = new Vuex.Store({
     design: new models.Design(),
 
     // Just empty requirement to bundle top level requiremnts.
-    rootRequirement: new models.Requirement(),
+    requirements: [],
 
     showModal: false,
     modalEditing: null
@@ -101,17 +101,5 @@ const store = new Vuex.Store({
     }
   }
 });
-
-store.state.rootRequirement.addChild(
-  store.state.vision
-    .addChild(
-      store.state.concept1
-        // .addChild(new models.Requirement('オンラインで使える'))
-        // .addChild(new models.Requirement('ユーザー管理'))
-        // .addChild(new models.Requirement('直感的なUI'))
-    )
-    .addChild(store.state.concept2)
-    .addChild(store.state.concept3)
-);
 
 module.exports = store;

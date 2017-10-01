@@ -14,7 +14,9 @@
 </script>
 
 <template>
-  <ul class="tree root">
-    <stakeholder :stakeholder="stakeholder"></stakeholder>
-  </ul>
+  <div class="container">
+    <ul class="tree root">
+      <stakeholder :stakeholder="stakeholder"></stakeholder>
+    </ul>
+  </div>
 </template>

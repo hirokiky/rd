@@ -55,6 +55,14 @@ function makeSchema(fields) {
 }
 
 
+class Path {
+  constructor() {
+    this.parent = null;
+    this.child = null;
+  }
+}
+
+
 class Node {
   constructor() {
     this.parent = null;

@@ -11,11 +11,14 @@
   "devDependencies": {
     "css-loader": "^0.26.1",
     "vue-loader": "^10.1.2",
-    "vue-template-compiler": "^2.1.10",
+    "vue-template-compiler": "^2.4.4",
     "webpack": "^1.14.0"
   },
   "dependencies": {
-    "vue": "^2.1.10",
+    "svg.connectable.js": "^2.0.0",
+    "svg.draggy.js": "^1.1.1",
+    "svg.js": "^2.6.3",
+    "vue": "^2.4.4",
     "vue-form-generator": "^2.0.0-beta4",
     "vue-router": "^2.2.0",
     "vuex": "^2.1.1"

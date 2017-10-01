@@ -34,10 +34,7 @@
         <router-link to="/requirements">要求分析</router-link>
       </div>
     </nav>
-    <div class="container">
-      <router-view></router-view>
-    </div>
-
+    <router-view></router-view>
     <modal></modal>
   </div>
 </template>

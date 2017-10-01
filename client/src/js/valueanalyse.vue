@@ -27,7 +27,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <ul class="tree root">
       <li v-for="purpose in purposes">
         <div class="inline">

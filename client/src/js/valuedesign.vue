@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <h2 :style="{'border-color': vision.color}">ビジョン</h2>
     <p>
       <bodyedit :obj="vision"
@@ -71,6 +71,7 @@
                       bodyAttr="body"
                       widget="textarea"></bodyedit>
             <modal-button :model="catchcopy"></modal-button>
+          </p>
         </div>
       </div>
 
