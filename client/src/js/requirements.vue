@@ -67,27 +67,57 @@
        draw: null
      }
    },
-   methods: {
-     renderRequirement(requirement) {
-       var draw = this.draw;
-       if (!requirement.svg) {
-         requirement.svgGroup = draw.group();
-         requirement.svgRect = requirement.svgGroup.rect();
-         requirement.svgText = requirement.svgGroup.text(requirement.body);
+   components: {
+     'requirement': {
+       render() {
+         if (this.draw) {
+           this.renderRequirement(this.requirement);
+         }
+       },
+       props: ["draw", "requirement"],
+       methods: {
+         renderRequirement(requirement) {
+           var draw = this.draw;
+           if (!this.svgGroup) {
+             this.svgGroup = draw.group();
+             this.svgRect = this.svgGroup.rect();
+             this.svgText = this.svgGroup.text(requirement.body);
+             this.svgGroup.draggy();
+           }
+           this.svgGroup.move(120, 80);
+           this.svgText.text(requirement.body).attr({x: 10, y: 0}).font({
+             'dominant-baseline': 'central'
+           });
+           var bbox = this.svgText.bbox();
+           this.svgRect.attr({
+             fill: requirement.colorLighter,
+             stroke: requirement.color,
+             width: bbox.width + 20,
+             height: bbox.height + 30
+           });
+         },
+       },
+       watch: {
+         draw(val) {
+           // When initial rendering, there isn't this.draw,
+           // So watching it will be activated and render.
+           if (val) {
+             this.renderRequirement(this.requirement);
+           }
+         },
+         "requirement.body": function(val) {
+           this.svgText.text(val);
+         },
+         "requirement.color": function(val) {
+           this.svgRect.attr({
+             fill: requirement.colorLighter,
+             stroke: requirement.color,
+           });
+         }
        }
-       requirement.svgGroup.move(120, 80);
-       requirement.svgGroup.draggy();
-       requirement.svgText.text(requirement.body).attr({x: 10, y: 0}).font({
-         'dominant-baseline': 'central'
-       });
-       var bbox = requirement.svgText.bbox();
-       requirement.svgRect.attr({
-         fill: requirement.colorLighter,
-         stroke: requirement.color,
-         width: bbox.width + 20,
-         height: bbox.height + 30
-       });
-     },
+     }
+   },
+   methods: {
      initialSVG() {
        var draw = SVG('requirements').size(LAYER_HORI_PADDING * 2 + LAYER_WIDTH * 3,
                                            LAYER_VERT_PADDING * 2 + LAYER_HEIGHT);
@@ -114,12 +144,8 @@
          .attr({fill: 'none', stroke: '#555'});
        it.text("IT要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
 
-       // 各要求を作成
-       for (var req of this.allRequirements) {
-         this.renderRequirement(req);
-       }
-
        // 各要求のコネクションを作成
+       /*
        var req0 = this.allRequirements[0].svgGroup;
        req0.move(120, 340);
        i = 100;
@@ -135,11 +161,11 @@
          con.update();
          i += 80;
        }
+       */
      },
      addRequirement() {
        var req = new models.Requirement("");
        store.commit('addRequirement', req);
-       this.renderRequirement(req);
      }
    },
    computed: {
@@ -159,5 +185,7 @@
     </div>
     <div id="requirements">
     </div>
+
+    <requirement :requirement="req" :draw="draw" v-for="req in allRequirements" />
   </div>
 </template>

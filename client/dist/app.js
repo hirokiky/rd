@@ -9361,7 +9361,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/app.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/app.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] app.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12360,7 +12360,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/modal.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/modal.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] modal.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12520,7 +12520,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/modalButton.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/modalButton.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] modalButton.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12597,7 +12597,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/bodyedit.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/bodyedit.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] bodyedit.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12790,7 +12790,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/stakeholders.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/stakeholders.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] stakeholders.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -12843,7 +12843,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/stakeholder.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/stakeholder.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] stakeholder.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -13025,7 +13025,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/valueanalyse.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/valueanalyse.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] valueanalyse.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -13244,7 +13244,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/valuedesign.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/valuedesign.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] valuedesign.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -13493,7 +13493,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/home/hirokiky/dev/rd/client/src/js/requirements.vue"
+	Component.options.__file = "/Users/user1/dev/rd/client/src/js/requirements.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] requirements.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -13586,27 +13586,57 @@
 	      draw: null
 	    }
 	  },
-	  methods: {
-	    renderRequirement(requirement) {
-	      var draw = this.draw;
-	      if (!requirement.svg) {
-	        requirement.svgGroup = draw.group();
-	        requirement.svgRect = requirement.svgGroup.rect();
-	        requirement.svgText = requirement.svgGroup.text(requirement.body);
+	  components: {
+	    'requirement': {
+	      render() {
+	        if (this.draw) {
+	          this.renderRequirement(this.requirement);
+	        }
+	      },
+	      props: ["draw", "requirement"],
+	      methods: {
+	        renderRequirement(requirement) {
+	          var draw = this.draw;
+	          if (!this.svgGroup) {
+	            this.svgGroup = draw.group();
+	            this.svgRect = this.svgGroup.rect();
+	            this.svgText = this.svgGroup.text(requirement.body);
+	            this.svgGroup.draggy();
+	          }
+	          this.svgGroup.move(120, 80);
+	          this.svgText.text(requirement.body).attr({x: 10, y: 0}).font({
+	            'dominant-baseline': 'central'
+	          });
+	          var bbox = this.svgText.bbox();
+	          this.svgRect.attr({
+	            fill: requirement.colorLighter,
+	            stroke: requirement.color,
+	            width: bbox.width + 20,
+	            height: bbox.height + 30
+	          });
+	        },
+	      },
+	      watch: {
+	        draw(val) {
+	          // When initial rendering, there isn't this.draw,
+	          // So watching it will be activated and render.
+	          if (val) {
+	            this.renderRequirement(this.requirement);
+	          }
+	        },
+	        "requirement.body": function(val) {
+	          this.svgText.text(val);
+	        },
+	        "requirement.color": function(val) {
+	          this.svgRect.attr({
+	            fill: requirement.colorLighter,
+	            stroke: requirement.color,
+	          });
+	        }
 	      }
-	      requirement.svgGroup.move(120, 80);
-	      requirement.svgGroup.draggy();
-	      requirement.svgText.text(requirement.body).attr({x: 10, y: 0}).font({
-	        'dominant-baseline': 'central'
-	      });
-	      var bbox = requirement.svgText.bbox();
-	      requirement.svgRect.attr({
-	        fill: requirement.colorLighter,
-	        stroke: requirement.color,
-	        width: bbox.width + 20,
-	        height: bbox.height + 30
-	      });
-	    },
+	    }
+	  },
+	  methods: {
 	    initialSVG() {
 	      var draw = SVG('requirements').size(LAYER_HORI_PADDING * 2 + LAYER_WIDTH * 3,
 	                                          LAYER_VERT_PADDING * 2 + LAYER_HEIGHT);
@@ -13633,12 +13663,8 @@
 	        .attr({fill: 'none', stroke: '#555'});
 	      it.text("IT要求").attr({x: LAYER_WIDTH / 2}).font({anchor: 'middle'});
 
-	      // 各要求を作成
-	      for (var req of this.allRequirements) {
-	        this.renderRequirement(req);
-	      }
-
 	      // 各要求のコネクションを作成
+	      /*
 	      var req0 = this.allRequirements[0].svgGroup;
 	      req0.move(120, 340);
 	      i = 100;
@@ -13654,11 +13680,11 @@
 	        con.update();
 	        i += 80;
 	      }
+	      */
 	    },
 	    addRequirement() {
 	      var req = new models.Requirement("");
 	      store.commit('addRequirement', req);
-	      this.renderRequirement(req);
 	    }
 	  },
 	  computed: {
@@ -13684,7 +13710,14 @@
 	    attrs: {
 	      "id": "requirements"
 	    }
-	  })])
+	  }), _vm._v(" "), _vm._l((_vm.allRequirements), function(req) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": req,
+	        "draw": _vm.draw
+	      }
+	    })
+	  })], 2)
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
