@@ -4,60 +4,31 @@
   const store = require('./store');
 
   module.exports = {
-    directives: {
-      focus: function (el, value) {
-        Vue.nextTick(() => {
-          if (value) {
-            el.focus();
-          } else {
-            el.blur();
-          }
-        });
-      }
-    },
     props: {
       obj: Object,
       bodyAttr: String,
       widget: String  // 'input' or 'textarea'
     },
-    computed: {
-      isEditing() {
-        return this.obj == store.state.bodyEditing;
-      }
-    },
     methods: {
       edit() {
-        store.commit('editBody', this.obj);
-      },
-      end() {
-        store.commit('endBodyEditing');
+        store.commit('editOnModal', this.obj);
       }
     }
   }
 </script>
 
 <template>
-  <span>
-    <input v-if="isEditing && widget == 'input'"
-           v-model="obj[bodyAttr]"
-           v-focus="isEditing"
-           @blur="end"
-           @keydown.ctrl.enter="end" />
-    <textarea v-if="isEditing && widget == 'textarea'"
-              v-model="obj[bodyAttr]"
-              v-focus="isEditing"
-              @blur="end"
-              @keydown.ctrl.enter="end">
-    </textarea>
-    <span class="body-text"
-          v-if="!isEditing"
-          v-text="obj[bodyAttr]"
-          @dblclick="edit"></span>
-  </span>
+  <span class="body-text"
+        v-text="obj[bodyAttr]"
+        @click="edit"></span>
 </template>
 
 <style scoped>
   span.body-text {
       white-space: pre-line;
+  }
+
+  span.body-text:hover {
+    cursor: pointer;
   }
 </style>

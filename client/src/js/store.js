@@ -37,8 +37,6 @@ const store = new Vuex.Store({
           .addDemand(new models.Demand('要求開発が広がってほしい'))
           .addValue(new models.Value(null, null, 'Astaに慣れてない人も使えるので、幅広い世代や人々に受け入れられて嬉しい'))
       ),
-    bodyEditing: null,
-
     purposes: [
       new models.Purpose('要求開発を広める', '#ff7f7f'),
       new models.Purpose('誰でも編集、参加できる、属人化しない。', '#7fff7f'),
@@ -83,12 +81,6 @@ const store = new Vuex.Store({
     addRequirement(state, requirement) {
       state.requirements.push(requirement);
       store.commit("editOnModal", requirement);
-    },
-    editBody(state, obj) {
-      state.bodyEditing = obj;
-    },
-    endBodyEditing(state) {
-      state.bodyEditing = null;
     },
     editOnModal(state, obj) {
       state.modalEditing = obj;

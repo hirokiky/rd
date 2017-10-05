@@ -7839,8 +7839,6 @@
 	          .addDemand(new models.Demand('要求開発が広がってほしい'))
 	          .addValue(new models.Value(null, null, 'Astaに慣れてない人も使えるので、幅広い世代や人々に受け入れられて嬉しい'))
 	      ),
-	    bodyEditing: null,
-
 	    purposes: [
 	      new models.Purpose('要求開発を広める', '#ff7f7f'),
 	      new models.Purpose('誰でも編集、参加できる、属人化しない。', '#7fff7f'),
@@ -7885,12 +7883,6 @@
 	    addRequirement(state, requirement) {
 	      state.requirements.push(requirement);
 	      store.commit("editOnModal", requirement);
-	    },
-	    editBody(state, obj) {
-	      state.bodyEditing = obj;
-	    },
-	    endBodyEditing(state) {
-	      state.bodyEditing = null;
 	    },
 	    editOnModal(state, obj) {
 	      state.modalEditing = obj;
@@ -9355,7 +9347,7 @@
 	  /* script */
 	  __webpack_require__(14),
 	  /* template */
-	  __webpack_require__(47),
+	  __webpack_require__(57),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -12652,7 +12644,7 @@
 
 
 	// module
-	exports.push([module.id, "\nspan.body-text[data-v-7663d851] {\n    white-space: pre-line;\n}\n", ""]);
+	exports.push([module.id, "\nspan.body-text[data-v-7663d851] {\n    white-space: pre-line;\n}\nspan.body-text[data-v-7663d851]:hover {\n  cursor: pointer;\n}\n", ""]);
 
 	// exports
 
@@ -12667,33 +12659,14 @@
 	const store = __webpack_require__(3);
 
 	module.exports = {
-	  directives: {
-	    focus: function (el, value) {
-	      Vue.nextTick(() => {
-	        if (value) {
-	          el.focus();
-	        } else {
-	          el.blur();
-	        }
-	      });
-	    }
-	  },
 	  props: {
 	    obj: Object,
 	    bodyAttr: String,
 	    widget: String  // 'input' or 'textarea'
 	  },
-	  computed: {
-	    isEditing() {
-	      return this.obj == store.state.bodyEditing;
-	    }
-	  },
 	  methods: {
 	    edit() {
-	      store.commit('editBody', this.obj);
-	    },
-	    end() {
-	      store.commit('endBodyEditing');
+	      store.commit('editOnModal', this.obj);
 	    }
 	  }
 	}
@@ -12704,69 +12677,15 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('span', [(_vm.isEditing && _vm.widget == 'input') ? _c('input', {
-	    directives: [{
-	      name: "model",
-	      rawName: "v-model",
-	      value: (_vm.obj[_vm.bodyAttr]),
-	      expression: "obj[bodyAttr]"
-	    }, {
-	      name: "focus",
-	      rawName: "v-focus",
-	      value: (_vm.isEditing),
-	      expression: "isEditing"
-	    }],
-	    domProps: {
-	      "value": (_vm.obj[_vm.bodyAttr])
-	    },
-	    on: {
-	      "blur": _vm.end,
-	      "keydown": function($event) {
-	        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-	        if (!$event.ctrlKey) { return null; }
-	        _vm.end($event)
-	      },
-	      "input": function($event) {
-	        if ($event.target.composing) { return; }
-	        _vm.$set(_vm.obj, _vm.bodyAttr, $event.target.value)
-	      }
-	    }
-	  }) : _vm._e(), _vm._v(" "), (_vm.isEditing && _vm.widget == 'textarea') ? _c('textarea', {
-	    directives: [{
-	      name: "model",
-	      rawName: "v-model",
-	      value: (_vm.obj[_vm.bodyAttr]),
-	      expression: "obj[bodyAttr]"
-	    }, {
-	      name: "focus",
-	      rawName: "v-focus",
-	      value: (_vm.isEditing),
-	      expression: "isEditing"
-	    }],
-	    domProps: {
-	      "value": (_vm.obj[_vm.bodyAttr])
-	    },
-	    on: {
-	      "blur": _vm.end,
-	      "keydown": function($event) {
-	        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13)) { return null; }
-	        if (!$event.ctrlKey) { return null; }
-	        _vm.end($event)
-	      },
-	      "input": function($event) {
-	        if ($event.target.composing) { return; }
-	        _vm.$set(_vm.obj, _vm.bodyAttr, $event.target.value)
-	      }
-	    }
-	  }) : _vm._e(), _vm._v(" "), (!_vm.isEditing) ? _c('span', {
+	  return _c('span', {
 	    staticClass: "body-text",
 	    domProps: {
 	      "textContent": _vm._s(_vm.obj[_vm.bodyAttr])
 	    },
 	    on: {
-	      "dblclick": _vm.edit
+	      "click": _vm.edit
 	    }
-	  }) : _vm._e()])
+	  })
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -13487,7 +13406,7 @@
 	  /* script */
 	  __webpack_require__(45),
 	  /* template */
-	  __webpack_require__(46),
+	  __webpack_require__(56),
 	  /* scopeId */
 	  null,
 	  /* cssModules */
@@ -13518,10 +13437,10 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	
-	const SVG = __webpack_require__(48);
-	__webpack_require__(49);
-	__webpack_require__(50);
-	const IterateObject = __webpack_require__(57);
+	const SVG = __webpack_require__(46);
+	__webpack_require__(47);
+	__webpack_require__(48);
+	const IterateObject = __webpack_require__(55);
 
 	const Vue = __webpack_require__(1);
 
@@ -13699,69 +13618,6 @@
 
 /***/ }),
 /* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('div', [_c('button', {
-	    on: {
-	      "click": _vm.addRequirement
-	    }
-	  }, [_vm._v("要求を追加")])]), _vm._v(" "), _c('div', {
-	    attrs: {
-	      "id": "requirements"
-	    }
-	  }), _vm._v(" "), _vm._l((_vm.allRequirements), function(req) {
-	    return _c('requirement', {
-	      attrs: {
-	        "requirement": req,
-	        "draw": _vm.draw
-	      }
-	    })
-	  })], 2)
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-50ecc496", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('div', [_c('nav', [_c('div', {
-	    staticClass: "container"
-	  }, [_c('router-link', {
-	    attrs: {
-	      "to": "/"
-	    }
-	  }, [_vm._v("ステークホルダー")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/valueanalyse"
-	    }
-	  }, [_vm._v("価値分析")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/valuedesign"
-	    }
-	  }, [_vm._v("価値デザイン")]), _vm._v(" "), _c('router-link', {
-	    attrs: {
-	      "to": "/requirements"
-	    }
-	  }, [_vm._v("要求分析")])], 1)]), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('modal')], 1)
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-f01fa9e8", module.exports)
-	  }
-	}
-
-/***/ }),
-/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -19318,7 +19174,7 @@
 	}));
 
 /***/ }),
-/* 49 */
+/* 47 */
 /***/ (function(module, exports) {
 
 	(function() {
@@ -19571,14 +19427,14 @@
 
 
 /***/ }),
-/* 50 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Dependencies
-	var Id = __webpack_require__(51)
-	  , SetOrGet = __webpack_require__(52)
-	  , IterateObject = __webpack_require__(57)
-	  , Deffy = __webpack_require__(53)
+	var Id = __webpack_require__(49)
+	  , SetOrGet = __webpack_require__(50)
+	  , IterateObject = __webpack_require__(55)
+	  , Deffy = __webpack_require__(51)
 	  ;
 
 	// Internal cache
@@ -19923,7 +19779,7 @@
 
 
 /***/ }),
-/* 51 */
+/* 49 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -19945,13 +19801,13 @@
 	module.exports = Idy;
 
 /***/ }),
-/* 52 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	// Dependencies
-	var Deffy = __webpack_require__(53);
+	var Deffy = __webpack_require__(51);
 
 	/**
 	 * SetOrGet
@@ -19971,11 +19827,11 @@
 	module.exports = SetOrGet;
 
 /***/ }),
-/* 53 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// Dependencies
-	var Typpy = __webpack_require__(54);
+	var Typpy = __webpack_require__(52);
 
 	/**
 	 * Deffy
@@ -20024,12 +19880,12 @@
 
 
 /***/ }),
-/* 54 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	__webpack_require__(55);
+	__webpack_require__(53);
 
 	/**
 	 * Typpy
@@ -20115,12 +19971,12 @@
 	module.exports = Typpy;
 
 /***/ }),
-/* 55 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var noop6 = __webpack_require__(56);
+	var noop6 = __webpack_require__(54);
 
 	(function () {
 	    var NAME_FIELD = "name";
@@ -20154,7 +20010,7 @@
 	};
 
 /***/ }),
-/* 56 */
+/* 54 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -20162,7 +20018,7 @@
 	module.exports = function () {};
 
 /***/ }),
-/* 57 */
+/* 55 */
 /***/ (function(module, exports) {
 
 	/**
@@ -20198,6 +20054,69 @@
 
 	module.exports = iterateObject;
 
+
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('div', [_c('button', {
+	    on: {
+	      "click": _vm.addRequirement
+	    }
+	  }, [_vm._v("要求を追加")])]), _vm._v(" "), _c('div', {
+	    attrs: {
+	      "id": "requirements"
+	    }
+	  }), _vm._v(" "), _vm._l((_vm.allRequirements), function(req) {
+	    return _c('requirement', {
+	      attrs: {
+	        "requirement": req,
+	        "draw": _vm.draw
+	      }
+	    })
+	  })], 2)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-50ecc496", module.exports)
+	  }
+	}
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('nav', [_c('div', {
+	    staticClass: "container"
+	  }, [_c('router-link', {
+	    attrs: {
+	      "to": "/"
+	    }
+	  }, [_vm._v("ステークホルダー")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valueanalyse"
+	    }
+	  }, [_vm._v("価値分析")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/valuedesign"
+	    }
+	  }, [_vm._v("価値デザイン")]), _vm._v(" "), _c('router-link', {
+	    attrs: {
+	      "to": "/requirements"
+	    }
+	  }, [_vm._v("要求分析")])], 1)]), _vm._v(" "), _c('router-view'), _vm._v(" "), _c('modal')], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (false) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     require("vue-hot-reload-api").rerender("data-v-f01fa9e8", module.exports)
+	  }
+	}
 
 /***/ })
 /******/ ]);
